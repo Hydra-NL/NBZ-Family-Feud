@@ -1,0 +1,20 @@
+export class Question {
+  id: number = 0;
+  answer1: string = '';
+  answer2: string = '';
+  answer3: string = '';
+  answer4: string = '';
+  answer5: string = '';
+  answer6: string = '';
+  answer7: string = '';
+  answer8: string = '';
+  points1: number = 0;
+  points2: number = 0;
+  points3: number = 0;
+  points4: number = 0;
+  points5: number = 0;
+  points6: number = 0;
+  points7: number = 0;
+  points8: number = 0;
+
+}

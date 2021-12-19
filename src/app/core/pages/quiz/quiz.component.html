@@ -1,0 +1,499 @@
+<!-- Strikes team 1 -->
+<div class="row" style="position: absolute; left: 100px; top: 20px">
+  <div *ngIf="team1Strikes >= 1">
+    <img
+      src="../../../../assets/images/strike.png"
+      style="height: 100px; width: 100px"
+    />
+  </div>
+  <div *ngIf="team1Strikes == 0">
+    <img
+      src="../../../../assets/images/strike_inactive.png"
+      style="height: 100px; width: 100px"
+    />
+  </div>
+
+  <div *ngIf="team1Strikes >= 2">
+    <img
+      src="../../../../assets/images/strike.png"
+      style="height: 100px; width: 100px"
+    />
+  </div>
+  <div *ngIf="team1Strikes <= 1">
+    <img
+      src="../../../../assets/images/strike_inactive.png"
+      style="height: 100px; width: 100px"
+    />
+  </div>
+  <div *ngIf="team1Strikes >= 3">
+    <img
+      src="../../../../assets/images/strike.png"
+      style="height: 100px; width: 100px"
+    />
+  </div>
+  <div *ngIf="team1Strikes <= 2">
+    <img
+      src="../../../../assets/images/strike_inactive.png"
+      style="height: 100px; width: 100px"
+    />
+  </div>
+</div>
+<!-- Strikes team 2 -->
+<div class="row" style="position: absolute; right: 100px; top: 20px">
+  <div *ngIf="team2Strikes >= 1">
+    <img
+      src="../../../../assets/images/strike.png"
+      style="height: 100px; width: 100px"
+    />
+  </div>
+  <div *ngIf="team2Strikes == 0">
+    <img
+      src="../../../../assets/images/strike_inactive.png"
+      style="height: 100px; width: 100px"
+    />
+  </div>
+
+  <div *ngIf="team2Strikes >= 2">
+    <img
+      src="../../../../assets/images/strike.png"
+      style="height: 100px; width: 100px"
+    />
+  </div>
+  <div *ngIf="team2Strikes <= 1">
+    <img
+      src="../../../../assets/images/strike_inactive.png"
+      style="height: 100px; width: 100px"
+    />
+  </div>
+  <div *ngIf="team2Strikes >= 3">
+    <img
+      src="../../../../assets/images/strike.png"
+      style="height: 100px; width: 100px"
+    />
+  </div>
+  <div *ngIf="team2Strikes <= 2">
+    <img
+      src="../../../../assets/images/strike_inactive.png"
+      style="height: 100px; width: 100px"
+    />
+  </div>
+</div>
+
+<!-- Title -->
+<div
+  style="
+    background-color: rgba(79, 234, 255, 0.5);
+    border-radius: 50px;
+    padding: 30px;
+    margin-top: 30px;
+    left: 20%;
+    right: 20%;
+    top: 15%;
+    position: absolute;
+  "
+>
+  <div style="color: rgb(20, 20, 20); text-align: center">
+    <h1
+      style="
+        font-size: 5rem;
+
+        background: -webkit-linear-gradient(
+          rgb(252, 122, 35) 30%,
+          rgb(255, 221, 29),
+          rgb(255, 228, 78)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(3px 3px 3px #333);
+      "
+    >
+      NBZ Family Feud
+    </h1>
+    <h2>Round {{ round }} - Question {{ questionNumber }}</h2>
+  </div>
+</div>
+
+<!-- Body quiz -->
+<div
+  style="
+    background-color: rgba(79, 234, 255, 0.5);
+    border-radius: 50px;
+    padding: 30px;
+    margin-top: 30px;
+    left: 20%;
+    right: 20%;
+    top: 35%;
+    position: absolute;
+  "
+>
+  <div class="row" style="margin-bottom: 15px">
+    <div class="col-md-6">
+      <input
+        id="FlipCard1"
+        type="checkbox"
+        class="answer-card-input"
+        accesskey="1"
+        (click)="awardPointsRound(question.points1)"
+      />
+      <label for="FlipCard1" class="answer-card">
+        <span class="answer-card-body-front">
+          <div class="row justify-content-center">
+            <div class="circle">
+              <h1>1</h1>
+            </div>
+          </div>
+        </span>
+        <div class="answer-card-body-back">
+          <div class="row justify-content-center">
+            <p>
+              {{ question.answer1 }}
+              [{{ question.points1 }}]
+            </p>
+          </div>
+        </div>
+      </label>
+    </div>
+
+    <div class="col-md-6">
+      <input
+        id="FlipCard5"
+        type="checkbox"
+        class="answer-card-input"
+        accesskey="5"
+        (click)="awardPointsRound(question.points5)"
+      />
+      <label for="FlipCard5" class="answer-card">
+        <span class="answer-card-body-front">
+          <div class="row justify-content-center">
+            <div class="circle">
+              <h1>5</h1>
+            </div>
+          </div>
+        </span>
+        <div class="answer-card-body-back">
+          <div class="row justify-content-center">
+            <p>
+              {{ question.answer5 }}
+
+              [{{ question.points5 }}]
+            </p>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 15px">
+    <div class="col-md-6">
+      <input
+        id="FlipCard2"
+        type="checkbox"
+        class="answer-card-input"
+        accesskey="2"
+        (click)="awardPointsRound(question.points2)"
+      />
+      <label for="FlipCard2" class="answer-card">
+        <span class="answer-card-body-front">
+          <div class="row justify-content-center">
+            <div class="circle">
+              <h1>2</h1>
+            </div>
+          </div>
+        </span>
+        <div class="answer-card-body-back">
+          <div class="row justify-content-center">
+            <p>
+              {{ question.answer2 }}
+
+              [{{ question.points2 }}]
+            </p>
+          </div>
+        </div>
+      </label>
+    </div>
+    <div class="col-md-6">
+      <input
+        id="FlipCard6"
+        type="checkbox"
+        class="answer-card-input"
+        accesskey="6"
+        (click)="awardPointsRound(question.points6)"
+      />
+      <label for="FlipCard6" class="answer-card">
+        <span class="answer-card-body-front">
+          <div class="row justify-content-center">
+            <div class="circle">
+              <h1>6</h1>
+            </div>
+          </div>
+        </span>
+        <div class="answer-card-body-back">
+          <div class="row justify-content-center">
+            <p>
+              {{ question.answer6 }}
+              [{{ question.points6 }}]
+            </p>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 15px">
+    <div class="col-md-6">
+      <input
+        id="FlipCard3"
+        type="checkbox"
+        class="answer-card-input"
+        accesskey="3"
+        (click)="awardPointsRound(question.points3)"
+      />
+      <label for="FlipCard3" class="answer-card">
+        <span class="answer-card-body-front">
+          <div class="row justify-content-center">
+            <div class="circle">
+              <h1>3</h1>
+            </div>
+          </div>
+        </span>
+        <div class="answer-card-body-back">
+          <div class="row justify-content-center">
+            <p>
+              {{ question.answer3 }}
+              [{{ question.points3 }}]
+            </p>
+          </div>
+        </div>
+      </label>
+    </div>
+    <div class="col-md-6">
+      <input
+        id="FlipCard7"
+        type="checkbox"
+        class="answer-card-input"
+        accesskey="7"
+        (click)="awardPointsRound(question.points7)"
+      />
+      <label for="FlipCard7" class="answer-card">
+        <span class="answer-card-body-front">
+          <div class="row justify-content-center">
+            <div class="circle">
+              <h1>7</h1>
+            </div>
+          </div>
+        </span>
+        <div class="answer-card-body-back">
+          <div class="row justify-content-center">
+            <p>
+              {{ question.answer7 }}
+              [{{ question.points7 }}]
+            </p>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom: 15px">
+    <div class="col-md-6">
+      <input
+        id="FlipCard4"
+        type="checkbox"
+        class="answer-card-input"
+        accesskey="4"
+        (click)="awardPointsRound(question.points4)"
+      />
+      <label for="FlipCard4" class="answer-card">
+        <span class="answer-card-body-front">
+          <div class="row justify-content-center">
+            <div class="circle">
+              <h1>4</h1>
+            </div>
+          </div>
+        </span>
+        <div class="answer-card-body-back">
+          <div class="row justify-content-center">
+            <p>
+              {{ question.answer4 }}
+              [{{ question.points4 }}]
+            </p>
+          </div>
+        </div>
+      </label>
+    </div>
+    <div class="col-md-6">
+      <input
+        id="FlipCard8"
+        type="checkbox"
+        class="answer-card-input"
+        accesskey="8"
+        (click)="awardPointsRound(question.points8)"
+      />
+      <label for="FlipCard8" class="answer-card">
+        <span class="answer-card-body-front">
+          <div class="row justify-content-center">
+            <div class="circle">
+              <h1>8</h1>
+            </div>
+          </div>
+        </span>
+        <div class="answer-card-body-back">
+          <div class="row justify-content-center">
+            <p>
+              {{ question.answer8 }}
+              [{{ question.points8 }}]
+            </p>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+</div>
+
+<!-- Team 1 card their turn -->
+<div *ngIf="teamTurn">
+  <div
+    class="col-md-2"
+    style="position: absolute; left: 0px; top: 30%"
+    *ngFor="let member of team1"
+  >
+    <div
+      class="card"
+      style="
+        background-color: #ffe864;
+        padding: 6px;
+        box-shadow: 0px 0px 10px 0px rgb(255, 166, 0);
+      "
+    >
+      <div class="card-header" style="text-align: center">
+        Team 1 - Points: {{ pointsTeam1 }}
+      </div>
+      <div class="card-body">
+        <p><b>Team Leader: </b>{{ member.team1L }}</p>
+        <p><b>Team Member: </b> {{ member.teamM2 }}</p>
+        <p><b>Team Member: </b> {{ member.teamM3 }}</p>
+        <p><b>Team Member: </b> {{ member.teamM4 }}</p>
+        <p><b>Team Member: </b> {{ member.teamM5 }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Round points -->
+<div style="position: absolute; top: 20px; left: 45%">
+  <div class="card" style="width: 150px; max-width: 250px">
+    <div
+      class="card-body"
+      style="background: linear-gradient(#a7e4cb, #3c8868)"
+    >
+      <p style="font-size: 5rem; text-align: center">{{ roundPoints }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Points Team 1 -->
+<div style="position: absolute; left: 20px; bottom: 20%">
+  <div class="card" style="width: 150px; max-width: 250px">
+    <div
+      class="card-body"
+      style="background: linear-gradient(#a7e4cb, #3c8868)"
+    >
+      <p style="font-size: 5rem; text-align: center">{{ pointsTeam1 }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Team 1 card NOT their turn -->
+<div *ngIf="!teamTurn">
+  <div
+    class="col-md-2"
+    style="position: absolute; left: 0px; top: 30%"
+    *ngFor="let member of team1"
+  >
+    <div class="card">
+      <div class="card-header" style="text-align: center">
+        Team 1 - Points: {{ pointsTeam1 }}
+      </div>
+      <div class="card-body">
+        <p><b>Team Leader: </b>{{ member.team1L }}</p>
+        <p><b>Team Member: </b> {{ member.teamM2 }}</p>
+        <p><b>Team Member: </b> {{ member.teamM3 }}</p>
+        <p><b>Team Member: </b> {{ member.teamM4 }}</p>
+        <p><b>Team Member: </b> {{ member.teamM5 }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Team 2 card their turn -->
+<div *ngIf="!teamTurn">
+  <div
+    class="col-md-2"
+    style="position: absolute; right: 0px; top: 30%"
+    *ngFor="let member of team2"
+  >
+    <div>
+      <div
+        class="card"
+        style="
+          background-color: #ffe864;
+          padding: 6px;
+          box-shadow: 0px 0px 10px 0px rgb(255, 166, 0);
+        "
+      >
+        <div class="card-header" style="text-align: center">
+          Team 2 - Points: {{ pointsTeam2 }}
+        </div>
+        <div class="card-body">
+          <p><b>Team Leader: </b>{{ member.team2L }}</p>
+          <p><b>Team Member: </b> {{ member.team2M2 }}</p>
+          <p><b>Team Member: </b> {{ member.team2M3 }}</p>
+          <p><b>Team Member: </b> {{ member.team2M4 }}</p>
+          <p><b>Team Member: </b>{{ member.team2M5 }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Team 2 card NOT their turn -->
+<div *ngIf="teamTurn">
+  <div
+    class="col-md-2"
+    style="position: absolute; right: 0px; top: 30%"
+    *ngFor="let member of team2"
+  >
+    <div class="card">
+      <div class="card-header" style="text-align: center">
+        Team 2 - Points: {{ pointsTeam2 }}
+      </div>
+      <div class="card-body">
+        <p><b>Team Leader: </b>{{ member.team2L }}</p>
+        <p><b>Team Member: </b> {{ member.team2M2 }}</p>
+        <p><b>Team Member: </b> {{ member.team2M3 }}</p>
+        <p><b>Team Member: </b> {{ member.team2M4 }}</p>
+        <p><b>Team Member: </b>{{ member.team2M5 }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Point Team 2 -->
+<div style="position: absolute; right: 20px; bottom: 20%">
+  <div class="card" style="width: 150px; max-width: 250px">
+    <div
+      class="card-body"
+      style="background: linear-gradient(#a7e4cb, #3c8868)"
+    >
+      <p style="font-size: 5rem; text-align: center">{{ pointsTeam2 }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Control panel -->
+<div style="position: absolute; bottom: 0px">
+  <div>
+    <button accesskey="w" (click)="addStrikeTeam()" hidden>STRIKE</button>
+    <button (click)="clearStrikes()">CLEAR Strikes</button>
+    <button (click)="switchTurns()">switchTurn</button>
+    <button (click)="nextQuestion()">nextQuestion</button>
+    <button accesskey="q" (click)="playGoodAnsa()"></button>
+  </div>
+</div>

@@ -1,0 +1,282 @@
+<button
+  class="btn btn-primary"
+  style="position: absolute; top: 30px; left: 50px"
+  routerLink="/info"
+>
+  <i class="fa fa-info-circle"></i> How to play
+</button>
+
+<div
+  style="
+    background-color: rgba(79, 234, 255, 0.5);
+    border-radius: 50px;
+    padding: 30px;
+    margin-top: 30px;
+  "
+>
+  <div class="justify-content-center align-items-center">
+    <div class="box">
+      <div style="color: rgb(20, 20, 20); text-align: center">
+        <img
+          src="../../../../assets/images/steve_harvey.png"
+          style="height: 100px; position: absolute; right: 25%"
+        />
+        <img
+          src="../../../../assets/images/steve_harvey.png"
+          style="
+            height: 100px;
+            position: absolute;
+            left: 25%;
+            transform: scaleX(-1);
+          "
+        />
+        <div style="color: rgb(20, 20, 20); text-align: center">
+          <h1
+            style="
+              font-size: 5rem;
+
+              background: -webkit-linear-gradient(
+                rgb(252, 122, 35) 30%,
+                rgb(255, 221, 29),
+                rgb(255, 228, 78)
+              );
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              filter: drop-shadow(3px 3px 3px #333);
+            "
+          >
+            NBZ Family Feud
+          </h1>
+          <h2>Enter the teams</h2>
+        </div>
+      </div>
+
+      <div class="row itemsBlock" style="margin-top: 20px">
+        <div class="col-md-5">
+          <div class="card" style="background-color: rgb(0, 0, 0)">
+            <div
+              class="card-header"
+              style="text-align: center; font-weight: bold"
+            >
+              Team 1
+            </div>
+            <form #team1Form="ngForm" (ngSubmit)="save1()">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="teamLeader1">Team leader</label>
+                  <input
+                    id="teamLeader1"
+                    class="form-control"
+                    name="teamLeader1"
+                    [(ngModel)]="team1.team1L"
+                    #teamLeader1="ngModel"
+                    value="{{ team1.team1L }}"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="teammember2">Team member 2</label>
+                  <input
+                    id="teammember2"
+                    class="form-control"
+                    name="teammember2"
+                    [(ngModel)]="team1.teamM2"
+                    #teamMember2="ngModel"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="teammember3">Team member 3</label>
+                  <input
+                    id="teammember3"
+                    class="form-control"
+                    name="teammember3"
+                    [(ngModel)]="team1.teamM3"
+                    #teamMember3="ngModel"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="teammember4">Team member 4</label>
+                  <input
+                    id="teammember4"
+                    class="form-control"
+                    name="teammember4"
+                    [(ngModel)]="team1.teamM4"
+                    #teamMember4="ngModel"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="teammember2">Team member 5</label>
+                  <input
+                    id="teammember5"
+                    class="form-control"
+                    name="teammember5"
+                    [(ngModel)]="team1.teamM5"
+                    #teamMember5="ngModel"
+                  />
+                </div>
+              </div>
+            </form>
+            <div class="card-footer">
+              <button
+                class="btn btn-primary btn-block"
+                (click)="save1()"
+                [disabled]="!team1Form.valid"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+          <div *ngIf="saveTeam1" style="position: absolute; margin-top: 10px">
+            <h3>Team Saved!</h3>
+          </div>
+        </div>
+
+        <div class="col-md-2"></div>
+        <div class="col-md-5">
+          <div class="card" style="background-color: rgb(0, 0, 0)">
+            <div
+              class="card-header"
+              style="text-align: center; font-weight: bold"
+            >
+              Team 2
+            </div>
+            <form #team2Form="ngForm" (ngSubmit)="(team2Form.valid)">
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="teamleader2">Team leader</label>
+                  <input
+                    id="teamleader2"
+                    class="form-control"
+                    name="teamleader2"
+                    [(ngModel)]="team2.team2L"
+                    #teamLeader2="ngModel"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="team2member2">Team member 2</label>
+                  <input
+                    id="team2member2"
+                    class="form-control"
+                    name="team2member2"
+                    [(ngModel)]="team2.team2M2"
+                    #team2Member2="ngModel"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="team2member3">Team member 3</label>
+                  <input
+                    id="team2member3"
+                    class="form-control"
+                    name="team2member3"
+                    [(ngModel)]="team2.team2M3"
+                    #team2Member3="ngModel"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="team2member4">Team member 4</label>
+                  <input
+                    id="team2member4"
+                    class="form-control"
+                    name="team2member4"
+                    [(ngModel)]="team2.team2M4"
+                    #team2Member4="ngModel"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="team2member2">Team member 5</label>
+                  <input
+                    id="team2member5"
+                    class="form-control"
+                    name="team2member5"
+                    [(ngModel)]="team2.team2M5"
+                    #team2Member5="ngModel"
+                  />
+                </div>
+              </div>
+            </form>
+            <div class="card-footer">
+              <button
+                class="btn btn-primary btn-block"
+                (click)="save2()"
+                [disabled]="!team2Form.valid"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+          <div *ngIf="saveTeam2" style="position: absolute; margin-top: 10px">
+            <h3>Team Saved!</h3>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center" style="margin-top: 30px">
+        <button
+          class="btn btn-primary"
+          style="width: 140px"
+          (click)="next()"
+          [disabled]="!team1Form.valid && !team2Form.valid"
+        >
+          Start Feud
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center">
+  <div
+    style="
+      background-color: rgba(79, 234, 255, 0.363);
+      border-radius: 30px;
+      padding: 10px;
+      margin-top: 20px;
+      color: white;
+      text-align: center;
+      width: 200px;
+      height: fit-content;
+    "
+  >
+    <p>
+      Made by Hydra with
+      <i class="fa fa-heart" style="font-size: 16px; color: red"></i><br />
+      <a
+        style="color: white; text-decoration: none"
+        href="https://www.instagram.com/pascal.vdkeere/"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-instagram"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
+          />
+        </svg>
+        Instagram |
+      </a>
+      <a
+        style="color: white; text-decoration: none"
+        href="https://www.youtube.com/channel/UCuBeCVIM7uUYRt9pzkGgbhA"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-youtube"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"
+          />
+        </svg>
+        YouTube
+      </a>
+    </p>
+  </div>
+</div>

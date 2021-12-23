@@ -2211,7 +2211,7 @@ textarea.form-control.is-invalid {
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   line-height: 1.5;
-  border-radius: 0.25rem;
+  border-radius: 15px;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -8983,7 +8983,7 @@ a.text-dark:hover {
   color: #212529 !important;
 }
 .text-muted {
-  color: #6c757d !important;
+  color: #b8bcbf !important;
 }
 .text-black-50 {
   color: #00000080 !important;

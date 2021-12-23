@@ -21,6 +21,7 @@ export class QuizComponent implements OnInit {
   roundPoints: number = 0;
   teamTurn: boolean = true;
   round: number = 1;
+  multiplier: number = 1;
   questionNumber: number = 1;
   questionId: number = 0;
   questions!: Question[];
@@ -63,7 +64,7 @@ export class QuizComponent implements OnInit {
       this.pointsTeam2 += this.roundPoints;
     }
     this.roundPoints = 0;
-    if (this.round == 3 && this.questionNumber == 3) {
+    if (this.round == 6 && this.questionNumber == 3) {
       if (this.pointsTeam1 > this.pointsTeam2) {
         this.winner('team1');
       }
@@ -116,6 +117,14 @@ export class QuizComponent implements OnInit {
       this.playStrike();
       this.switchTurns();
     }
+
+    if (this.team1Strikes == 3 && this.team2Strikes == 1) {
+      this.disableAnswers();
+    }
+
+    if (this.team2Strikes == 3 && this.team1Strikes == 1) {
+      this.disableAnswers();
+    }
   }
 
   clearStrikes() {
@@ -151,50 +160,59 @@ export class QuizComponent implements OnInit {
   }
 
   awardPointsRound(amount: number) {
+    if (this.round == 1 || this.round == 2) {
+      this.multiplier = 1;
+    }
+    if (this.round == 3 || this.round == 4) {
+      this.multiplier = 2;
+    }
+    if (this.round == 5 || this.round == 6) {
+      this.multiplier = 3;
+    }
     if (!this.points1Given && amount == this.question.points1) {
-      amount *= this.round;
+      amount *= this.multiplier;
       this.roundPoints += amount;
       this.points1Given = true;
       this.playGoodAnsa();
     }
     if (!this.points2Given && amount == this.question.points2) {
-      amount *= this.round;
+      amount *= this.multiplier;
       this.roundPoints += amount;
       this.points2Given = true;
       this.playGoodAnsa();
     }
     if (!this.points3Given && amount == this.question.points3) {
-      amount *= this.round;
+      amount *= this.multiplier;
       this.roundPoints += amount;
       this.points3Given = true;
       this.playGoodAnsa();
     }
     if (!this.points4Given && amount == this.question.points4) {
-      amount *= this.round;
+      amount *= this.multiplier;
       this.roundPoints += amount;
       this.points4Given = true;
       this.playGoodAnsa();
     }
     if (!this.points5Given && amount == this.question.points5) {
-      amount *= this.round;
+      amount *= this.multiplier;
       this.roundPoints += amount;
       this.points5Given = true;
       this.playGoodAnsa();
     }
     if (!this.points6Given && amount == this.question.points6) {
-      amount *= this.round;
+      amount *= this.multiplier;
       this.roundPoints += amount;
       this.points6Given = true;
       this.playGoodAnsa();
     }
     if (!this.points7Given && amount == this.question.points7) {
-      amount *= this.round;
+      amount *= this.multiplier;
       this.roundPoints += amount;
       this.points7Given = true;
       this.playGoodAnsa();
     }
     if (!this.points8Given && amount == this.question.points8) {
-      amount *= this.round;
+      amount *= this.multiplier;
       this.roundPoints += amount;
       this.points8Given = true;
       this.playGoodAnsa();

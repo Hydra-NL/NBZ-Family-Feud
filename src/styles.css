@@ -74,6 +74,17 @@ body {
   background-image: url("./assets/images/famfeud-background.jpg");
 }
 
+.winner-name {
+  font-size: 4rem;
+  background: -webkit-linear-gradient(
+    rgb(255, 143, 236) 30%,
+    rgb(96, 255, 207)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(3px 0px 1px rgb(0, 0, 0));
+}
+
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
 }

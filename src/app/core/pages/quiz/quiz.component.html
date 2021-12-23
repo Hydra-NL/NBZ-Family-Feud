@@ -1,5 +1,9 @@
 <!-- Strikes team 1 -->
-<div class="row" style="position: absolute; left: 100px; top: 20px">
+<div
+  *ngIf="win == false"
+  class="row"
+  style="position: absolute; left: 100px; top: 20px"
+>
   <div *ngIf="team1Strikes >= 1">
     <img
       src="../../../../assets/images/strike.png"
@@ -39,7 +43,11 @@
   </div>
 </div>
 <!-- Strikes team 2 -->
-<div class="row" style="position: absolute; right: 100px; top: 20px">
+<div
+  *ngIf="win == false"
+  class="row"
+  style="position: absolute; right: 100px; top: 20px"
+>
   <div *ngIf="team2Strikes >= 1">
     <img
       src="../../../../assets/images/strike.png"
@@ -79,6 +87,27 @@
   </div>
 </div>
 
+<div *ngIf="win == true">
+  <div style="z-index: 3; position: absolute; left: 5px">
+    <img src="../../../../assets/gifs/confetti.gif" />
+    <img src="../../../../assets/gifs/confetti.gif" />
+    <img src="../../../../assets/gifs/confetti.gif" />
+    <img src="../../../../assets/gifs/confetti.gif" />
+    <img src="../../../../assets/gifs/confetti.gif" />
+    <img src="../../../../assets/gifs/confetti.gif" />
+    <img src="../../../../assets/gifs/confetti.gif" />
+  </div>
+  <div style="z-index: 3; position: absolute; left: 5px; top: 470px">
+    <img src="../../../../assets/gifs/confetti.gif" />
+    <img src="../../../../assets/gifs/confetti.gif" />
+    <img src="../../../../assets/gifs/confetti.gif" />
+    <img src="../../../../assets/gifs/confetti.gif" />
+    <img src="../../../../assets/gifs/confetti.gif" />
+    <img src="../../../../assets/gifs/confetti.gif" />
+    <img src="../../../../assets/gifs/confetti.gif" />
+  </div>
+</div>
+
 <!-- Title -->
 <div
   style="
@@ -109,7 +138,10 @@
     >
       NBZ Family Feud
     </h1>
-    <h2>Round {{ round }} - Question {{ questionNumber }}</h2>
+
+    <h2 *ngIf="win == false">
+      Round {{ round }} - Question {{ questionNumber }}
+    </h2>
   </div>
 </div>
 
@@ -126,7 +158,62 @@
     position: absolute;
   "
 >
-  <div class="row" style="margin-bottom: 15px">
+  <!-- Winning screen Team 1 -->
+  <div *ngIf="resultTeam1 == true" style="text-align: center">
+    <h1
+      style="
+        font-size: 7rem;
+
+        background: -webkit-linear-gradient(
+          rgb(252, 122, 35) 30%,
+          rgb(255, 221, 29),
+          rgb(255, 228, 78)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(3px 3px 3px #333);
+      "
+    >
+      TEAM 1 WON!!!
+    </h1>
+    <div *ngFor="let member of team1">
+      <h2 class="winner-name">{{ member.team1L }}</h2>
+      <h2 class="winner-name">{{ member.teamM2 }}</h2>
+      <h2 class="winner-name">{{ member.teamM3 }}</h2>
+      <h2 class="winner-name">{{ member.teamM4 }}</h2>
+      <h2 class="winner-name">{{ member.teamM5 }}</h2>
+    </div>
+  </div>
+
+  <!-- Winning screen Team 2 -->
+  <div *ngIf="resultTeam2 == true" style="text-align: center">
+    <h1
+      style="
+        font-size: 7rem;
+
+        background: -webkit-linear-gradient(
+          rgb(252, 122, 35) 30%,
+          rgb(255, 221, 29),
+          rgb(255, 228, 78)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(3px 3px 3px #333);
+      "
+    >
+      TEAM 2 WON!!!
+    </h1>
+    <div *ngFor="let member of team2">
+      <h2 class="winner-name">{{ member.team2L }}</h2>
+      <h2 class="winner-name">{{ member.team2M2 }}</h2>
+      <h2 class="winner-name">{{ member.team2M3 }}</h2>
+      <h2 class="winner-name">{{ member.team2M4 }}</h2>
+      <h2 class="winner-name">{{ member.team2M5 }}</h2>
+    </div>
+  </div>
+
+  <!-- Question's anwsers -->
+  <div *ngIf="win == false" class="row" style="margin-bottom: 15px">
     <div class="col-md-6">
       <input
         id="FlipCard1"
@@ -135,6 +222,7 @@
         accesskey="1"
         (click)="awardPointsRound(question.points1)"
       />
+
       <label for="FlipCard1" class="answer-card">
         <span class="answer-card-body-front">
           <div class="row justify-content-center">
@@ -182,7 +270,7 @@
       </label>
     </div>
   </div>
-  <div class="row" style="margin-bottom: 15px">
+  <div *ngIf="win == false" class="row" style="margin-bottom: 15px">
     <div class="col-md-6">
       <input
         id="FlipCard2"
@@ -237,7 +325,7 @@
       </label>
     </div>
   </div>
-  <div class="row" style="margin-bottom: 15px">
+  <div *ngIf="win == false" class="row" style="margin-bottom: 15px">
     <div class="col-md-6">
       <input
         id="FlipCard3"
@@ -291,7 +379,7 @@
       </label>
     </div>
   </div>
-  <div class="row" style="margin-bottom: 15px">
+  <div *ngIf="win == false" class="row" style="margin-bottom: 15px">
     <div class="col-md-6">
       <input
         id="FlipCard4"
@@ -347,8 +435,44 @@
   </div>
 </div>
 
+<!-- Round points -->
+<div *ngIf="!answersEnabled">
+  <div *ngIf="win == false" style="position: absolute; top: 20px; left: 46%">
+    <div class="card" style="width: 150px; max-width: 250px">
+      <div
+        class="card-body"
+        style="background: linear-gradient(#a7e4cb, #3c8868)"
+      >
+        <p style="font-size: 5rem; text-align: center">{{ roundPoints }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="answersEnabled">
+  <div *ngIf="win == false" style="position: absolute; top: 20px; left: 46%">
+    <div
+      class="card"
+      style="
+        width: 150px;
+        max-width: 250px;
+        background-color: #ffe864;
+        padding: 6px;
+        box-shadow: 0px 0px 10px 0px rgb(255, 166, 0);
+      "
+    >
+      <div
+        class="card-body"
+        style="background: linear-gradient(#a7e4cb, #3c8868)"
+      >
+        <p style="font-size: 5rem; text-align: center">{{ roundPoints }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- Team 1 card their turn -->
-<div *ngIf="teamTurn">
+<div *ngIf="teamTurn && win == false">
   <div
     class="col-md-2"
     style="position: absolute; left: 0px; top: 30%"
@@ -376,20 +500,8 @@
   </div>
 </div>
 
-<!-- Round points -->
-<div style="position: absolute; top: 20px; left: 45%">
-  <div class="card" style="width: 150px; max-width: 250px">
-    <div
-      class="card-body"
-      style="background: linear-gradient(#a7e4cb, #3c8868)"
-    >
-      <p style="font-size: 5rem; text-align: center">{{ roundPoints }}</p>
-    </div>
-  </div>
-</div>
-
 <!-- Points Team 1 -->
-<div style="position: absolute; left: 20px; bottom: 20%">
+<div *ngIf="win == false" style="position: absolute; left: 20px; bottom: 20%">
   <div class="card" style="width: 150px; max-width: 250px">
     <div
       class="card-body"
@@ -401,7 +513,7 @@
 </div>
 
 <!-- Team 1 card NOT their turn -->
-<div *ngIf="!teamTurn">
+<div *ngIf="!teamTurn && win == false">
   <div
     class="col-md-2"
     style="position: absolute; left: 0px; top: 30%"
@@ -423,7 +535,7 @@
 </div>
 
 <!-- Team 2 card their turn -->
-<div *ngIf="!teamTurn">
+<div *ngIf="!teamTurn && win == false">
   <div
     class="col-md-2"
     style="position: absolute; right: 0px; top: 30%"
@@ -454,7 +566,7 @@
 </div>
 
 <!-- Team 2 card NOT their turn -->
-<div *ngIf="teamTurn">
+<div *ngIf="teamTurn && win == false">
   <div
     class="col-md-2"
     style="position: absolute; right: 0px; top: 30%"
@@ -476,7 +588,7 @@
 </div>
 
 <!-- Point Team 2 -->
-<div style="position: absolute; right: 20px; bottom: 20%">
+<div *ngIf="win == false" style="position: absolute; right: 20px; bottom: 20%">
   <div class="card" style="width: 150px; max-width: 250px">
     <div
       class="card-body"
@@ -490,10 +602,9 @@
 <!-- Control panel -->
 <div style="position: absolute; bottom: 0px">
   <div>
-    <button accesskey="w" (click)="addStrikeTeam()" hidden>STRIKE</button>
-    <button (click)="clearStrikes()">CLEAR Strikes</button>
-    <button (click)="switchTurns()">switchTurn</button>
-    <button (click)="nextQuestion()">nextQuestion</button>
-    <button accesskey="q" (click)="playGoodAnsa()"></button>
+    <button accesskey="9" (click)="addStrikeTeam()" hidden>STRIKE</button>
+    <button accesskey="0" (click)="switchTurns()" hidden>switchTurn</button>
+    <button accesskey="n" (click)="nextQuestion()" hidden>nextQuestion</button>
+    <button accesskey="p" (click)="disableAnswers()" hidden>DISABLE</button>
   </div>
 </div>

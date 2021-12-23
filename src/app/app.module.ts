@@ -13,9 +13,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { QuizComponent } from './core/pages/quiz/quiz.component';
 import { InfoComponent } from './core/pages/info/info.component';
+import { ControlsComponent } from './core/pages/controls/controls.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, QuizComponent, InfoComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    QuizComponent,
+    InfoComponent,
+    ControlsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

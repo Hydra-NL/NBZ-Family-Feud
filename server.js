@@ -17,7 +17,7 @@ app.use(compression());
 //
 // Replace the name below to match your own "defaultProject" value!
 //
-const appname = "cmcom";
+const appname = "Family Feud";
 
 // Set express options
 app.use(cors());

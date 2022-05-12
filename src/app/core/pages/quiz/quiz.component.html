@@ -1,6 +1,6 @@
 <!-- Strikes team 1 -->
 <div
-  *ngIf="win == false"
+  *ngIf="win == false && tie == false"
   class="row"
   style="position: absolute; left: 100px; top: 20px"
 >
@@ -44,7 +44,7 @@
 </div>
 <!-- Strikes team 2 -->
 <div
-  *ngIf="win == false"
+  *ngIf="win == false && tie == false"
   class="row"
   style="position: absolute; right: 100px; top: 20px"
 >
@@ -139,7 +139,7 @@
       NBZ Family Feud
     </h1>
 
-    <h2 *ngIf="win == false">
+    <h2 *ngIf="win == false && tie == false">
       Round {{ round }} - Question {{ questionNumber }}
     </h2>
   </div>
@@ -212,8 +212,32 @@
     </div>
   </div>
 
+  <!-- Tie screen -->
+  <div *ngIf="tie == true" style="text-align: center">
+    <h1
+      style="
+        font-size: 7rem;
+
+        background: -webkit-linear-gradient(
+          rgb(252, 122, 35) 30%,
+          rgb(255, 221, 29),
+          rgb(255, 228, 78)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(3px 3px 3px #333);
+      "
+    >
+      TIE!!!
+    </h1>
+  </div>
+
   <!-- Question's anwsers -->
-  <div *ngIf="win == false" class="row" style="margin-bottom: 15px">
+  <div
+    *ngIf="win == false && tie == false"
+    class="row"
+    style="margin-bottom: 15px"
+  >
     <div class="col-md-6">
       <input
         id="FlipCard1"
@@ -270,7 +294,11 @@
       </label>
     </div>
   </div>
-  <div *ngIf="win == false" class="row" style="margin-bottom: 15px">
+  <div
+    *ngIf="win == false && tie == false"
+    class="row"
+    style="margin-bottom: 15px"
+  >
     <div class="col-md-6">
       <input
         id="FlipCard2"
@@ -325,7 +353,11 @@
       </label>
     </div>
   </div>
-  <div *ngIf="win == false" class="row" style="margin-bottom: 15px">
+  <div
+    *ngIf="win == false && tie == false"
+    class="row"
+    style="margin-bottom: 15px"
+  >
     <div class="col-md-6">
       <input
         id="FlipCard3"
@@ -379,7 +411,11 @@
       </label>
     </div>
   </div>
-  <div *ngIf="win == false" class="row" style="margin-bottom: 15px">
+  <div
+    *ngIf="win == false && tie == false"
+    class="row"
+    style="margin-bottom: 15px"
+  >
     <div class="col-md-6">
       <input
         id="FlipCard4"
@@ -437,7 +473,10 @@
 
 <!-- Round points -->
 <div *ngIf="!answersEnabled">
-  <div *ngIf="win == false" style="position: absolute; top: 20px; left: 46%">
+  <div
+    *ngIf="win == false && tie == false"
+    style="position: absolute; top: 20px; left: 46%"
+  >
     <div class="card" style="width: 150px; max-width: 250px">
       <div
         class="card-body"
@@ -450,7 +489,10 @@
 </div>
 
 <div *ngIf="answersEnabled">
-  <div *ngIf="win == false" style="position: absolute; top: 20px; left: 46%">
+  <div
+    *ngIf="win == false && tie == false"
+    style="position: absolute; top: 20px; left: 46%"
+  >
     <div
       class="card"
       style="
@@ -472,7 +514,7 @@
 </div>
 
 <!-- Team 1 card their turn -->
-<div *ngIf="teamTurn && win == false">
+<div *ngIf="teamTurn && win == false && tie == false">
   <div
     class="col-md-2"
     style="position: absolute; left: 0px; top: 30%"
@@ -501,7 +543,10 @@
 </div>
 
 <!-- Points Team 1 -->
-<div *ngIf="win == false" style="position: absolute; left: 20px; bottom: 20%">
+<div
+  *ngIf="win == false && tie == false"
+  style="position: absolute; left: 20px; bottom: 20%"
+>
   <div class="card" style="width: 150px; max-width: 250px">
     <div
       class="card-body"
@@ -513,7 +558,7 @@
 </div>
 
 <!-- Team 1 card NOT their turn -->
-<div *ngIf="!teamTurn && win == false">
+<div *ngIf="!teamTurn && win == false && tie == false">
   <div
     class="col-md-2"
     style="position: absolute; left: 0px; top: 30%"
@@ -535,7 +580,7 @@
 </div>
 
 <!-- Team 2 card their turn -->
-<div *ngIf="!teamTurn && win == false">
+<div *ngIf="!teamTurn && win == false && tie == false">
   <div
     class="col-md-2"
     style="position: absolute; right: 0px; top: 30%"
@@ -566,7 +611,7 @@
 </div>
 
 <!-- Team 2 card NOT their turn -->
-<div *ngIf="teamTurn && win == false">
+<div *ngIf="teamTurn && win == false && tie == false">
   <div
     class="col-md-2"
     style="position: absolute; right: 0px; top: 30%"
@@ -588,7 +633,10 @@
 </div>
 
 <!-- Point Team 2 -->
-<div *ngIf="win == false" style="position: absolute; right: 20px; bottom: 20%">
+<div
+  *ngIf="win == false && tie == false"
+  style="position: absolute; right: 20px; bottom: 20%"
+>
   <div class="card" style="width: 150px; max-width: 250px">
     <div
       class="card-body"
@@ -606,5 +654,7 @@
     <button accesskey="0" (click)="switchTurns()" hidden>switchTurn</button>
     <button accesskey="n" (click)="nextQuestion()" hidden>nextQuestion</button>
     <button accesskey="p" (click)="disableAnswers()" hidden>DISABLE</button>
+    <button accesskey="l" (click)="playTheme()" hidden>PLAY SOUND</button>
+    <button accesskey="k" (click)="playFunny()" hidden>PLAY SOUND</button>
   </div>
 </div>

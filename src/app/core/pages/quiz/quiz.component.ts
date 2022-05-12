@@ -5,7 +5,6 @@ import { QuestionService } from 'src/app/entities/question.service';
 import { Team1 } from 'src/app/entities/team1/team1.model';
 import { Team2 } from 'src/app/entities/team2/team2.model';
 import { Question } from 'src/app/entities/questions/question.model';
-import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-quiz',
@@ -64,7 +63,7 @@ export class QuizComponent implements OnInit {
       this.pointsTeam2 += this.roundPoints;
     }
     this.roundPoints = 0;
-    if (this.round == 6 && this.questionNumber == 3) {
+    if (this.round == 7 && this.questionNumber == 3) {
       if (this.pointsTeam1 > this.pointsTeam2) {
         this.winner('team1');
       }
@@ -169,6 +168,9 @@ export class QuizComponent implements OnInit {
     if (this.round == 5 || this.round == 6) {
       this.multiplier = 3;
     }
+    if (this.round == 7) {
+      this.multiplier = 4;
+    }
     if (!this.points1Given && amount == this.question.points1) {
       amount *= this.multiplier;
       this.roundPoints += amount;
@@ -239,6 +241,13 @@ export class QuizComponent implements OnInit {
     audio.play();
   }
 
+  playFunny() {
+    let audio = new Audio();
+    audio.src = '../../../../assets/sounds/BahBow.mp3';
+    audio.load();
+    audio.play();
+  }
+
   playOutroTheme() {
     let audio = new Audio();
     audio.src = '../../../../assets/sounds/outro_theme.mp3';
@@ -264,5 +273,12 @@ export class QuizComponent implements OnInit {
       this.playOutroTheme();
       console.log('Resulted in a tie');
     }
+  }
+
+  playTheme() {
+    let audio = new Audio();
+    audio.src = '../../../../assets/sounds/funny.mp3';
+    audio.load();
+    audio.play();
   }
 }

@@ -1,5 +1,7 @@
-export class Question {
-  id: number = 0;
+import { Entity } from 'src/app/core/entity/entity.model';
+
+export class Question extends Entity {
+  questionTitle: string = '';
   answer1: string = '';
   answer2: string = '';
   answer3: string = '';
@@ -16,5 +18,9 @@ export class Question {
   points6: number = 0;
   points7: number = 0;
   points8: number = 0;
+  totalPoints: number = 0;
 
+  constructor(_id: string) {
+    super(_id);
+  }
 }

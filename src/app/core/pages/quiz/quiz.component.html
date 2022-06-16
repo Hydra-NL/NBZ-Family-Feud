@@ -1,5 +1,5 @@
-<!-- Strikes team 1 -->
-<div
+Strikes team 1
+<!-- <div
   *ngIf="win == false && tie == false"
   class="row"
   style="position: absolute; left: 100px; top: 20px"
@@ -43,7 +43,7 @@
   </div>
 </div>
 <!-- Strikes team 2 -->
-<div
+<!-- <div
   *ngIf="win == false && tie == false"
   class="row"
   style="position: absolute; right: 100px; top: 20px"
@@ -106,10 +106,10 @@
     <img src="../../../../assets/gifs/confetti.gif" />
     <img src="../../../../assets/gifs/confetti.gif" />
   </div>
-</div>
+</div> -->
 
 <!-- Title -->
-<div
+<!-- <div
   style="
     background-color: rgba(79, 234, 255, 0.5);
     border-radius: 50px;
@@ -143,10 +143,10 @@
       Round {{ round }} - Question {{ questionNumber }}
     </h2>
   </div>
-</div>
+</div> -->
 
 <!-- Body quiz -->
-<div
+<!-- <div
   style="
     background-color: rgba(79, 234, 255, 0.5);
     border-radius: 50px;
@@ -157,9 +157,9 @@
     top: 35%;
     position: absolute;
   "
->
+> -->
   <!-- Winning screen Team 1 -->
-  <div *ngIf="resultTeam1 == true" style="text-align: center">
+  <!-- <div *ngIf="resultTeam1 == true" style="text-align: center">
     <h1
       style="
         font-size: 7rem;
@@ -183,10 +183,10 @@
       <h2 class="winner-name">{{ member.teamM4 }}</h2>
       <h2 class="winner-name">{{ member.teamM5 }}</h2>
     </div>
-  </div>
+  </div> -->
 
   <!-- Winning screen Team 2 -->
-  <div *ngIf="resultTeam2 == true" style="text-align: center">
+  <!-- <div *ngIf="resultTeam2 == true" style="text-align: center">
     <h1
       style="
         font-size: 7rem;
@@ -210,10 +210,10 @@
       <h2 class="winner-name">{{ member.team2M4 }}</h2>
       <h2 class="winner-name">{{ member.team2M5 }}</h2>
     </div>
-  </div>
+  </div> -->
 
   <!-- Tie screen -->
-  <div *ngIf="tie == true" style="text-align: center">
+  <!-- <div *ngIf="tie == true" style="text-align: center">
     <h1
       style="
         font-size: 7rem;
@@ -230,10 +230,10 @@
     >
       TIE!!!
     </h1>
-  </div>
+  </div> -->
 
   <!-- Question's anwsers -->
-  <div
+  <!-- <div
     *ngIf="win == false && tie == false"
     class="row"
     style="margin-bottom: 15px"
@@ -469,124 +469,57 @@
       </label>
     </div>
   </div>
-</div>
+</div> -->
 
-<!-- Round points -->
-<div *ngIf="!answersEnabled">
-  <div
-    *ngIf="win == false && tie == false"
-    style="position: absolute; top: 20px; left: 46%"
-  >
-    <div class="card" style="width: 150px; max-width: 250px">
-      <div
-        class="card-body"
-        style="background: linear-gradient(#a7e4cb, #3c8868)"
-      >
-        <p style="font-size: 5rem; text-align: center">{{ roundPoints }}</p>
+  <!-- Round points -->
+  <div *ngIf="!answersEnabled">
+    <div
+      *ngIf="win == false && tie == false"
+      style="position: absolute; top: 20px; left: 46%"
+    >
+      <div class="card" style="width: 150px; max-width: 250px">
+        <div
+          class="card-body"
+          style="background: linear-gradient(#a7e4cb, #3c8868)"
+        >
+          <p style="font-size: 5rem; text-align: center">{{ roundPoints }}</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div *ngIf="answersEnabled">
-  <div
-    *ngIf="win == false && tie == false"
-    style="position: absolute; top: 20px; left: 46%"
-  >
+  <div *ngIf="answersEnabled">
     <div
-      class="card"
-      style="
-        width: 150px;
-        max-width: 250px;
-        background-color: #ffe864;
-        padding: 6px;
-        box-shadow: 0px 0px 10px 0px rgb(255, 166, 0);
-      "
+      *ngIf="win == false && tie == false"
+      style="position: absolute; top: 20px; left: 46%"
     >
       <div
-        class="card-body"
-        style="background: linear-gradient(#a7e4cb, #3c8868)"
+        class="card"
+        style="
+          width: 150px;
+          max-width: 250px;
+          background-color: #ffe864;
+          padding: 6px;
+          box-shadow: 0px 0px 10px 0px rgb(255, 166, 0);
+        "
       >
-        <p style="font-size: 5rem; text-align: center">{{ roundPoints }}</p>
+        <div
+          class="card-body"
+          style="background: linear-gradient(#a7e4cb, #3c8868)"
+        >
+          <p style="font-size: 5rem; text-align: center">{{ roundPoints }}</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Team 1 card their turn -->
-<div *ngIf="teamTurn && win == false && tie == false">
-  <div
-    class="col-md-2"
-    style="position: absolute; left: 0px; top: 30%"
-    *ngFor="let member of team1"
-  >
+  <!-- Team 1 card their turn -->
+  <!-- <div *ngIf="teamTurn && win == false && tie == false">
     <div
-      class="card"
-      style="
-        background-color: #ffe864;
-        padding: 6px;
-        box-shadow: 0px 0px 10px 0px rgb(255, 166, 0);
-      "
+      class="col-md-2"
+      style="position: absolute; left: 0px; top: 30%"
+      *ngFor="let member of team1"
     >
-      <div class="card-header" style="text-align: center">
-        Team 1 - Points: {{ pointsTeam1 }}
-      </div>
-      <div class="card-body">
-        <p><b>Team Leader: </b>{{ member.team1L }}</p>
-        <p><b>Team Member: </b> {{ member.teamM2 }}</p>
-        <p><b>Team Member: </b> {{ member.teamM3 }}</p>
-        <p><b>Team Member: </b> {{ member.teamM4 }}</p>
-        <p><b>Team Member: </b> {{ member.teamM5 }}</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Points Team 1 -->
-<div
-  *ngIf="win == false && tie == false"
-  style="position: absolute; left: 20px; bottom: 20%"
->
-  <div class="card" style="width: 150px; max-width: 250px">
-    <div
-      class="card-body"
-      style="background: linear-gradient(#a7e4cb, #3c8868)"
-    >
-      <p style="font-size: 5rem; text-align: center">{{ pointsTeam1 }}</p>
-    </div>
-  </div>
-</div>
-
-<!-- Team 1 card NOT their turn -->
-<div *ngIf="!teamTurn && win == false && tie == false">
-  <div
-    class="col-md-2"
-    style="position: absolute; left: 0px; top: 30%"
-    *ngFor="let member of team1"
-  >
-    <div class="card">
-      <div class="card-header" style="text-align: center">
-        Team 1 - Points: {{ pointsTeam1 }}
-      </div>
-      <div class="card-body">
-        <p><b>Team Leader: </b>{{ member.team1L }}</p>
-        <p><b>Team Member: </b> {{ member.teamM2 }}</p>
-        <p><b>Team Member: </b> {{ member.teamM3 }}</p>
-        <p><b>Team Member: </b> {{ member.teamM4 }}</p>
-        <p><b>Team Member: </b> {{ member.teamM5 }}</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Team 2 card their turn -->
-<div *ngIf="!teamTurn && win == false && tie == false">
-  <div
-    class="col-md-2"
-    style="position: absolute; right: 0px; top: 30%"
-    *ngFor="let member of team2"
-  >
-    <div>
       <div
         class="card"
         style="
@@ -595,6 +528,96 @@
           box-shadow: 0px 0px 10px 0px rgb(255, 166, 0);
         "
       >
+        <div class="card-header" style="text-align: center">
+          Team 1 - Points: {{ pointsTeam1 }}
+        </div>
+        <div class="card-body">
+          <p><b>Team Leader: </b>{{ member.team1L }}</p>
+          <p><b>Team Member: </b> {{ member.teamM2 }}</p>
+          <p><b>Team Member: </b> {{ member.teamM3 }}</p>
+          <p><b>Team Member: </b> {{ member.teamM4 }}</p>
+          <p><b>Team Member: </b> {{ member.teamM5 }}</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Points Team 1 -->
+  <!-- <div
+    *ngIf="win == false && tie == false"
+    style="position: absolute; left: 20px; bottom: 20%"
+  >
+    <div class="card" style="width: 150px; max-width: 250px">
+      <div
+        class="card-body"
+        style="background: linear-gradient(#a7e4cb, #3c8868)"
+      >
+        <p style="font-size: 5rem; text-align: center">{{ pointsTeam1 }}</p>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Team 1 card NOT their turn -->
+  <!-- <div *ngIf="!teamTurn && win == false && tie == false">
+    <div
+      class="col-md-2"
+      style="position: absolute; left: 0px; top: 30%"
+      *ngFor="let member of team1"
+    >
+      <div class="card">
+        <div class="card-header" style="text-align: center">
+          Team 1 - Points: {{ pointsTeam1 }}
+        </div>
+        <div class="card-body">
+          <p><b>Team Leader: </b>{{ member.team1L }}</p>
+          <p><b>Team Member: </b> {{ member.teamM2 }}</p>
+          <p><b>Team Member: </b> {{ member.teamM3 }}</p>
+          <p><b>Team Member: </b> {{ member.teamM4 }}</p>
+          <p><b>Team Member: </b> {{ member.teamM5 }}</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Team 2 card their turn -->
+  <!-- <div *ngIf="!teamTurn && win == false && tie == false">
+    <div
+      class="col-md-2"
+      style="position: absolute; right: 0px; top: 30%"
+      *ngFor="let member of team2"
+    >
+      <div>
+        <div
+          class="card"
+          style="
+            background-color: #ffe864;
+            padding: 6px;
+            box-shadow: 0px 0px 10px 0px rgb(255, 166, 0);
+          "
+        >
+          <div class="card-header" style="text-align: center">
+            Team 2 - Points: {{ pointsTeam2 }}
+          </div>
+          <div class="card-body">
+            <p><b>Team Leader: </b>{{ member.team2L }}</p>
+            <p><b>Team Member: </b> {{ member.team2M2 }}</p>
+            <p><b>Team Member: </b> {{ member.team2M3 }}</p>
+            <p><b>Team Member: </b> {{ member.team2M4 }}</p>
+            <p><b>Team Member: </b>{{ member.team2M5 }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- Team 2 card NOT their turn -->
+  <!-- <div *ngIf="teamTurn && win == false && tie == false">
+    <div
+      class="col-md-2"
+      style="position: absolute; right: 0px; top: 30%"
+      *ngFor="let member of team2"
+    >
+      <div class="card">
         <div class="card-header" style="text-align: center">
           Team 2 - Points: {{ pointsTeam2 }}
         </div>
@@ -607,48 +630,25 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </div> -->
 
-<!-- Team 2 card NOT their turn -->
-<div *ngIf="teamTurn && win == false && tie == false">
-  <div
-    class="col-md-2"
-    style="position: absolute; right: 0px; top: 30%"
-    *ngFor="let member of team2"
+  <!-- Point Team 2 -->
+  <!-- <div
+    *ngIf="win == false && tie == false"
+    style="position: absolute; right: 20px; bottom: 20%"
   >
-    <div class="card">
-      <div class="card-header" style="text-align: center">
-        Team 2 - Points: {{ pointsTeam2 }}
-      </div>
-      <div class="card-body">
-        <p><b>Team Leader: </b>{{ member.team2L }}</p>
-        <p><b>Team Member: </b> {{ member.team2M2 }}</p>
-        <p><b>Team Member: </b> {{ member.team2M3 }}</p>
-        <p><b>Team Member: </b> {{ member.team2M4 }}</p>
-        <p><b>Team Member: </b>{{ member.team2M5 }}</p>
+    <div class="card" style="width: 150px; max-width: 250px">
+      <div
+        class="card-body"
+        style="background: linear-gradient(#a7e4cb, #3c8868)"
+      >
+        <p style="font-size: 5rem; text-align: center">{{ pointsTeam2 }}</p>
       </div>
     </div>
-  </div>
-</div>
+  </div> -->
 
-<!-- Point Team 2 -->
-<div
-  *ngIf="win == false && tie == false"
-  style="position: absolute; right: 20px; bottom: 20%"
->
-  <div class="card" style="width: 150px; max-width: 250px">
-    <div
-      class="card-body"
-      style="background: linear-gradient(#a7e4cb, #3c8868)"
-    >
-      <p style="font-size: 5rem; text-align: center">{{ pointsTeam2 }}</p>
-    </div>
-  </div>
-</div>
-
-<!-- Control panel -->
-<div style="position: absolute; bottom: 0px">
+  <!-- Control panel -->
+  <!-- <div style="position: absolute; bottom: 0px">
   <div>
     <button accesskey="9" (click)="addStrikeTeam()" hidden>STRIKE</button>
     <button accesskey="0" (click)="switchTurns()" hidden>switchTurn</button>
@@ -657,4 +657,5 @@
     <button accesskey="l" (click)="playTheme()" hidden>PLAY SOUND</button>
     <button accesskey="k" (click)="playFunny()" hidden>PLAY SOUND</button>
   </div>
-</div>
+</div> -->
+<!-- </div> -->

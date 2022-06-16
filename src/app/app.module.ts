@@ -14,6 +14,8 @@ import { CommonModule } from '@angular/common';
 import { QuizComponent } from './core/pages/quiz/quiz.component';
 import { InfoComponent } from './core/pages/info/info.component';
 import { ControlsComponent } from './core/pages/controls/controls.component';
+import { AdminComponent } from './core/pages/adminpanel/admin.component';
+import { AddComponent } from './core/pages/adminpanel/addquestion/add.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { ControlsComponent } from './core/pages/controls/controls.component';
     QuizComponent,
     InfoComponent,
     ControlsComponent,
+    AdminComponent,
+    AddComponent,
   ],
   imports: [
     BrowserModule,

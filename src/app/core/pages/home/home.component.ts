@@ -1,73 +1,95 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Team1 } from 'src/app/entities/team1/team1.model';
-import { Team2 } from 'src/app/entities/team2/team2.model';
-import { TeamService } from 'src/app/entities/team.service';
+import { Team } from 'src/app/entities/team/team.model';
+import { Player } from 'src/app/entities/players/player.model';
+import { TeamService } from 'src/app/entities/team/team.service';
+import { PlayerService } from 'src/app/entities/players/player.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
 })
-export class HomeComponent implements OnInit {
-  team1!: Team1;
-  saveTeam1: boolean = false;
+export class HomeComponent implements OnInit, OnDestroy {
+  players: Player[] | null = null;
+  player!: Player;
+  teams: Team[] | null = null;
+  team!: Team;
+  subscriptionPlayers!: Subscription;
+  subscriptionTeams!: Subscription;
 
-  team2!: Team2;
-  saveTeam2: boolean = false;
+  constructor(
+    private router: Router,
+    private teamService: TeamService,
+    private playerService: PlayerService
+  ) {}
+
   ngOnInit(): void {
-    this.team1 = {
-      id: 0,
-      team1L: '',
-      teamM2: '',
-      teamM3: '',
-      teamM4: '',
-      teamM5: '',
+    this.player = {
+      _id: '',
+      name: '',
+      team: '',
+      isActive: false,
     };
-    this.team2 = {
-      id: 0,
-      team2L: '',
-      team2M2: '',
-      team2M3: '',
-      team2M4: '',
-      team2M5: '',
+    this.team = {
+      _id: '',
+      teamName: '',
+      points: 0,
+      strikes: 0,
     };
+
+    this.subscriptionPlayers = this.playerService.list().subscribe({
+      next: (players) => {
+        this.players = players as Player[];
+        console.log(players);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+
+    this.subscriptionTeams = this.teamService.list().subscribe({
+      next: (teams) => {
+        this.teams = teams as Team[];
+        console.log(this.teams);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
-  constructor(private router: Router, private teamService: TeamService) {}
-
-  save1() {
-    this.saveTeam1 = true;
-    this.team1 = {
-      id: this.team1.id,
-      team1L: this.team1.team1L,
-      teamM2: this.team1.teamM2,
-      teamM3: this.team1.teamM3,
-      teamM4: this.team1.teamM4,
-      teamM5: this.team1.teamM5,
-    };
-    console.log(this.team1);
-    this.teamService.addTeam1(this.team1);
+  ngOnDestroy(): void {
+    this.subscriptionPlayers.unsubscribe();
+    this.subscriptionTeams.unsubscribe();
   }
 
-  save2() {
-    this.saveTeam2 = true;
-    this.team2 = {
-      id: this.team2.id,
-      team2L: this.team2.team2L,
-      team2M2: this.team2.team2M2,
-      team2M3: this.team2.team2M3,
-      team2M4: this.team2.team2M4,
-      team2M5: this.team2.team2M5,
-    };
-    console.log(this.team2);
-    this.teamService.addTeam2(this.team2);
+  goToAdminPanel() {
+    this.router.navigate(['/admin']);
   }
 
-  next() {
+  goToQuiz() {
     this.playTheme();
-    if (this.saveTeam1 == true && this.saveTeam2 == true) {
-      this.router.navigate(['/quiz']);
-    }
+
+    this.router.navigate(['/quiz']);
+  }
+
+  addPlayer(): void {
+    this.subscriptionPlayers = this.playerService
+      .create(this.player)
+      .subscribe({
+        error: (err) => {
+          console.log(err);
+        },
+      });
+  }
+
+  addTeam(): void {
+    this.teamService.addTeam(this.team);
+  }
+
+  switchTeam(player: Player) {
+    this.playerService.updatePlayer(player);
   }
 
   playTheme() {

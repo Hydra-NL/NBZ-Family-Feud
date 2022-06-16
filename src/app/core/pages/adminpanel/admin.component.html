@@ -1,0 +1,21 @@
+<div>
+  hier komt de adminpanel om vragen toe te voegen, updaten en te verwijderen
+  <h1>Adminpanel</h1>
+  <div>
+    <h2>Vragen</h2>
+    <div>
+      <button (click)="goToAddQuestion()">Add Question</button>
+      <br />
+      <label for="editquestion">Which question do you want to edit</label>
+      <select id="editquestion">
+        <option value="">Select a question</option>
+        <option *ngFor="let question of questions" [value]="question._id">
+          {{ question._id }}) {{ question.questionTitle }}
+        </option>
+      </select>
+
+      <br />
+      <button (click)="goToDeleteQuestion()">Delete question</button>
+    </div>
+  </div>
+</div>

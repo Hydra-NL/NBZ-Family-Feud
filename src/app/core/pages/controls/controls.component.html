@@ -1,81 +1,67 @@
-<button
-  class="btn btn-primary"
-  style="position: absolute; top: 30px; left: 50px"
-  routerLink="/info"
->
-  <i class="fa fa-info-circle"></i> How to play
-</button>
-<button
-  class="btn btn-primary"
-  style="position: absolute; top: 75px; left: 50px"
-  routerLink="/home"
->
-  <i class="fa fa-home"></i> Home
-</button>
+<!-- Info page nav-buttons -->
+<div class="nav-button-box">
+  <button class="nav-button" routerLink="/home">
+    <i class="fa fa-home"></i> Home
+  </button>
+  <br />
+  <button class="nav-button" routerLink="/info">
+    <i class="fa fa-info-circle"></i> How to play
+  </button>
+  <br />
+  <button class="nav-button" routerLink="/info/controls" disabled>
+    <i class="fa fa-gamepad"></i> Controls
+  </button>
+  <br />
+  <button class="nav-button" routerLink="/admin">
+    <i class="fa fa-book"></i> Admin
+  </button>
+</div>
 
 <!-- Title -->
-<div
-  style="
-    background-color: rgba(79, 234, 255, 0.5);
-    border-radius: 50px;
-    padding: 30px;
-    margin-top: 30px;
-    left: 20%;
-    right: 20%;
-    position: absolute;
-  "
->
-  <div style="color: rgb(20, 20, 20); text-align: center">
-    <h1
-      style="
-        font-size: 5rem;
-
-        background: -webkit-linear-gradient(
-          rgb(252, 122, 35) 30%,
-          rgb(255, 221, 29),
-          rgb(255, 228, 78)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(3px 3px 3px #333);
-      "
-    >
-      NBZ Family Feud
-    </h1>
-    <h2>Controls</h2>
-  </div>
+<div class="title-box">
+  <h1 class="title">Controls</h1>
 </div>
-<div class="row justify-content-center">
-  <div
-    class="col-md-6"
-    style="
-      background-color: rgba(204, 248, 255, 0.836);
-      border-radius: 50px;
-      padding: 30px;
-      margin-top: 20%;
-    "
-  >
-    <h1 style="text-decoration: underline; text-align: center">Hotkeys</h1>
-    <br />
-    <table class="table">
-      <th style="font-weight: normal">
-        <p><b>ALT + 1:</b> reveal/hide answer 1</p>
-        <p><b>ALT + 2:</b> reveal/hide answer 2</p>
-        <p><b>ALT + 3:</b> reveal/hide answer 3</p>
-        <p><b>ALT + 4:</b> reveal/hide answer 4</p>
-        <p><b>ALT + 5:</b> reveal/hide answer 5</p>
-        <p><b>ALT + 6:</b> reveal/hide answer 6</p>
-        <p><b>ALT + 7:</b> reveal/hide answer 7</p>
-      </th>
-      <th style="font-weight: normal">
-        <p><b>ALT + 8:</b> reveal/hide answer 8</p>
-        <p><b>ALT + 9:</b> gives active team a strike</p>
-        <p><b>ALT + 0:</b> switches active team</p>
-        <p><b>ALT + n:</b> go to next question</p>
-        <p><b>ALT + p:</b> disable points for answers</p>
-        <p><b>ALT + l:</b> short sound bite from theme</p>
-        <p><b>ALT + k:</b> face-off strike sound</p>
-      </th>
-    </table>
+<div class="content-box">
+  <div class="col-md-4">
+    <div class="content-box-item">
+      <h4 class="align-center-bold">Hotkeys</h4>
+      <li><b>ALT + 2:</b> Reveal answer 2</li>
+      <li><b>ALT + 3:</b> Reveal answer 3</li>
+      <li><b>ALT + 1:</b> Reveal answer 1</li>
+      <li><b>ALT + 4:</b> Reveal answer 4</li>
+      <li><b>ALT + 5:</b> Reveal answer 5</li>
+      <li><b>ALT + 6:</b> Reveal answer 6</li>
+      <li><b>ALT + 7:</b> Reveal answer 7</li>
+      <li><b>ALT + 8:</b> Reveal answer 8</li>
+      <li><b>ALT + B:</b> Give Strike</li>
+      <li><b>ALT + N:</b> Go to previous question</li>
+      <li><b>ALT + M:</b> Go to next question</li>
+      <li><b>ALT + H:</b> Left team won the face-off</li>
+      <li><b>ALT + J:</b> Right team won the face-off</li>
+    </div>
+  </div>
+  <div class="col-md-6 sound-board">
+    <div class="content-box-item">
+      <h4 class="align-center-bold">Sound Buttons</h4>
+      <button class="tech-button" (click)="playTheme()">Play theme</button>
+      <button class="tech-button" (click)="playFunny()">Play Funny</button>
+      <button class="tech-button" (click)="playBahBow()">Play Bah Bow</button>
+      <button class="tech-button" (click)="playGoodAnswer()">
+        Play Good answer
+      </button>
+      <button class="tech-button" (click)="playStrike()">Play Strike</button>
+      <button class="tech-button" (click)="playBadum()">Play Badum</button>
+      <button class="tech-button" (click)="playApplause()">
+        Play Applause
+      </button>
+      <button class="tech-button" (click)="playLaughtrack()">
+        Play Laughtrack
+      </button>
+      <button class="tech-button" (click)="playCricket()">Play Cricket</button>
+      <button class="tech-button" (click)="playTrombone()">
+        Play Trombone
+      </button>
+      <button class="tech-button" (click)="playGoofy()">Play Goofy</button>
+    </div>
   </div>
 </div>

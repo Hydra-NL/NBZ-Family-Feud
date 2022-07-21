@@ -20,7 +20,7 @@ export class Question extends Entity {
   points8: number = 0;
   totalPoints: number = 0;
 
-  constructor(_id: string) {
-    super(_id);
+  constructor(id: number) {
+    super(id);
   }
 }

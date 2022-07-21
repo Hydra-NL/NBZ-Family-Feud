@@ -15,7 +15,8 @@ import { QuizComponent } from './core/pages/quiz/quiz.component';
 import { InfoComponent } from './core/pages/info/info.component';
 import { ControlsComponent } from './core/pages/controls/controls.component';
 import { AdminComponent } from './core/pages/adminpanel/admin.component';
-import { AddComponent } from './core/pages/adminpanel/addquestion/add.component';
+import { FinalComponent } from './core/pages/final/final.component';
+import { DemoComponent } from './core/pages/demo/demo.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AddComponent } from './core/pages/adminpanel/addquestion/add.component'
     InfoComponent,
     ControlsComponent,
     AdminComponent,
-    AddComponent,
+    FinalComponent,
+    DemoComponent
   ],
   imports: [
     BrowserModule,

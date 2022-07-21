@@ -13,33 +13,35 @@ export class TeamService extends EntityService<Team> {
   }
   teams: Team[] = [
     {
-      _id: '1',
+      id: 1,
       teamName: 'Team 1',
       points: 0,
       strikes: 0,
+      isPlaying: false,
     },
     {
-      _id: '2',
+      id: 2,
       teamName: 'Team 2',
       points: 0,
       strikes: 0,
+      isPlaying: false,
     },
   ];
   getTeams() {
     return this.teams;
   }
-  getTeamById(id: string) {
-    return this.teams.find((team) => team._id === id);
+  getTeamById(id: number) {
+    return this.teams.find((team) => team.id === id);
   }
   addTeam(team: Team) {
     this.teams.push(team);
   }
   updateTeam(team: Team) {
-    const index = this.teams.findIndex((t) => t._id === team._id);
+    const index = this.teams.findIndex((t) => t.id === team.id);
     this.teams[index] = team;
   }
-  deleteTeam(id: string) {
-    const index = this.teams.findIndex((t) => t._id === id);
+  deleteTeam(id: number) {
+    const index = this.teams.findIndex((t) => t.id === id);
     this.teams.splice(index, 1);
   }
 }

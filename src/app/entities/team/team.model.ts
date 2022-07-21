@@ -4,7 +4,9 @@ export class Team extends Entity {
   teamName: string = '';
   points: number = 0;
   strikes: number = 0;
-  constructor(_id: string) {
-    super(_id);
+  isPlaying: boolean = false;
+
+  constructor(id: number) {
+    super(id);
   }
 }

@@ -49,7 +49,7 @@ export class EntityService<T extends Entity> {
   }
 
   public update(item: T, options?: any): Observable<T> {
-    const endpoint = `${this.url}${this.endpoint}/${item._id}/update`;
+    const endpoint = `${this.url}${this.endpoint}/update/${item.id}`;
     console.log(`update ${endpoint}`);
     console.log(item);
     return this.http.put(endpoint, item, { ...options, ...httpOptions }).pipe(
@@ -58,8 +58,8 @@ export class EntityService<T extends Entity> {
     );
   }
 
-  public delete(id: string, options?: any): Observable<T> {
-    const endpoint = `${this.url}${this.endpoint}/${id}/delete`;
+  public delete(id: number | string, options?: any): Observable<T> {
+    const endpoint = `${this.url}${this.endpoint}/delete/${id}`;
     console.log(`delete ${endpoint}`);
     return this.http.delete(endpoint, { ...options, ...httpOptions }).pipe(
       map((response: any) => response.result),

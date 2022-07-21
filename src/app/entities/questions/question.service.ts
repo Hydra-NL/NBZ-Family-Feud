@@ -14,7 +14,7 @@ export class QuestionService extends EntityService<Question> {
 
   questions: Question[] = [
     {
-      _id: '1',
+      id: 1,
       questionTitle: 'is this an example?',
       answer1: '1',
       answer2: '2',
@@ -40,8 +40,8 @@ export class QuestionService extends EntityService<Question> {
     return this.questions;
   }
 
-  getQuestionById(id: string) {
-    return this.questions.find((question) => question._id === id);
+  getQuestionById(id: number) {
+    return this.questions.find((question) => question.id === id);
   }
 
   addQuestion(question: Question) {
@@ -49,12 +49,12 @@ export class QuestionService extends EntityService<Question> {
   }
 
   updateQuestion(question: Question) {
-    const index = this.questions.findIndex((q) => q._id === question._id);
+    const index = this.questions.findIndex((q) => q.id === question.id);
     this.questions[index] = question;
   }
 
-  deleteQuestion(id: string) {
-    const index = this.questions.findIndex((q) => q._id === id);
+  deleteQuestion(id: number) {
+    const index = this.questions.findIndex((q) => q.id === id);
     this.questions.splice(index, 1);
   }
 }

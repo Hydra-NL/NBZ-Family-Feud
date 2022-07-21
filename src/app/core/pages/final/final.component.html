@@ -1,0 +1,25 @@
+<!-- Home page nav-buttons -->
+<div class="nav-button-box">
+  <button class="nav-button" routerLink="/home" style="margin-bottom: 0px">
+    <i class="fa fa-home"></i> Home
+  </button>
+</div>
+
+<!-- Gifs -->
+<div>
+  <img src="../../../../assets/gifs/steve.gif" alt="setev" class="steve-gif" />
+  <img
+    src="../../../../assets/gifs/confetti.gif"
+    alt="confetti"
+    class="confetti-gif"
+  />
+</div>
+
+<!-- Winner box -->
+<div class="content-box">
+  <div class="content-box-item col-md-12">
+    <h1 class="align-center-bold">Congratulations!</h1>
+    <h2 class="align-center-bold">You won!</h2>
+    <p *ngFor="let player of teamplayers">{{ player.playerName }}</p>
+  </div>
+</div>

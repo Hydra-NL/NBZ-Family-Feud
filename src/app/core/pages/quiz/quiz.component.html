@@ -1,4 +1,500 @@
-Strikes team 1
+<!-- Quiz page -->
+<ng-component *ngTemplateOutlet="currentTemplate"></ng-component>
+<ng-template #quiz>
+  <!-- Round points -->
+  <div class="round-points-box">
+    <p>{{ roundPoints }}</p>
+    <i id="lock-points" class="fa fa-lock disabled-ptns"></i>
+  </div>
+
+  <!-- Strikes -->
+  <div class="strikes-box-team1">
+    <img
+      *ngIf="team1.strikes < 1"
+      id="strikes-team1-1"
+      class="strike-img"
+      src="../../../../assets/images/strike_inactive.png"
+      alt="strike"
+    />
+    <img
+      *ngIf="team1.strikes >= 1"
+      id="strikes-team1-1"
+      class="strike-img"
+      src="../../../../assets/images/strike.png"
+      alt="strike"
+    />
+    <img
+      *ngIf="team1.strikes < 2"
+      id="strikes-team1-2"
+      class="strike-img"
+      src="../../../../assets/images/strike_inactive.png"
+      alt="strike"
+    />
+    <img
+      *ngIf="team1.strikes >= 2"
+      id="strikes-team1-2"
+      class="strike-img"
+      src="../../../../assets/images/strike.png"
+      alt="strike"
+    />
+    <img
+      *ngIf="team1.strikes < 3"
+      id="strikes-team1-3"
+      class="strike-img"
+      src="../../../../assets/images/strike_inactive.png"
+      alt="strike"
+    />
+    <img
+      *ngIf="team1.strikes >= 3"
+      id="strikes-team1-3"
+      class="strike-img"
+      src="../../../../assets/images/strike.png"
+      alt="strike"
+    />
+  </div>
+
+  <div class="strikes-box-team2">
+    <img
+      *ngIf="team2.strikes < 1"
+      id="strikes-team2-1"
+      class="strike-img"
+      src="../../../../assets/images/strike_inactive.png"
+      alt="strike"
+    />
+    <img
+      *ngIf="team2.strikes >= 1"
+      id="strikes-team2-1"
+      class="strike-img"
+      src="../../../../assets/images/strike.png"
+      alt="strike"
+    />
+    <img
+      *ngIf="team2.strikes < 2"
+      id="strikes-team2-2"
+      class="strike-img"
+      src="../../../../assets/images/strike_inactive.png"
+      alt="strike"
+    />
+    <img
+      *ngIf="team2.strikes >= 2"
+      id="strikes-team2-2"
+      class="strike-img"
+      src="../../../../assets/images/strike.png"
+      alt="strike"
+    />
+    <img
+      *ngIf="team2.strikes < 3"
+      id="strikes-team2-3"
+      class="strike-img"
+      src="../../../../assets/images/strike_inactive.png"
+      alt="strike"
+    />
+    <img
+      *ngIf="team2.strikes >= 3"
+      id="strikes-team2-3"
+      class="strike-img"
+      src="../../../../assets/images/strike.png"
+      alt="strike"
+    />
+  </div>
+
+  <!-- Big Strike -->
+  <div id="big-strike" class="big-strike">
+    <img
+      class="big-strike-image"
+      src="../../../../assets/images/strike.png"
+      alt="strike"
+    />
+  </div>
+
+  <!-- Title quiz -->
+  <div id="question-title" class="question-title-box">
+    <div class="question-title-box-content">
+      <button
+        id="show-title-button"
+        class="show-title-button"
+        (click)="toggleTitle()"
+      >
+        Reveal Question #{{ count }}
+      </button>
+      <div *ngFor="let question of questions">
+        <p
+          id="question-title"
+          class="question-title"
+          *ngIf="question.id === count"
+        >
+          {{ question.questionTitle }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quiz body -->
+  <div id="answer-section" class="answer-box">
+    <div *ngFor="let question of questions">
+      <div *ngIf="question.id === count">
+        <div class="answer-box-content col-md-6">
+          <div class="answer-box-item">
+            <button
+              id="btn-answer-1"
+              class="show-answer-button"
+              (click)="toggleAnswer(1)"
+              accesskey="1"
+              *ngIf="question.points1 > 0"
+            >
+              1
+            </button>
+            <p id="answer-1">{{ question.answer1 }}</p>
+            <p id="points-1" class="points-box">{{ question.points1 }}</p>
+          </div>
+          <div class="answer-box-item">
+            <button
+              id="btn-answer-2"
+              class="show-answer-button"
+              (click)="toggleAnswer(2)"
+              accesskey="2"
+              *ngIf="question.points2 > 0"
+            >
+              2
+            </button>
+            <p id="answer-2">{{ question.answer2 }}</p>
+            <p id="points-2" class="points-box">{{ question.points2 }}</p>
+          </div>
+          <div class="answer-box-item">
+            <button
+              id="btn-answer-3"
+              class="show-answer-button"
+              (click)="toggleAnswer(3)"
+              accesskey="3"
+              *ngIf="question.points3 > 0"
+            >
+              3
+            </button>
+            <p id="answer-3">{{ question.answer3 }}</p>
+            <p id="points-3" class="points-box">{{ question.points3 }}</p>
+          </div>
+          <div class="answer-box-item">
+            <button
+              id="btn-answer-4"
+              class="show-answer-button"
+              (click)="toggleAnswer(4)"
+              accesskey="4"
+              *ngIf="question.points4 > 0"
+            >
+              4
+            </button>
+            <p id="answer-4">{{ question.answer4 }}</p>
+            <p id="points-4" class="points-box">{{ question.points4 }}</p>
+          </div>
+        </div>
+        <div class="answer-box-content col-md-6">
+          <div class="answer-box-item">
+            <button
+              id="btn-answer-5"
+              class="show-answer-button"
+              (click)="toggleAnswer(5)"
+              accesskey="5"
+              *ngIf="question.points5 > 0"
+            >
+              5
+            </button>
+            <p id="answer-5">{{ question.answer5 }}</p>
+            <p id="points-5" class="points-box">{{ question.points5 }}</p>
+          </div>
+          <div class="answer-box-item">
+            <button
+              id="btn-answer-6"
+              class="show-answer-button"
+              (click)="toggleAnswer(6)"
+              accesskey="6"
+              *ngIf="question.points6 > 0"
+            >
+              6
+            </button>
+            <p id="answer-6">{{ question.answer6 }}</p>
+            <p id="points-6" class="points-box">{{ question.points6 }}</p>
+          </div>
+          <div class="answer-box-item">
+            <button
+              id="btn-answer-7"
+              class="show-answer-button"
+              (click)="toggleAnswer(7)"
+              accesskey="7"
+              *ngIf="question.points7 > 0"
+            >
+              7
+            </button>
+            <p id="answer-7">{{ question.answer7 }}</p>
+            <p id="points-7" class="points-box">{{ question.points7 }}</p>
+          </div>
+          <div class="answer-box-item">
+            <button
+              id="btn-answer-8"
+              class="show-answer-button"
+              (click)="toggleAnswer(8)"
+              accesskey="8"
+              *ngIf="question.points8 > 0"
+            >
+              8
+            </button>
+            <p id="answer-8">{{ question.answer8 }}</p>
+            <p id="points-8" class="points-box">{{ question.points8 }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team 1 -->
+  <div id="team-points-1" class="teams-box-1-points">
+    <p class="teams-box-points-p">{{ team1.points }}</p>
+  </div>
+  <div id="team-box-1" class="teams-box-1">
+    <div class="teams-box-title">
+      <p>Team {{ team1.teamName }}</p>
+    </div>
+    <div class="teams-box-content">
+      <div *ngFor="let teamplayer of teamPlayers">
+        <p *ngIf="teamplayer.teamId == team1.id">
+          {{ teamplayer.playerName }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team 2 -->
+  <div id="team-points-2" class="teams-box-2-points">
+    <p class="teams-box-points-p">{{ team2.points }}</p>
+  </div>
+  <div id="team-box-2" class="teams-box-2">
+    <div class="teams-box-title">
+      <p>Team {{ team2.teamName }}</p>
+    </div>
+    <div class="teams-box-content">
+      <div *ngFor="let teamplayer of teamPlayers">
+        <p *ngIf="teamplayer.teamId == team2.id">
+          {{ teamplayer.playerName }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team select -->
+  <div id="select-teams" class="select-team-box">
+    <p>Pass or Play</p>
+    <button
+      accesskey="h"
+      (click)="selectTeam(team1)"
+      class="select-team-button"
+    >
+      <i class="fa fa-arrow-left"></i>
+      {{ team1.teamName }}
+    </button>
+    <button
+      accesskey="j"
+      (click)="selectTeam(team2)"
+      class="select-team-button"
+    >
+      {{ team2.teamName }}
+      <i class="fa fa-arrow-right"></i>
+    </button>
+  </div>
+
+  <!-- Timer -->
+  <div id="timer" class="timer-box">
+    <p>{{ timeRemaining }}</p>
+  </div>
+
+  <!-- Buttons for tech-team -->
+  <div class="tech-funny-button-box">
+    <label>Funny buttons <i class="fa fa-smile-o"></i></label>
+    <button class="tech-button" (click)="playFunny()">🎵</button>
+    <button class="tech-button" (click)="playBadum()">🥁</button>
+    <button class="tech-button" (click)="playApplause()">👏</button>
+    <button class="tech-button" (click)="playLaughtrack()">😁</button>
+    <button class="tech-button" (click)="playCricket()">🦗</button>
+    <button class="tech-button" (click)="playTrombone()">🎺</button>
+    <button class="tech-button" (click)="playGoofy()">💀</button>
+  </div>
+
+  <div class="tech-button-box">
+    <label>Functional buttons <i class="fa fa-cog"></i></label>
+    <button (click)="toggleTimer()" class="tech-button">
+      Start <i class="fa fa-clock-o"></i>
+    </button>
+    <button class="tech-button" (click)="playBahBow()">Face-off</button>
+    <button accesskey="b" class="tech-button" (click)="giveStrike()">
+      Strike
+    </button>
+    <button accesskey="n" class="tech-button" (click)="previousQuestion()">
+      <i class="fa fa-arrow-left"></i> Prev question
+    </button>
+    <button accesskey="m" class="tech-button" (click)="nextQuestion()">
+      Next Question <i class="fa fa-arrow-right"></i>
+    </button>
+  </div>
+</ng-template>
+
+<!-- Winner page -->
+<ng-template #winner>
+  <!-- Home page nav-buttons -->
+  <div class="nav-button-box">
+    <button class="nav-button" routerLink="/home" style="margin-bottom: 0px">
+      <i class="fa fa-home"></i> Home
+    </button>
+  </div>
+
+  <!-- Winning title -->
+  <div class="winning-title-box">
+    <h1 class="winning-title">Congratulations!</h1>
+  </div>
+
+  <!-- Draw -->
+  <div *ngIf="team1.points == team2.points">
+    <div class="winning-team-box">
+      <h1 class="winning-title">Draw!</h1>
+      <div class="winning-box-item">
+        <p class="winning-points">Points: {{ team1.points }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team 1 wins -->
+  <div *ngIf="team1.points > team2.points">
+    <div class="winning-team-box">
+      <h1 class="winning-title">Team {{ team1.teamName }} wins!</h1>
+      <div class="winning-box-item">
+        <p class="winning-points">Points: {{ team1.points }}</p>
+        <div *ngFor="let teamplayer of teamPlayers">
+          <p class="winning-playername" *ngIf="teamplayer.teamId == team1.id">
+            {{ teamplayer.playerName }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Team 2 wins -->
+  <div *ngIf="team1.points < team2.points">
+    <div class="winning-team-box">
+      <h1 class="winning-title">Team {{ team2.teamName }} wins!</h1>
+      <div class="winning-box-item">
+        <p class="winning-points">Points: {{ team2.points }}</p>
+        <div *ngFor="let teamplayer of teamPlayers">
+          <p class="winning-playername" *ngIf="teamplayer.teamId == team2.id">
+            {{ teamplayer.playerName }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gifs -->
+  <div class="gif-1">
+    <img
+      src="../../../../assets/gifs/steve.gif"
+      alt="setev"
+      class="steve-gif"
+    />
+    <img
+      src="../../../../assets/gifs/confetti.gif"
+      alt="confetti"
+      class="confetti-gif"
+    />
+  </div>
+  <div class="gif-2">
+    <img
+      src="../../../../assets/gifs/steve.gif"
+      alt="setev"
+      class="steve-gif"
+    />
+    <img
+      src="../../../../assets/gifs/confetti.gif"
+      alt="confetti"
+      class="confetti-gif"
+    />
+  </div>
+  <div class="gif-3">
+    <img
+      src="../../../../assets/gifs/steve.gif"
+      alt="setev"
+      class="steve-gif"
+    />
+    <img
+      src="../../../../assets/gifs/confetti.gif"
+      alt="confetti"
+      class="confetti-gif"
+    />
+  </div>
+  <div class="gif-4">
+    <img
+      src="../../../../assets/gifs/steve.gif"
+      alt="setev"
+      class="steve-gif"
+    />
+    <img
+      src="../../../../assets/gifs/confetti.gif"
+      alt="confetti"
+      class="confetti-gif"
+    />
+  </div>
+  <div class="gif-5">
+    <img
+      src="../../../../assets/gifs/steve.gif"
+      alt="setev"
+      class="steve-gif"
+    />
+    <img
+      src="../../../../assets/gifs/confetti.gif"
+      alt="confetti"
+      class="confetti-gif"
+    />
+  </div>
+  <div class="gif-6">
+    <img
+      src="../../../../assets/gifs/steve.gif"
+      alt="setev"
+      class="steve-gif"
+    />
+    <img
+      src="../../../../assets/gifs/confetti.gif"
+      alt="confetti"
+      class="confetti-gif"
+    />
+  </div>
+  <div class="gif-7">
+    <img
+      src="../../../../assets/gifs/steve.gif"
+      alt="setev"
+      class="steve-gif"
+    />
+    <img
+      src="../../../../assets/gifs/confetti.gif"
+      alt="confetti"
+      class="confetti-gif"
+    />
+  </div>
+  <div class="gif-8">
+    <img
+      src="../../../../assets/gifs/steve.gif"
+      alt="setev"
+      class="steve-gif"
+    />
+    <img
+      src="../../../../assets/gifs/confetti.gif"
+      alt="confetti"
+      class="confetti-gif"
+    />
+  </div>
+  <div class="big-confetti-gif">
+    <img
+      src="../../../../assets/gifs/confetti.gif"
+      alt="confetti"
+      class="confetti-gif"
+    />
+  </div>
+</ng-template>
+<!-- Strikes team 1 -->
 <!-- <div
   *ngIf="win == false && tie == false"
   class="row"
@@ -158,8 +654,8 @@ Strikes team 1
     position: absolute;
   "
 > -->
-  <!-- Winning screen Team 1 -->
-  <!-- <div *ngIf="resultTeam1 == true" style="text-align: center">
+<!-- Winning screen Team 1 -->
+<!-- <div *ngIf="resultTeam1 == true" style="text-align: center">
     <h1
       style="
         font-size: 7rem;
@@ -185,8 +681,8 @@ Strikes team 1
     </div>
   </div> -->
 
-  <!-- Winning screen Team 2 -->
-  <!-- <div *ngIf="resultTeam2 == true" style="text-align: center">
+<!-- Winning screen Team 2 -->
+<!-- <div *ngIf="resultTeam2 == true" style="text-align: center">
     <h1
       style="
         font-size: 7rem;
@@ -212,8 +708,8 @@ Strikes team 1
     </div>
   </div> -->
 
-  <!-- Tie screen -->
-  <!-- <div *ngIf="tie == true" style="text-align: center">
+<!-- Tie screen -->
+<!-- <div *ngIf="tie == true" style="text-align: center">
     <h1
       style="
         font-size: 7rem;
@@ -232,8 +728,8 @@ Strikes team 1
     </h1>
   </div> -->
 
-  <!-- Question's anwsers -->
-  <!-- <div
+<!-- Question's anwsers -->
+<!-- <div
     *ngIf="win == false && tie == false"
     class="row"
     style="margin-bottom: 15px"
@@ -471,8 +967,8 @@ Strikes team 1
   </div>
 </div> -->
 
-  <!-- Round points -->
-  <div *ngIf="!answersEnabled">
+<!-- Round points -->
+<!-- <div *ngIf="!answersEnabled">
     <div
       *ngIf="win == false && tie == false"
       style="position: absolute; top: 20px; left: 46%"
@@ -511,10 +1007,10 @@ Strikes team 1
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
-  <!-- Team 1 card their turn -->
-  <!-- <div *ngIf="teamTurn && win == false && tie == false">
+<!-- Team 1 card their turn -->
+<!-- <div *ngIf="teamTurn && win == false && tie == false">
     <div
       class="col-md-2"
       style="position: absolute; left: 0px; top: 30%"
@@ -542,8 +1038,8 @@ Strikes team 1
     </div>
   </div> -->
 
-  <!-- Points Team 1 -->
-  <!-- <div
+<!-- Points Team 1 -->
+<!-- <div
     *ngIf="win == false && tie == false"
     style="position: absolute; left: 20px; bottom: 20%"
   >
@@ -557,8 +1053,8 @@ Strikes team 1
     </div>
   </div> -->
 
-  <!-- Team 1 card NOT their turn -->
-  <!-- <div *ngIf="!teamTurn && win == false && tie == false">
+<!-- Team 1 card NOT their turn -->
+<!-- <div *ngIf="!teamTurn && win == false && tie == false">
     <div
       class="col-md-2"
       style="position: absolute; left: 0px; top: 30%"
@@ -579,8 +1075,8 @@ Strikes team 1
     </div>
   </div> -->
 
-  <!-- Team 2 card their turn -->
-  <!-- <div *ngIf="!teamTurn && win == false && tie == false">
+<!-- Team 2 card their turn -->
+<!-- <div *ngIf="!teamTurn && win == false && tie == false">
     <div
       class="col-md-2"
       style="position: absolute; right: 0px; top: 30%"
@@ -610,8 +1106,8 @@ Strikes team 1
     </div>
   </div> -->
 
-  <!-- Team 2 card NOT their turn -->
-  <!-- <div *ngIf="teamTurn && win == false && tie == false">
+<!-- Team 2 card NOT their turn -->
+<!-- <div *ngIf="teamTurn && win == false && tie == false">
     <div
       class="col-md-2"
       style="position: absolute; right: 0px; top: 30%"
@@ -632,8 +1128,8 @@ Strikes team 1
     </div>
   </div> -->
 
-  <!-- Point Team 2 -->
-  <!-- <div
+<!-- Point Team 2 -->
+<!-- <div
     *ngIf="win == false && tie == false"
     style="position: absolute; right: 20px; bottom: 20%"
   >
@@ -647,8 +1143,8 @@ Strikes team 1
     </div>
   </div> -->
 
-  <!-- Control panel -->
-  <!-- <div style="position: absolute; bottom: 0px">
+<!-- Control panel -->
+<!-- <div style="position: absolute; bottom: 0px">
   <div>
     <button accesskey="9" (click)="addStrikeTeam()" hidden>STRIKE</button>
     <button accesskey="0" (click)="switchTurns()" hidden>switchTurn</button>

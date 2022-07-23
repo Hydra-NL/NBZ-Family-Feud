@@ -23,6 +23,7 @@ export class DemoComponent implements OnInit {
   team2Turn: boolean = false;
   pointsEnabled: boolean = true;
   timeRemaining: number = 30;
+  timerActive: boolean = false;
 
   constructor(
     private controlsService: ControlsService,
@@ -173,10 +174,16 @@ export class DemoComponent implements OnInit {
   }
 
   nextQuestion() {
+    if (this.count < 2) {
+      var double = document.getElementById('double-points');
+      double!.style.visibility = 'visible';
+    }
     if (this.team1Turn === true) {
       this.team1.points += this.roundPoints;
+      this.team1.strikes = 0;
     } else if (this.team2Turn === true) {
       this.team2.points += this.roundPoints;
+      this.team2.strikes = 0;
     }
     if (this.count < this.questions!.length) {
       this.count++;
@@ -186,7 +193,6 @@ export class DemoComponent implements OnInit {
       this.team2Turn = false;
       this.team1.strikes = 0;
       this.team2.strikes = 0;
-      this.timeRemaining = 30;
       var team1Selected = document.getElementById('team-box-1');
       var team2Selected = document.getElementById('team-box-2');
       var team1Points = document.getElementById('team-points-1');
@@ -208,16 +214,8 @@ export class DemoComponent implements OnInit {
     }
   }
 
-  previousQuestion() {
-    if (this.count > 1) {
-      this.count--;
-    }
-    var button = document.getElementById('show-title-button');
-    button!.style.visibility = 'visible';
-  }
-
   goBack() {
-    this.router.navigate(['/info']);
+    this.router.navigate(['/']);
   }
 
   disablePoints() {
@@ -244,17 +242,29 @@ export class DemoComponent implements OnInit {
     button!.style.visibility = 'hidden';
 
     if (this.pointsEnabled === true) {
+      if (this.count < 2) {
+        this.roundPoints += parseInt(points!.innerHTML);
+      } else if (this.count < 3) {
+        this.roundPoints += parseInt(points!.innerHTML) * 2;
+      }
+
       if (this.team1.strikes === 3 && this.team2Turn) {
         this.controlsService.playGoodAnswer();
-        this.roundPoints += parseInt(points!.innerHTML);
+        setTimeout(() => {
+          this.controlsService.playApplause();
+        }, 700);
         this.disablePoints();
       } else if (this.team2.strikes === 3 && this.team1Turn) {
         this.controlsService.playGoodAnswer();
-        this.roundPoints += parseInt(points!.innerHTML);
+        setTimeout(() => {
+          this.controlsService.playApplause();
+        }, 700);
         this.disablePoints();
       } else {
         this.controlsService.playGoodAnswer();
-        this.roundPoints += parseInt(points!.innerHTML);
+        setTimeout(() => {
+          this.controlsService.playApplause();
+        }, 700);
       }
     }
   }
@@ -278,17 +288,55 @@ export class DemoComponent implements OnInit {
   }
 
   toggleTimer() {
-    if (this.timeRemaining > 0) {
-      var timer = document.getElementById('timer');
-      timer!.style.visibility = 'visible';
-      const intervalId = setInterval(() => {
-        this.timeRemaining -= 1;
+    if (this.team1Turn === true || this.team2Turn === true) {
+      if (this.timerActive === false) {
+        this.timerActive = true;
+        this.timeRemaining = 30;
+        this.controlsService.playTimerTick();
+        if (this.timeRemaining > 0) {
+          var timer = document.getElementById('timer');
+          timer!.style.visibility = 'visible';
+          const intervalId = setInterval(() => {
+            this.timeRemaining -= 1;
 
-        if (this.timeRemaining < 1) {
-          clearInterval(intervalId);
-          this.controlsService.playTimer();
+            if (this.timeRemaining < 1) {
+              clearInterval(intervalId);
+              this.controlsService.playTimerDing();
+              this.timerActive = false;
+            }
+          }, 1000);
         }
-      }, 1000);
+      }
     }
+  }
+  playTheme() {
+    this.controlsService.playTheme();
+  }
+  playBahBow() {
+    this.controlsService.playBahBow();
+  }
+  playFunny() {
+    this.controlsService.playFunny();
+  }
+  playBadum() {
+    this.controlsService.playBadum();
+  }
+  playApplause() {
+    this.controlsService.playApplause();
+  }
+  playLaughtrack() {
+    this.controlsService.playLaughtrack();
+  }
+  playCricket() {
+    this.controlsService.playCricket();
+  }
+  playTrombone() {
+    this.controlsService.playTrombone();
+  }
+  playGoofy() {
+    this.controlsService.playGoofy();
+  }
+  playOoh() {
+    this.controlsService.playOoh();
   }
 }

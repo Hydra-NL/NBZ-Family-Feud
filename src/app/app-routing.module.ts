@@ -6,7 +6,6 @@ import { ControlsComponent } from './core/pages/controls/controls.component';
 import { HomeComponent } from './core/pages/home/home.component';
 import { InfoComponent } from './core/pages/info/info.component';
 import { QuizComponent } from './core/pages/quiz/quiz.component';
-import { FinalComponent } from './core/pages/final/final.component';
 import { DemoComponent } from './core/pages/demo/demo.component';
 
 const routes: Routes = [
@@ -27,8 +26,6 @@ const routes: Routes = [
         path: 'quiz',
         children: [
           { path: '', component: QuizComponent },
-          { path: 'winner/:id', component: FinalComponent },
-          { path: 'winner/draw', component: FinalComponent },
         ],
       },
       {

@@ -30,6 +30,7 @@ export class QuizComponent implements OnInit {
   @ViewChild('quiz') quizTemplate!: TemplateRef<any>;
   @ViewChild('winner') winnerTemplate!: TemplateRef<any>;
   timeRemaining: number = 30;
+  timerActive: boolean = false;
 
   constructor(
     private controlsService: ControlsService,
@@ -118,6 +119,10 @@ export class QuizComponent implements OnInit {
   }
 
   nextQuestion() {
+    if (this.count === 19) {
+      var double = document.getElementById('double-points');
+      double!.style.visibility = 'visible';
+    }
     if (this.team1Turn === true) {
       this.team1.points += this.roundPoints;
       this.team1.strikes = 0;
@@ -143,7 +148,6 @@ export class QuizComponent implements OnInit {
       this.team2Turn = false;
       this.team1.strikes = 0;
       this.team2.strikes = 0;
-      this.timeRemaining = 30;
       var team1Selected = document.getElementById('team-box-1');
       var team2Selected = document.getElementById('team-box-2');
       var team1Points = document.getElementById('team-points-1');
@@ -162,17 +166,10 @@ export class QuizComponent implements OnInit {
       timer!.style.visibility = 'hidden';
     } else {
       this.toggleWinner();
-      this.playOutro();
+      this.controlsService.playOutro();
     }
   }
 
-  previousQuestion() {
-    if (this.count > 1) {
-      this.count--;
-    }
-    var button = document.getElementById('show-title-button');
-    button!.style.visibility = 'visible';
-  }
   disablePoints() {
     var lock = document.getElementById('lock-points');
     lock!.style.visibility = 'visible';
@@ -197,17 +194,29 @@ export class QuizComponent implements OnInit {
     button!.style.visibility = 'hidden';
 
     if (this.pointsEnabled === true) {
-      if (this.team1.strikes === 3 && this.team2Turn) {
-        this.playGoodAnswer();
+      if (this.count < 20) {
         this.roundPoints += parseInt(points!.innerHTML);
+      } else if (this.count < 30) {
+        this.roundPoints += parseInt(points!.innerHTML) * 2;
+      }
+
+      if (this.team1.strikes === 3 && this.team2Turn) {
+        this.controlsService.playGoodAnswer();
+        setTimeout(() => {
+          this.controlsService.playApplause();
+        }, 700);
         this.disablePoints();
       } else if (this.team2.strikes === 3 && this.team1Turn) {
-        this.playGoodAnswer();
-        this.roundPoints += parseInt(points!.innerHTML);
+        this.controlsService.playGoodAnswer();
+        setTimeout(() => {
+          this.controlsService.playApplause();
+        }, 700);
         this.disablePoints();
       } else {
-        this.playGoodAnswer();
-        this.roundPoints += parseInt(points!.innerHTML);
+        this.controlsService.playGoodAnswer();
+        setTimeout(() => {
+          this.controlsService.playApplause();
+        }, 700);
       }
     }
   }
@@ -231,17 +240,25 @@ export class QuizComponent implements OnInit {
   }
 
   toggleTimer() {
-    if (this.timeRemaining > 0) {
-      var timer = document.getElementById('timer');
-      timer!.style.visibility = 'visible';
-      const intervalId = setInterval(() => {
-        this.timeRemaining -= 1;
+    if (this.team1Turn === true || this.team2Turn === true) {
+      if (this.timerActive === false) {
+        this.timerActive = true;
+        this.timeRemaining = 30;
+        this.controlsService.playTimerTick();
+        if (this.timeRemaining > 0) {
+          var timer = document.getElementById('timer');
+          timer!.style.visibility = 'visible';
+          const intervalId = setInterval(() => {
+            this.timeRemaining -= 1;
 
-        if (this.timeRemaining < 1) {
-          clearInterval(intervalId);
-          this.controlsService.playTimer();
+            if (this.timeRemaining < 1) {
+              clearInterval(intervalId);
+              this.controlsService.playTimerDing();
+              this.timerActive = false;
+            }
+          }, 1000);
         }
-      }, 1000);
+      }
     }
   }
 
@@ -254,17 +271,11 @@ export class QuizComponent implements OnInit {
   playTheme() {
     this.controlsService.playTheme();
   }
-  playOutro() {
-    this.controlsService.playOutro();
-  }
   playBahBow() {
     this.controlsService.playBahBow();
   }
   playFunny() {
     this.controlsService.playFunny();
-  }
-  playGoodAnswer() {
-    this.controlsService.playGoodAnswer();
   }
   playStrike() {
     this.controlsService.playStrike();
@@ -286,6 +297,9 @@ export class QuizComponent implements OnInit {
   }
   playGoofy() {
     this.controlsService.playGoofy();
+  }
+  playOoh() {
+    this.controlsService.playOoh();
   }
 }
 

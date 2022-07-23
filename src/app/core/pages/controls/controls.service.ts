@@ -89,9 +89,21 @@ export class ControlsService {
     audio.load();
     audio.play();
   }
-  playTimer() {
+  playTimerDing() {
     let audio = new Audio();
-    audio.src = '../../../../assets/sounds/Timer.mp3';
+    audio.src = '../../../../assets/sounds/timer_ding.mp3';
+    audio.load();
+    audio.play();
+  }
+  playTimerTick() {
+    let audio = new Audio();
+    audio.src = '../../../../assets/sounds/timer.mp3';
+    audio.load();
+    audio.play();
+  }
+  playOoh() {
+    let audio = new Audio();
+    audio.src = '../../../../assets/sounds/ooh.mp3';
     audio.load();
     audio.play();
   }

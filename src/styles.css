@@ -31,6 +31,7 @@ body {
   margin: 0px;
   visibility: hidden;
   color: white;
+  text-shadow: 2px 2px 6px black;
 }
 .winning-title {
   font-size: 78px;
@@ -86,9 +87,11 @@ li {
   cursor: pointer;
   visibility: visible;
   position: absolute;
-  left: 45%;
-  top: 18%;
+  display: flex;
   border: 2px rgb(218, 230, 255) solid;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .show-answer-button {
@@ -97,8 +100,9 @@ li {
   color: white;
   padding: 5px;
   width: 78px;
-  font-weight: bold;
+  font-weight: 900;
   font-size: 30px;
+
   margin: 4px 1px;
   cursor: pointer;
   visibility: visible;
@@ -379,6 +383,7 @@ li {
   color: white;
   margin: 0px;
   visibility: hidden;
+  text-shadow: 1px 1px 6px black;
 }
 
 .points-box {
@@ -469,6 +474,7 @@ li {
   font-size: 18px;
   color: white;
   margin: 2px;
+  text-shadow: 1px 1px 6px black;
 }
 
 .select-team-box {
@@ -542,6 +548,15 @@ li {
   top: 16px;
   color: white;
   font-size: 30px;
+  visibility: hidden;
+}
+
+.double-ptns {
+  position: absolute;
+  top: 16px;
+  transform: translate(190px, 0px);
+  color: white;
+  font-size: 20px;
   visibility: hidden;
 }
 

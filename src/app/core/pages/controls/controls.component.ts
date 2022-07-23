@@ -53,4 +53,7 @@ export class ControlsComponent {
   playGoofy() {
     this.controlsService.playGoofy();
   }
+  playOoh() {
+    this.controlsService.playOoh();
+  }
 }

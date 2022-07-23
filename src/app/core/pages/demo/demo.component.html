@@ -2,6 +2,7 @@
 <div class="round-points-box">
   <p>{{ roundPoints }}</p>
   <i id="lock-points" class="fa fa-lock disabled-ptns"></i>
+  <i id="double-points" class="fa fa-star double-ptns"></i>
 </div>
 
 <!-- Strikes -->
@@ -290,19 +291,32 @@
   <p>{{ timeRemaining }}</p>
 </div>
 
+<!-- Funny buttons -->
+<div class="tech-funny-button-box">
+  <label>Funny buttons <i class="fa fa-smile-o"></i></label>
+  <button class="tech-button" (click)="playFunny()">🎵</button>
+  <button class="tech-button" (click)="playBadum()">🥁</button>
+  <button class="tech-button" (click)="playApplause()">👏</button>
+  <button class="tech-button" (click)="playLaughtrack()">😂</button>
+  <button class="tech-button" (click)="playCricket()">🦗</button>
+  <button class="tech-button" (click)="playTrombone()">🎺</button>
+  <button class="tech-button" (click)="playGoofy()">💀</button>
+  <button class="tech-button" (click)="playOoh()">😮</button>
+</div>
+
 <!-- Functional buttons -->
 <div class="tech-button-box">
   <label>Functional buttons <i class="fa fa-cog"></i></label>
-  <button (click)="toggleTimer()" class="tech-button">
-    Start <i class="fa fa-clock-o"></i>
+  <button accesskey="t" (click)="toggleTimer()" class="tech-button">
+    Start <i class="fa fa-clock-o"></i> (T)
   </button>
-  <button accesskey="b" class="tech-button" (click)="giveStrike()">
-    Strike
+  <button accesskey="x" class="tech-button" (click)="playBahBow()">
+    Face-off (X)
   </button>
-  <button accesskey="n" class="tech-button" (click)="previousQuestion()">
-    <i class="fa fa-arrow-left"></i> Prev question
+  <button accesskey="n" class="tech-button" (click)="giveStrike()">
+    Strike (N)
   </button>
-  <button accesskey="m" class="tech-button" (click)="nextQuestion()">
-    Next Question <i class="fa fa-arrow-right"></i>
+  <button accesskey="." class="tech-button" (click)="nextQuestion()">
+    Next Question (.) <i class="fa fa-arrow-right"></i>
   </button>
 </div>

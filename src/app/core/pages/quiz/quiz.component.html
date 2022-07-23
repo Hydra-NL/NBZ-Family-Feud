@@ -5,6 +5,7 @@
   <div class="round-points-box">
     <p>{{ roundPoints }}</p>
     <i id="lock-points" class="fa fa-lock disabled-ptns"></i>
+    <i id="double-points" class="fa fa-star double-ptns"></i>
   </div>
 
   <!-- Strikes -->
@@ -108,7 +109,7 @@
   </div>
 
   <!-- Title quiz -->
-  <div id="question-title" class="question-title-box">
+  <div class="question-title-box">
     <div class="question-title-box-content">
       <button
         id="show-title-button"
@@ -281,21 +282,13 @@
 
   <!-- Team select -->
   <div id="select-teams" class="select-team-box">
-    <p>Pass or Play</p>
-    <button
-      accesskey="h"
-      (click)="selectTeam(team1)"
-      class="select-team-button"
-    >
+    <p>Who plays?</p>
+    <button (click)="selectTeam(team1)" class="select-team-button">
       <i class="fa fa-arrow-left"></i>
-      {{ team1.teamName }}
+      Team {{ team1.teamName }}
     </button>
-    <button
-      accesskey="j"
-      (click)="selectTeam(team2)"
-      class="select-team-button"
-    >
-      {{ team2.teamName }}
+    <button (click)="selectTeam(team2)" class="select-team-button">
+      Team {{ team2.teamName }}
       <i class="fa fa-arrow-right"></i>
     </button>
   </div>
@@ -311,26 +304,26 @@
     <button class="tech-button" (click)="playFunny()">🎵</button>
     <button class="tech-button" (click)="playBadum()">🥁</button>
     <button class="tech-button" (click)="playApplause()">👏</button>
-    <button class="tech-button" (click)="playLaughtrack()">😁</button>
+    <button class="tech-button" (click)="playLaughtrack()">😂</button>
     <button class="tech-button" (click)="playCricket()">🦗</button>
     <button class="tech-button" (click)="playTrombone()">🎺</button>
     <button class="tech-button" (click)="playGoofy()">💀</button>
+    <button class="tech-button" (click)="playOoh()">😮</button>
   </div>
 
   <div class="tech-button-box">
     <label>Functional buttons <i class="fa fa-cog"></i></label>
-    <button (click)="toggleTimer()" class="tech-button">
-      Start <i class="fa fa-clock-o"></i>
+    <button accesskey="t" (click)="toggleTimer()" class="tech-button">
+      Start <i class="fa fa-clock-o"></i> (T)
     </button>
-    <button class="tech-button" (click)="playBahBow()">Face-off</button>
-    <button accesskey="b" class="tech-button" (click)="giveStrike()">
-      Strike
+    <button accesskey="x" class="tech-button" (click)="playBahBow()">
+      Face-off (X)
     </button>
-    <button accesskey="n" class="tech-button" (click)="previousQuestion()">
-      <i class="fa fa-arrow-left"></i> Prev question
+    <button accesskey="n" class="tech-button" (click)="giveStrike()">
+      Strike (N)
     </button>
-    <button accesskey="m" class="tech-button" (click)="nextQuestion()">
-      Next Question <i class="fa fa-arrow-right"></i>
+    <button accesskey="." class="tech-button" (click)="nextQuestion()">
+      Next Question (.) <i class="fa fa-arrow-right"></i>
     </button>
   </div>
 </ng-template>
@@ -494,6 +487,7 @@
     />
   </div>
 </ng-template>
+
 <!-- Strikes team 1 -->
 <!-- <div
   *ngIf="win == false && tie == false"

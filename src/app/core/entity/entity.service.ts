@@ -22,7 +22,7 @@ export class EntityService<T extends Entity> {
     const endpoint = `${this.url}${this.endpoint}`;
     console.log(`list ${this.endpoint}`);
     return this.http.get<T[]>(endpoint, { ...options, ...httpOptions }).pipe(
-      tap(console.log),
+      tap(),
       map((response: any) => response.result),
       catchError(this.handleError)
     );

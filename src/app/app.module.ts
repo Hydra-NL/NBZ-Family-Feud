@@ -16,6 +16,11 @@ import { InfoComponent } from './core/pages/info/info.component';
 import { ControlsComponent } from './core/pages/controls/controls.component';
 import { AdminComponent } from './core/pages/adminpanel/admin.component';
 import { DemoComponent } from './core/pages/demo/demo.component';
+import { HalloffameComponent } from './core/pages/halloffame/halloffame.component';
+import { NavComponent } from './nav/nav.component';
+import { AddQuestionComponent } from './core/pages/adminpanel/addquestion/addquestion.component';
+import { AddPlayerComponent } from './core/pages/adminpanel/addplayer/addplayer.component';
+import { AddTeamComponent } from './core/pages/adminpanel/addteam/addteam.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +31,11 @@ import { DemoComponent } from './core/pages/demo/demo.component';
     ControlsComponent,
     AdminComponent,
     DemoComponent,
+    HalloffameComponent,
+    NavComponent,
+    AddQuestionComponent,
+    AddPlayerComponent,
+    AddTeamComponent,
   ],
   imports: [
     BrowserModule,

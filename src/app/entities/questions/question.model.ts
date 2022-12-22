@@ -1,5 +1,10 @@
 import { Entity } from 'src/app/core/entity/entity.model';
 
+export enum QuestionSpeciality {
+  None = 'None',
+  Reverse = 'Reverse',
+}
+
 export class Question extends Entity {
   questionTitle: string = '';
   answer1: string = '';
@@ -18,9 +23,11 @@ export class Question extends Entity {
   points6: number = 0;
   points7: number = 0;
   points8: number = 0;
-  totalPoints: number = 0;
+  isSpecial: boolean = false;
+  speciality: QuestionSpeciality = QuestionSpeciality.None;
+  episode: number = 0;
 
-  constructor(id: number) {
-    super(id);
+  constructor(_id: string) {
+    super(_id);
   }
 }

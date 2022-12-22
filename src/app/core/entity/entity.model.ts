@@ -1,7 +1,7 @@
 export abstract class Entity {
-  id!: number | undefined;
+  _id!: string | undefined;
 
   constructor(values: any) {
-    this.id = values ? values.id : undefined;
+    this._id = values ? values._id : undefined;
   }
 }

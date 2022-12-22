@@ -8,20 +8,22 @@ import { Team } from './team.model';
   providedIn: 'root',
 })
 export class TeamService extends EntityService<Team> {
-  constructor(http: HttpClient) {
-    super(http, environment.apiUrl, 'teams');
+  constructor(protected override http: HttpClient) {
+    super(http, environment.apiUrl, 'team');
   }
   teams: Team[] = [
     {
-      id: 1,
+      _id: '1',
       teamName: 'Team 1',
+      teamMembers: ['Player 1', 'Player 2'],
       points: 0,
       strikes: 0,
       isPlaying: false,
     },
     {
-      id: 2,
+      _id: '2',
       teamName: 'Team 2',
+      teamMembers: ['Player 3', 'Player 4'],
       points: 0,
       strikes: 0,
       isPlaying: false,
@@ -30,18 +32,18 @@ export class TeamService extends EntityService<Team> {
   getTeams() {
     return this.teams;
   }
-  getTeamById(id: number) {
-    return this.teams.find((team) => team.id === id);
+  getTeamById(id: string) {
+    return this.teams.find((team) => team._id === id);
   }
   addTeam(team: Team) {
     this.teams.push(team);
   }
   updateTeam(team: Team) {
-    const index = this.teams.findIndex((t) => t.id === team.id);
+    const index = this.teams.findIndex((t) => t._id === team._id);
     this.teams[index] = team;
   }
-  deleteTeam(id: number) {
-    const index = this.teams.findIndex((t) => t.id === id);
+  deleteTeam(id: string) {
+    const index = this.teams.findIndex((t) => t._id === id);
     this.teams.splice(index, 1);
   }
 }

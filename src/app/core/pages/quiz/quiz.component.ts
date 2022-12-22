@@ -228,7 +228,7 @@ export class QuizComponent implements OnInit {
     var team2Points = document.getElementById('team-points-2');
     var selectedTeam = document.getElementById('select-teams');
     selectedTeam!.style.visibility = 'hidden';
-    if (team.id === this.team1.id) {
+    if (team._id === this.team1._id) {
       team1Selected!.style.borderColor = '#00ff00';
       team1Points!.style.borderColor = '#00ff00';
       this.team1Turn = true;

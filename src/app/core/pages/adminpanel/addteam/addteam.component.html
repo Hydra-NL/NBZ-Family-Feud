@@ -1,0 +1,57 @@
+<div class="content-box">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="content-box-item">
+      <h4 class="align-center-bold">Create a Team</h4>
+      <form
+        #teamaddform="ngForm"
+        (ngSubmit)="teamaddform.form.valid && addTeam()"
+      >
+        <div class="form-group">
+          <label for="teamname">Team Name</label>
+          <div class="home-team-creation">
+            <p>Team -</p>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="team.teamName"
+              #teamname="ngModel"
+              name="teamname"
+              placeholder="Enter team name"
+              [ngClass]="{
+                'is-invalid': teamaddform.submitted && teamname.invalid
+              }"
+              required
+              minlength="3"
+            />
+          </div>
+
+          <div *ngIf="teamname.errors && teamname.touched">
+            <div *ngIf="teamname.errors?.['required']">
+              <p class="error-message" style="margin-left: 15%">
+                Team name is required
+              </p>
+            </div>
+            <div *ngIf="teamname.errors?.['minlength']">
+              <p class="error-message" style="margin-left: 15%">
+                Team name must be at least 3 characters long
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
+      <button
+        type="submit"
+        class="action-button"
+        (click)="addTeam()"
+        [disabled]="!teamaddform.valid"
+      >
+        <i class="fa fa-save"></i>
+        Create
+      </button>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<a class="btn btn-danger" routerLink="..">Back</a>

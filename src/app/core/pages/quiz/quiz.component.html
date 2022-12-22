@@ -119,13 +119,13 @@
         Reveal Question #{{ count }}
       </button>
       <div *ngFor="let question of questions">
-        <p
+        <!-- <p
           id="question-title"
           class="question-title"
           *ngIf="question.id === count"
         >
           {{ question.questionTitle }}
-        </p>
+        </p> -->
       </div>
     </div>
   </div>
@@ -133,7 +133,7 @@
   <!-- Quiz body -->
   <div id="answer-section" class="answer-box">
     <div *ngFor="let question of questions">
-      <div *ngIf="question.id === count">
+      <!-- <div *ngIf="question.id === count">
         <div class="answer-box-content col-md-6">
           <div class="answer-box-item">
             <button
@@ -242,7 +242,7 @@
             <p id="points-8" class="points-box">{{ question.points8 }}</p>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -256,7 +256,7 @@
     </div>
     <div class="teams-box-content">
       <div *ngFor="let teamplayer of teamPlayers">
-        <p *ngIf="teamplayer.teamId == team1.id">
+        <p *ngIf="team1.teamMembers.includes(teamplayer._id!)">
           {{ teamplayer.playerName }}
         </p>
       </div>
@@ -273,7 +273,7 @@
     </div>
     <div class="teams-box-content">
       <div *ngFor="let teamplayer of teamPlayers">
-        <p *ngIf="teamplayer.teamId == team2.id">
+        <p *ngIf="team2.teamMembers.includes(teamplayer._id!)">
           {{ teamplayer.playerName }}
         </p>
       </div>
@@ -359,7 +359,10 @@
       <div class="winning-box-item">
         <p class="winning-points">Points: {{ team1.points }}</p>
         <div *ngFor="let teamplayer of teamPlayers">
-          <p class="winning-playername" *ngIf="teamplayer.teamId == team1.id">
+          <p
+            class="winning-playername"
+            *ngIf="team1.teamMembers.includes(teamplayer._id!)"
+          >
             {{ teamplayer.playerName }}
           </p>
         </div>
@@ -374,7 +377,10 @@
       <div class="winning-box-item">
         <p class="winning-points">Points: {{ team2.points }}</p>
         <div *ngFor="let teamplayer of teamPlayers">
-          <p class="winning-playername" *ngIf="teamplayer.teamId == team2.id">
+          <p
+            class="winning-playername"
+            *ngIf="team2.teamMembers.includes(teamplayer._id!)"
+          >
             {{ teamplayer.playerName }}
           </p>
         </div>

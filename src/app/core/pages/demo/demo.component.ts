@@ -1,9 +1,10 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ControlsService } from '../controls/controls.service';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { Team } from 'src/app/entities/team/team.model';
 import { Question } from 'src/app/entities/questions/question.model';
 import { TeamPlayer } from 'src/app/entities/teamplayers/teamplayer.model';
+import { QuestionSpeciality } from 'src/app/entities/questions/question.model';
 
 @Component({
   selector: 'app-demo',
@@ -24,30 +25,35 @@ export class DemoComponent implements OnInit {
   pointsEnabled: boolean = true;
   timeRemaining: number = 30;
   timerActive: boolean = false;
+  showNav: boolean = false;
 
   constructor(
     private controlsService: ControlsService,
     private router: Router
-  ) {}
+  ) {
+    
+  }
 
   ngOnInit(): void {
     this.team1 = {
-      id: 1,
+      _id: '1',
       teamName: 'Steve',
+      teamMembers: ['Player 1', 'Player 2'],
       points: 0,
       strikes: 0,
       isPlaying: false,
     };
     this.team2 = {
-      id: 2,
+      _id: '2',
       teamName: 'Harvey',
+      teamMembers: ['Player 3', 'Player 4'],
       points: 0,
       strikes: 0,
       isPlaying: false,
     };
     this.questions = [
       {
-        id: 1,
+        _id: '1',
         questionTitle: 'Name a name that is fitting for a demo',
         answer1: 'Demo',
         answer2: 'Demo 2',
@@ -65,10 +71,12 @@ export class DemoComponent implements OnInit {
         points6: 10,
         points7: 8,
         points8: 2,
-        totalPoints: 100,
+        isSpecial: false,
+        speciality: QuestionSpeciality.None,
+        episode: 1,
       },
       {
-        id: 2,
+        _id: '2',
         questionTitle: 'What is the name of the demo?',
         answer1: 'Demo',
         answer2: 'Demo 2',
@@ -86,33 +94,40 @@ export class DemoComponent implements OnInit {
         points6: 10,
         points7: 8,
         points8: 2,
-        totalPoints: 100,
+        isSpecial: false,
+        speciality: QuestionSpeciality.None,
+        episode: 1,
       },
     ];
     this.teamPlayers = [
       {
-        id: 1,
-        teamId: 1,
+        _id: '1',
         playerName: 'Steve',
-        theirTurn: false,
+        playerTeam: '1',
+        isAnswering: false,
+        achievements: [''],
       },
       {
-        id: 2,
-        teamId: 1,
+        _id: '2',
         playerName: 'Harvey',
-        theirTurn: false,
+        playerTeam: '1',
+        isAnswering: false,
+        achievements: [''],
       },
       {
-        id: 3,
-        teamId: 2,
+        _id: '3',
         playerName: 'Steve',
-        theirTurn: false,
+        playerTeam: '2',
+        isAnswering: false,
+        achievements: [''],
       },
       {
-        id: 4,
-        teamId: 2,
+        _id: '4',
         playerName: 'Harvey',
-        theirTurn: false,
+        playerTeam: '2',
+
+        isAnswering: false,
+        achievements: [''],
       },
     ];
   }
@@ -205,6 +220,7 @@ export class DemoComponent implements OnInit {
       button!.style.visibility = 'visible';
       team1Selected!.style.borderColor = '#cccccc';
       team2Selected!.style.borderColor = '#cccccc';
+      team1Selected!.style.backgroundColor = '';
       team1Points!.style.borderColor = '#cccccc';
       team2Points!.style.borderColor = '#cccccc';
       selectTeam!.style.visibility = 'visible';
@@ -276,13 +292,17 @@ export class DemoComponent implements OnInit {
     var team2Points = document.getElementById('team-points-2');
     var selectedTeam = document.getElementById('select-teams');
     selectedTeam!.style.visibility = 'hidden';
-    if (team.id === this.team1.id) {
-      team1Selected!.style.borderColor = '#00ff00';
-      team1Points!.style.borderColor = '#00ff00';
+    if (team._id === this.team1._id) {
+      team1Selected!.style.borderColor = 'rgb(255 249 0)';
+      team1Selected!.style.backgroundColor = 'rgb(157 128 0 / 50%)';
+      team1Points!.style.borderColor = 'rgb(255 249 0)';
+      team1Points!.style.backgroundColor = 'rgb(157 128 0 / 50%)';
       this.team1Turn = true;
     } else {
-      team2Selected!.style.borderColor = '#00ff00';
-      team2Points!.style.borderColor = '#00ff00';
+      team2Selected!.style.borderColor = 'rgb(255 249 0)';
+      team2Selected!.style.backgroundColor = 'rgb(157 128 0 / 50%)';
+      team2Points!.style.borderColor = 'rgb(255 249 0)';
+      team2Points!.style.backgroundColor = 'rgb(157 128 0 / 50%)';
       this.team2Turn = true;
     }
   }

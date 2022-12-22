@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http';
 import { Entity } from './entity.model';
 import { catchError, map, Observable, tap, throwError } from 'rxjs';
+import { Inject } from '@angular/core';
 
 const httpOptions = {
   observe: 'body',
@@ -13,16 +14,16 @@ const httpOptions = {
 
 export class EntityService<T extends Entity> {
   constructor(
-    public readonly http: HttpClient,
-    public readonly url: string,
-    public readonly endpoint: string
+    @Inject(HttpClient) protected http: HttpClient,
+    @Inject(String) protected url: string,
+    @Inject(String) protected endpoint: string
   ) {}
 
   public list(options?: any): Observable<T[] | null> {
-    const endpoint = `${this.url}${this.endpoint}`;
+    const endpoint = `${this.url}${this.endpoint}s`;
     console.log(`list ${this.endpoint}`);
     return this.http.get<T[]>(endpoint, { ...options, ...httpOptions }).pipe(
-      tap(),
+      tap(console.log),
       map((response: any) => response.result),
       catchError(this.handleError)
     );
@@ -35,7 +36,7 @@ export class EntityService<T extends Entity> {
       .post<T>(endpoint, item, { ...options, ...httpOptions })
       .pipe(
         tap(console.log),
-        map((response: any) => response.result),
+        // map((response: any) => response.result),
         catchError(this.handleError)
       );
   }
@@ -49,11 +50,11 @@ export class EntityService<T extends Entity> {
   }
 
   public update(item: T, options?: any): Observable<T> {
-    const endpoint = `${this.url}${this.endpoint}/update/${item.id}`;
+    const endpoint = `${this.url}${this.endpoint}/update/${item._id}`;
     console.log(`update ${endpoint}`);
     console.log(item);
     return this.http.put(endpoint, item, { ...options, ...httpOptions }).pipe(
-      map((response: any) => response.result),
+      // map((response: any) => response.result),
       catchError(this.handleError)
     );
   }
@@ -62,9 +63,33 @@ export class EntityService<T extends Entity> {
     const endpoint = `${this.url}${this.endpoint}/delete/${id}`;
     console.log(`delete ${endpoint}`);
     return this.http.delete(endpoint, { ...options, ...httpOptions }).pipe(
-      map((response: any) => response.result),
+      // map((response: any) => response.result),
       catchError(this.handleError)
     );
+  }
+
+  public joinTeam(
+    playerId: string,
+    teamId: string,
+    options?: any
+  ): Observable<T> {
+    const endpoint = `${this.url}${this.endpoint}/${playerId}/join/${teamId}`;
+    console.log(`subscribe ${endpoint}`);
+    return this.http
+      .put(endpoint, playerId, { ...options, ...httpOptions })
+      .pipe(catchError(this.handleError));
+  }
+
+  public leaveTeam(
+    playerId: string,
+    teamId: string,
+    options?: any
+  ): Observable<T> {
+    const endpoint = `${this.url}${this.endpoint}/${playerId}/leave/${teamId}`;
+    console.log(`subscribe ${endpoint}`);
+    return this.http
+      .put(endpoint, playerId, { ...options, ...httpOptions })
+      .pipe(catchError(this.handleError));
   }
 
   public handleError(error: HttpErrorResponse): Observable<any> {

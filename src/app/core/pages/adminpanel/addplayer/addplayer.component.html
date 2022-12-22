@@ -1,0 +1,57 @@
+<div class="content-box">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div class="content-box-item">
+      <h4 class="align-center-bold">Add a Teamplayer</h4>
+      <form
+        #playeraddform="ngForm"
+        (ngSubmit)="playeraddform.form.valid && addPlayer()"
+      >
+        <div class="form-group">
+          <label for="playerName">Player Name</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="player.playerName"
+            #playerName="ngModel"
+            name="playerName"
+            placeholder="Enter player name"
+            [ngClass]="{
+              'is-invalid': playerName.invalid && playerName.touched
+            }"
+            required
+            minlength="2"
+            maxlength="30"
+          />
+
+          <div *ngIf="playerName.invalid && playerName.touched">
+            <div *ngIf="playerName.errors?.['required']">
+              <p class="error-message">Player name is required</p>
+            </div>
+            <div *ngIf="playerName.errors?.['minlength']">
+              <p class="error-message">
+                Player name must be at least 2 characters
+              </p>
+            </div>
+            <div *ngIf="playerName.errors?.['maxlength']">
+              <p class="error-message">
+                Player name can be at most 30 characters
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
+      <button
+        type="submit"
+        class="action-button"
+        (click)="addPlayer()"
+        [disabled]="!playeraddform.valid"
+      >
+        <i class="fa fa-save"></i>
+        Join
+      </button>
+    </div>
+  </div>
+</div>
+
+<a class="btn btn-danger" routerLink="..">Back</a>

@@ -7,6 +7,10 @@ import { HomeComponent } from './core/pages/home/home.component';
 import { InfoComponent } from './core/pages/info/info.component';
 import { QuizComponent } from './core/pages/quiz/quiz.component';
 import { DemoComponent } from './core/pages/demo/demo.component';
+import { HalloffameComponent } from './core/pages/halloffame/halloffame.component';
+import { AddQuestionComponent } from './core/pages/adminpanel/addquestion/addquestion.component';
+import { AddPlayerComponent } from './core/pages/adminpanel/addplayer/addplayer.component';
+import { AddTeamComponent } from './core/pages/adminpanel/addteam/addteam.component';
 
 const routes: Routes = [
   {
@@ -32,8 +36,12 @@ const routes: Routes = [
         path: 'admin',
         children: [
           { path: '', component: AdminComponent },
+          { path: 'addquestion', component: AddQuestionComponent},
+          { path: 'addplayer', component: AddPlayerComponent},
+          { path: 'addteam', component: AddTeamComponent},
         ],
       },
+      { path: 'halloffame', component: HalloffameComponent},
       { path: 'demo', component: DemoComponent },
     ],
   },

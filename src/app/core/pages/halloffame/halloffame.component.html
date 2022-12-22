@@ -1,0 +1,27 @@
+<!-- Home page title -->
+<div class="title-box">
+  <p class="title">
+    <i class="fa-solid fa-trophy"></i> {{ title }} <i class="fa-solid fa-trophy"></i>
+  </p>
+</div>
+
+<div class="content-box">
+    <div class="col-md-12">
+        <div class="content-box-item">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Player</th>
+                        <th>Achievements</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let player of players">
+                        <td>{{ player.playerName }}</td>
+                        <td>{{ player.achievements }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

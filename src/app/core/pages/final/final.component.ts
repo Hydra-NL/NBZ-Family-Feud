@@ -29,12 +29,7 @@ export class FinalComponent implements OnInit, OnDestroy {
         next: (teams) => {
           this.teams = teams as Team[];
           console.log('Teams: ' + this.teams.length);
-          for (let i = 0; i < this.teams.length; i++) {
-            if (this.teams[i].id === +winnerId) {
-              this.teams[i] = this.team;
-              console.log('Team: ' + this.team.teamName);
-            }
-          }
+          
         },
       });
 

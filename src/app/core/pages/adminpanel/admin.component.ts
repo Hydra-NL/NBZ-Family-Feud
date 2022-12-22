@@ -1,93 +1,123 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { QuestionService } from 'src/app/entities/questions/question.service';
-import { Question } from 'src/app/entities/questions/question.model';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Team } from 'src/app/entities/team/team.model';
+import { TeamService } from 'src/app/entities/team/team.service';
+import { TeamPlayer } from 'src/app/entities/teamplayers/teamplayer.model';
+import { TeamPlayerService } from 'src/app/entities/teamplayers/teamplayer.service';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
 })
-export class AdminComponent implements OnInit, OnDestroy {
-  questions!: Question[];
-  question!: Question;
-  subscriptionQuestions!: Subscription;
+export class AdminComponent implements OnInit {
+  team!: Team;
+  teams!: Team[];
+  players!: TeamPlayer[];
+  subscription!: Subscription;
 
   constructor(
-    private questionsService: QuestionService,
-    private router: Router
+    private teamService: TeamService,
+    private teamPlayerService: TeamPlayerService
   ) {}
 
   ngOnInit(): void {
-    this.question = {
-      id: 0,
-      questionTitle: '',
-      answer1: '',
-      answer2: '',
-      answer3: '',
-      answer4: '',
-      answer5: '',
-      answer6: '',
-      answer7: '',
-      answer8: '',
-      points1: 0,
-      points2: 0,
-      points3: 0,
-      points4: 0,
-      points5: 0,
-      points6: 0,
-      points7: 0,
-      points8: 0,
-      totalPoints: 0,
-    };
-    this.subscriptionQuestions = this.questionsService.list().subscribe({
-      next: (questions) => {
-        this.questions = questions as Question[];
-        console.log(questions);
+    this.getTeams();
+    this.getPlayers();
+  }
+  getTeams() {
+    this.teamService.list().subscribe({
+      next: (teams) => {
+        this.teams = teams!;
+        console.log('Teams: ' + this.teams.length);
+      },
+    });
+  }
+
+  getPlayers() {
+    this.players = [];
+    this.subscription = this.teamPlayerService.list().subscribe({
+      next: (players) => {
+        this.players = players!;
+        console.log('Teamplayers: ' + this.players.length);
       },
       error: (err) => {
         console.log(err);
       },
     });
-    var list = document.getElementById('question-list');
-    list!.classList.toggle('hidden');
-  }
-  ngOnDestroy(): void {
-    this.subscriptionQuestions.unsubscribe();
-  }
-  
-  toggleList() {
-    var list = document.getElementById('question-list');
-    var button = document.getElementById('toggle');
-    list!.classList.toggle('hidden');
-    button!.style.content = '"Hide"';
   }
 
-  addQuestion() {
-    this.question.totalPoints =
-      this.question.points1 +
-      this.question.points2 +
-      this.question.points3 +
-      this.question.points4 +
-      this.question.points5 +
-      this.question.points6 +
-      this.question.points7 +
-      this.question.points8;
-    this.questionsService.create(this.question).subscribe({
-      error: (err) => {
-        console.log(err);
-      },
-    });
-    location.reload();
+  delTeam(id: string) {
+    console.log(id);
+    let text = 'Are you sure you want to delete this team?';
+    if (confirm(text) == true) {
+      this.subscription = this.teamPlayerService.list().subscribe({
+        next: (players) => {
+          this.players = players!;
+          console.log('Teamplayers: ' + this.players.length);
+          for (let i = 0; i < this.players.length; i++) {
+            if (this.players[i].playerTeam === id) {
+              this.players[i].playerTeam = '';
+              this.subscription = this.teamPlayerService
+                .update(this.players[i])
+                .subscribe({
+                  error: (err) => {
+                    console.log(err);
+                  },
+                });
+            }
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+      this.subscription = this.teamService.delete(id).subscribe({
+        next: () => {
+          this.getTeams();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 
-  delQuestion(id: number) {
-    this.questionsService.delete(id).subscribe({
-      next: (question) => {
-        this.question = question as Question;
-        console.log(question);
-      },
-    });
-    location.reload();
+  delPlayer(id: string) {
+    console.log(id);
+    let text = 'Are you sure you want to delete this player?';
+    if (confirm(text) == true) {
+      this.subscription = this.teamService.list().subscribe({
+        next: (teams) => {
+          this.teams = teams!;
+          console.log('Teams: ' + this.teams.length);
+          for (let i = 0; i < this.teams.length; i++) {
+            if (this.teams[i].teamMembers.includes(id)) {
+              this.teams[i].teamMembers.splice(
+                this.teams[i].teamMembers.indexOf(id),
+                1
+              );
+              this.subscription = this.teamService
+                .update(this.teams[i])
+                .subscribe({
+                  error: (err) => {
+                    console.log(err);
+                  },
+                });
+            }
+          }
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+      this.subscription = this.teamPlayerService.delete(id).subscribe({
+        next: () => {
+          this.getPlayers();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    }
   }
 }

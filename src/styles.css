@@ -1,11 +1,15 @@
 body {
-  background-image: url("../src/assets/images/beach.jpg");
+  background-image: url("../src/assets/images/ep3.jpg");
   background-size: cover;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
-/* Text */
+/* Texts */
+/* ============================================================================= */
 .align-center-bold {
   text-align: center;
   font-weight: bold;
+  text-shadow: #000000 0px 0px 8px;
 }
 .align-block {
   text-align: justify;
@@ -16,9 +20,9 @@ body {
   text-align: center;
   margin: 0px;
   background: -webkit-linear-gradient(
-    rgb(255, 136, 0),
-    rgb(252, 234, 206),
-    rgb(255, 136, 0)
+    rgb(255, 0, 0),
+    rgb(255, 216, 159),
+    rgb(255, 0, 0)
   );
   background-clip: inherit;
   -webkit-background-clip: text;
@@ -74,8 +78,30 @@ body {
 li {
   margin-bottom: 5px;
 }
+.home-credit-box p,
+.home-credit-box a {
+  color: white;
+  text-decoration: none;
+}
+
+.team-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  text-align: center;
+  background-color: rgb(255, 73, 73);
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.text-muted {
+  color: #7a7a7a;
+  font-style: italic;
+}
+/* ============================================================================= */
 
 /* Reveal button */
+/* ============================================================================= */
 .show-title-button {
   border-radius: 150px;
   background-image: linear-gradient(#acbbff, rgb(25, 51, 167) 60%);
@@ -110,8 +136,10 @@ li {
   left: 42.5%;
   border: 2px rgb(218, 230, 255) solid;
 }
+/* ============================================================================= */
 
 /* Tech buttons */
+/* ============================================================================= */
 .tech-button-box {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0;
@@ -150,8 +178,10 @@ li {
   margin-inline: 2px;
   height: 26px;
 }
+/* ============================================================================= */
 
 /* Nav buttons */
+/* ============================================================================= */
 .nav-button-box {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 5px;
@@ -164,14 +194,14 @@ li {
 .nav-button {
   background-image: linear-gradient(
     to right,
-    #5387a7 0%,
-    #4dbaec 51%,
-    #5387a7 100%
+    #fd3333 0%,
+    #f37d7d 51%,
+    #fd3333 100%
   );
   color: white;
   padding: 6px;
   border-radius: 6px;
-  border: 1px solid rgb(167, 160, 255);
+  border: 1px solid rgb(255, 160, 160);
   margin-bottom: 5px;
   text-align: center;
   transition: 0.5s;
@@ -185,19 +215,21 @@ li {
 }
 .nav-button:disabled {
   background-image: linear-gradient(
-    rgb(218, 230, 255) 10%,
-    rgb(253, 253, 255) 80%
+    rgb(255, 206, 206) 10%,
+    rgb(255, 235, 235) 80%
   );
   color: rgb(145, 145, 145);
 }
+/* ============================================================================= */
 
 /* Action buttons */
+/* ============================================================================= */
 .action-button {
   background-image: linear-gradient(
     to right,
-    #ff9daa 0%,
-    #ffe8ed 51%,
-    #ff9daa 100%
+    #ff2e2e 0%,
+    #ffe8e8 51%,
+    #35fd1b 100%
   );
   min-width: 33%;
   max-width: 45%;
@@ -217,20 +249,22 @@ li {
   text-decoration: none;
 }
 .action-button:disabled {
-  background-color: rgb(255, 228, 232);
+  background-color: #ffe8e8;
   min-width: 33%;
   max-width: 45%;
   color: rgb(196, 196, 196);
   padding: 6px;
   border-radius: 6px;
-  border: 1px solid rgb(255, 196, 226);
+  border: 1px solid #ffe8e8;
   margin-left: 33%;
   margin-right: auto;
   background-size: 0% auto;
   box-shadow: 0 0 0px #eee;
 }
+/* ============================================================================= */
 
 /* Select Team buttons */
+/* ============================================================================= */
 .select-team-button {
   background-image: linear-gradient(#ff9daa 0%, #ffe8ed 51%, #ff9daa 100%);
   color: black;
@@ -243,8 +277,10 @@ li {
   box-shadow: 0 0 6px #eee;
   min-width: 48%;
 }
+/* ============================================================================= */
 
 /* Boxes */
+/* ============================================================================= */
 .content-box {
   display: flex;
   background-color: rgba(0, 0, 0, 0.65);
@@ -259,7 +295,7 @@ li {
   margin-bottom: 10px;
   border-radius: 10px;
   padding: 8px;
-  background-color: rgba(0, 217, 255, 0.65);
+  background-color: rgba(224, 154, 1, 0.65);
   color: white;
 }
 .rules .content-box-item {
@@ -271,7 +307,7 @@ li {
   overflow: auto;
   max-height: 163px;
   border-radius: 5px;
-  background-color: rgba(164, 241, 255, 0.315);
+  background-color: rgba(255, 208, 164, 0.315);
 }
 .rules .content-box-content {
   max-height: 190px;
@@ -339,7 +375,8 @@ li {
   padding: 3px;
   height: 125px;
   border: #e2e2e2 7px ridge;
-  background-image: linear-gradient(#a2dbff 10%, #4dbaec 40%, #2480b9 70%);
+
+  background-image: linear-gradient(#ffcb95 10%, #e99f45 40%, #b1681b 70%);
   justify-content: center;
   align-items: center;
 }
@@ -369,7 +406,7 @@ li {
   padding: 3px;
   height: 80px;
   border: #e2e2e2 7px ridge;
-  background-image: linear-gradient(#a2dbff 10%, #4dbaec 40%, #2480b9 70%);
+  background-image: linear-gradient(#ffcb95 10%, #e99f45 40%, #b1681b 70%);
   justify-content: space-between;
   width: 530px;
   align-items: center;
@@ -462,14 +499,38 @@ li {
   border-radius: 3px;
   background: linear-gradient(
     90deg,
-    rgba(0, 125, 176, 1) 0%,
-    rgba(48, 195, 255, 1) 33%,
-    rgba(48, 195, 255, 1) 66%,
-    rgba(0, 125, 176, 1) 100%
+    rgb(9, 114, 0) 0%,
+    rgb(42, 194, 3) 33%,
+    rgb(42, 194, 3) 66%,
+    rgb(9, 114, 0) 100%
   );
   border: #cccccc 2px ridge;
 }
+.teams-box-content-right {
+  margin: 0px;
+  padding: 3px;
+  overflow: auto;
+  max-height: 300px;
+  border-radius: 3px;
+  background: linear-gradient(
+    90deg,
+    rgb(176, 0, 0) 0%,
+    rgb(255, 72, 72) 33%,
+    rgb(255, 72, 72) 66%,
+    rgb(176, 0, 0) 100%
+  );
+  border: #cccccc 2px ridge;
+}
+
 .teams-box-content p {
+  font-weight: bold;
+  font-size: 18px;
+  color: white;
+  margin: 2px;
+  text-shadow: 1px 1px 6px black;
+}
+
+.teams-box-content-right p {
   font-weight: bold;
   font-size: 18px;
   color: white;
@@ -521,7 +582,16 @@ li {
   width: 32.5%;
 }
 
+.theme-select-box {
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+/* ============================================================================= */
+
 /* Images */
+/* ============================================================================= */
 .strike-img {
   width: 100px;
   height: 100px;
@@ -560,7 +630,14 @@ li {
   visibility: hidden;
 }
 
+.achievement-img {
+  width: 20px;
+  height: 20px;
+}
+/* ============================================================================= */
+
 /* Scrollbar */
+/* ============================================================================= */
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -575,8 +652,10 @@ li {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+/* ============================================================================= */
 
 /* Tooltips */
+/* ============================================================================= */
 .tooltip {
   position: relative;
   display: inline-block;
@@ -598,28 +677,37 @@ li {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+/* ============================================================================= */
 
 /* Home page */
-.home-delete-btn {
-  border-radius: 6px;
-  background-color: rgba(255, 64, 64, 0.829);
-  border-width: 1.2px;
+/* ============================================================================= */
+.home-player-team-row {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  transition: 0.2s;
+  margin-inline-start: 5%;
 }
 
-.home-player-team-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2px;
-  padding-inline: 5px;
-  border-radius: 5px;
+.home-player-team-row:hover {
+  cursor: pointer;
+  text-decoration: line-through;
+  color: rgb(216, 216, 216);
+}
+
+.home-delete-btn:hover {
+  background-color: rgba(129, 19, 19, 0.829);
 }
 
 .home-team-creation {
   display: flex;
   flex-wrap: nowrap;
-  align-items: flex-end;
+  align-items: center;
+}
+.home-team-creation p {
+  width: 10%;
+  margin: 0;
 }
 .home-steve-img {
   width: 100px;
@@ -636,10 +724,9 @@ li {
   left: 23%;
 }
 .home-credit-box {
-  background-color: rgba(0, 131, 148, 0.65);
+  background-color: rgba(148, 79, 0, 0.65);
   border-radius: 10px;
   padding: 6px;
-  color: white;
   text-align: center;
   width: 200px;
   height: auto;
@@ -649,7 +736,21 @@ li {
   transform: translateX(-50%);
 }
 
+.team-player-select-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-player-select {
+  margin-inline: 10px;
+  width: 40%;
+}
+/* ============================================================================= */
+
 /* Admin page */
+/* ============================================================================= */
 .question-form {
   display: flex;
   flex-direction: row;
@@ -664,7 +765,62 @@ li {
   bottom: 40px;
 }
 
+.question-list-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  height: 20px;
+  margin-bottom: 4px;
+}
+
+.question-list-title p {
+  margin: 0;
+}
+
+.admin-nav-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.admin-nav-buttons-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-nav-buttons-group .action-button {
+  margin: 0;
+  max-width: 100%;
+}
+
+.admin-item-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2px;
+  padding-inline: 5px;
+  border-radius: 5px;
+  height: 20px;
+}
+
+.admin-item-row:hover .admin-item-row-delete-btn,
+.question-list-title:hover .admin-item-row-delete-btn {
+  display: inline;
+}
+
+.admin-item-row-delete-btn {
+  display: none;
+  border-radius: 6px;
+  background-color: rgba(216, 17, 17, 0.829);
+  border: 1px solid darkred;
+  transition: 0.2s;
+}
+/* ============================================================================= */
+
 /* Info page */
+/* ============================================================================= */
 .info-strike {
   display: flex;
   flex-direction: column;
@@ -682,8 +838,10 @@ li {
   top: 10px;
   left: 15px;
 }
+/* ============================================================================= */
 
 /* Quiz page */
+/* ============================================================================= */
 .gif-1 {
   position: absolute;
   left: 10%;
@@ -752,8 +910,10 @@ li {
   height: auto;
   z-index: 1;
 }
+/* ============================================================================= */
 
 /* Timer */
+/* ============================================================================= */
 .timer-box {
   border-radius: 6px;
   margin-inline: auto;
@@ -774,3 +934,198 @@ li {
   color: white;
   margin: 0px;
 }
+/* ============================================================================= */
+
+/* Snowfall */
+/* ============================================================================= */
+.snowflake {
+  color: #fff;
+  font-size: 1em;
+  font-family: Arial;
+  text-shadow: 0 0 1px #000;
+}
+
+@-webkit-keyframes snowflakes-fall {
+  0% {
+    top: -10%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+@-webkit-keyframes snowflakes-shake {
+  0% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+  50% {
+    -webkit-transform: translateX(80px);
+    transform: translateX(80px);
+  }
+  100% {
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+  }
+}
+@keyframes snowflakes-fall {
+  0% {
+    top: -10%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+@keyframes snowflakes-shake {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(80px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.snowflake {
+  position: fixed;
+  top: -10%;
+  z-index: 9999;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+  -webkit-animation-name: snowflakes-fall, snowflakes-shake;
+  -webkit-animation-duration: 10s, 3s;
+  -webkit-animation-timing-function: linear, ease-in-out;
+  -webkit-animation-iteration-count: infinite, infinite;
+  -webkit-animation-play-state: running, running;
+  animation-name: snowflakes-fall, snowflakes-shake;
+  animation-duration: 10s, 3s;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+  animation-play-state: running, running;
+}
+.snowflake:nth-of-type(0) {
+  left: 1%;
+  -webkit-animation-delay: 0s, 0s;
+  animation-delay: 0s, 0s;
+}
+.snowflake:nth-of-type(1) {
+  left: 10%;
+  -webkit-animation-delay: 1s, 1s;
+  animation-delay: 1s, 1s;
+}
+.snowflake:nth-of-type(2) {
+  left: 20%;
+  -webkit-animation-delay: 6s, 0.5s;
+  animation-delay: 6s, 0.5s;
+}
+.snowflake:nth-of-type(3) {
+  left: 30%;
+  -webkit-animation-delay: 4s, 2s;
+  animation-delay: 4s, 2s;
+}
+.snowflake:nth-of-type(4) {
+  left: 40%;
+  -webkit-animation-delay: 2s, 2s;
+  animation-delay: 2s, 2s;
+}
+.snowflake:nth-of-type(5) {
+  left: 50%;
+  -webkit-animation-delay: 8s, 3s;
+  animation-delay: 8s, 3s;
+}
+.snowflake:nth-of-type(6) {
+  left: 60%;
+  -webkit-animation-delay: 6s, 2s;
+  animation-delay: 6s, 2s;
+}
+.snowflake:nth-of-type(7) {
+  left: 70%;
+  -webkit-animation-delay: 2.5s, 1s;
+  animation-delay: 2.5s, 1s;
+}
+.snowflake:nth-of-type(8) {
+  left: 80%;
+  -webkit-animation-delay: 1s, 0s;
+  animation-delay: 1s, 0s;
+}
+.snowflake:nth-of-type(9) {
+  left: 90%;
+  -webkit-animation-delay: 3s, 1.5s;
+  animation-delay: 3s, 1.5s;
+}
+/* ============================================================================= */
+
+/* Episode 2 */
+/* 
+.title {
+  background: -webkit-linear-gradient(
+    rgb(255, 136, 0),
+    rgb(252, 234, 206),
+    rgb(255, 136, 0)
+  );
+}
+.content-box-item {
+  background-color: rgba(0, 217, 255, 0.65);
+  color: white;
+}
+.content-box-content {
+  background-color: rgba(164, 241, 255, 0.315);
+}
+.home-credit-box {
+  background-color: rgba(0, 131, 148, 0.65);
+  color: white;
+}
+.action-button {
+  background-image: linear-gradient(
+    to right,
+    #ff9daa 0%,
+    #ffe8ed 51%,
+    #ff9daa 100%
+  );
+  color: black;
+}
+.action-button:disabled {
+  background-color: rgb(255, 228, 232);
+  color: rgb(196, 196, 196);
+  border: 1px solid rgb(255, 196, 226);
+}
+.nav-button {
+  background-image: linear-gradient(
+    to right,
+    #5387a7 0%,
+    #4dbaec 51%,
+    #5387a7 100%
+  );
+  color: white;
+}
+.nav-button:disabled {
+  background-image: linear-gradient(
+    rgb(218, 230, 255) 10%,
+    rgb(253, 253, 255) 80%
+  );
+  color: rgb(145, 145, 145);
+}
+.question-title-box-content {
+  background-image: linear-gradient(#a2dbff 10%, #4dbaec 40%, #2480b9 70%);
+}
+.answer-box-item {
+  background-image: linear-gradient(#a2dbff 10%, #4dbaec 40%, #2480b9 70%);
+}
+.teams-box-content {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 125, 176, 1) 0%,
+    rgba(48, 195, 255, 1) 33%,
+    rgba(48, 195, 255, 1) 66%,
+    rgba(0, 125, 176, 1) 100%
+  );
+}
+.select-team-button {
+  background-image: linear-gradient(#ff9daa 0%, #ffe8ed 51%, #ff9daa 100%);
+  color: black;
+  border: 1px solid rgb(255, 139, 187);
+}
+*/

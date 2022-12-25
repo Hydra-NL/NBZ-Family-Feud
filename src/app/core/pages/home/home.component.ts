@@ -54,9 +54,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  getTeams() {
+  async getTeams() {
     this.teams = [];
-    this.subscription = this.teamService.list().subscribe({
+    this.subscription = (await this.teamService.list()).subscribe({
       next: (teams) => {
         this.teams = teams!;
         console.log('Teams: ' + this.teams.length);
@@ -68,9 +68,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  getPlayers() {
+  async getPlayers() {
     this.teamplayers = [];
-    this.subscription = this.teamPlayerService.list().subscribe({
+    this.subscription = (await this.teamPlayerService.list()).subscribe({
       next: (teamplayers) => {
         this.teamplayers = teamplayers!;
         console.log('Teamplayers: ' + this.teamplayers.length);

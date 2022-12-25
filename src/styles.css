@@ -16,9 +16,6 @@ body {
 }
 .title {
   font-size: 38px;
-  font-weight: bold;
-  text-align: center;
-  margin: 0px;
   background: -webkit-linear-gradient(
     rgb(255, 0, 0),
     rgb(255, 216, 159),
@@ -30,18 +27,22 @@ body {
 }
 .question-title {
   font-size: 38px;
-  font-weight: bold;
-  text-align: center;
-  margin: 0px;
   visibility: hidden;
   color: white;
   text-shadow: 2px 2px 6px black;
 }
-.winning-title {
-  font-size: 78px;
+
+.question-title,
+.title,
+.winning-title,
+.team-title {
   font-weight: bold;
   text-align: center;
   margin: 0px;
+}
+
+.winning-title {
+  font-size: 78px;
   background: -webkit-linear-gradient(
     rgb(255, 136, 0),
     rgb(252, 234, 206),
@@ -86,9 +87,6 @@ li {
 
 .team-title {
   font-size: 20px;
-  font-weight: bold;
-  margin: 0;
-  text-align: center;
   background-color: rgb(255, 73, 73);
   border-radius: 5px;
   margin-bottom: 5px;
@@ -190,6 +188,9 @@ li {
   left: 1%;
   top: 2%;
   max-width: 12%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 .nav-button {
   background-image: linear-gradient(
@@ -202,11 +203,10 @@ li {
   padding: 6px;
   border-radius: 6px;
   border: 1px solid rgb(255, 160, 160);
-  margin-bottom: 5px;
-  text-align: center;
   transition: 0.5s;
   background-size: 200% auto;
   box-shadow: 0 0 3px #eee;
+  width: 100%;
 }
 .nav-button:hover {
   background-position: right center;
@@ -233,50 +233,38 @@ li {
   );
   min-width: 33%;
   max-width: 45%;
-  color: black;
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid rgb(255, 139, 187);
   margin-left: 33%;
   margin-right: auto;
-  text-align: center;
-  transition: 0.5s;
-  background-size: 200% auto;
-  box-shadow: 0 0 6px #eee;
 }
 .action-button:hover {
   background-position: right center;
+  border: 1px solid #35fd1b;
   text-decoration: none;
 }
 .action-button:disabled {
   background-color: #ffe8e8;
-  min-width: 33%;
-  max-width: 45%;
   color: rgb(196, 196, 196);
+  border: 1px solid #ffe8e8;
+  background-size: 0% auto;
+  box-shadow: 0 0 0px;
+}
+
+.action-button,
+.select-team-button {
+  color: black;
   padding: 6px;
   border-radius: 6px;
-  border: 1px solid #ffe8e8;
-  margin-left: 33%;
-  margin-right: auto;
-  background-size: 0% auto;
-  box-shadow: 0 0 0px #eee;
+  border: 1px solid rgb(255, 139, 187);
+  text-align: center;
+  transition: 0.4s;
+  background-size: 200% auto;
+  box-shadow: 0 0 6px rgb(53, 53, 53);
 }
 /* ============================================================================= */
 
 /* Select Team buttons */
 /* ============================================================================= */
-.select-team-button {
-  background-image: linear-gradient(#ff9daa 0%, #ffe8ed 51%, #ff9daa 100%);
-  color: black;
-  padding: 6px;
-  border-radius: 6px;
-  border: 1px solid rgb(255, 139, 187);
-  text-align: center;
-  transition: 0.5s;
-  background-size: 200% auto;
-  box-shadow: 0 0 6px #eee;
-  min-width: 48%;
-}
+
 /* ============================================================================= */
 
 /* Boxes */
@@ -298,19 +286,25 @@ li {
   background-color: rgba(224, 154, 1, 0.65);
   color: white;
 }
-.rules .content-box-item {
-  height: 292.39px;
-}
 .content-box-content {
   margin: 0px;
   padding: 3px;
   overflow: auto;
-  max-height: 163px;
   border-radius: 5px;
   background-color: rgba(255, 208, 164, 0.315);
 }
 .rules .content-box-content {
   max-height: 190px;
+}
+#home-page .content-box-content {
+  max-height: 350px;
+}
+#admin-page .content-box-content,
+#question-list.content-box-content {
+  max-height: 600px;
+}
+.content-box-content ul {
+  padding-inline-start: 25px;
 }
 .title-box {
   background-color: rgba(0, 0, 0, 0.5);
@@ -343,240 +337,6 @@ li {
   background-color: rgba(0, 217, 255, 0.65);
 }
 
-.round-points-box {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 6px;
-  border-radius: 6px;
-  border: 4px ridge;
-  border-color: #cccccc;
-  width: 20%;
-  margin-inline: auto;
-  margin-top: 7px;
-}
-
-.round-points-box p {
-  color: white;
-  font-size: 60px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.question-title-box {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  width: auto;
-}
-.question-title-box-content {
-  display: flex;
-  margin: 0px;
-  padding: 3px;
-  height: 125px;
-  border: #e2e2e2 7px ridge;
-
-  background-image: linear-gradient(#ffcb95 10%, #e99f45 40%, #b1681b 70%);
-  justify-content: center;
-  align-items: center;
-}
-.answer-box {
-  background-color: rgba(0, 21, 90, 0.5);
-  padding: 6px;
-  border-radius: 10px;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  width: auto;
-  border: #ffb52c 8px double;
-  display: flex;
-  flex-direction: row;
-}
-
-.answer-box-content {
-  margin: 0px;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  flex-direction: column;
-}
-
-.answer-box-item {
-  display: flex;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  padding: 3px;
-  height: 80px;
-  border: #e2e2e2 7px ridge;
-  background-image: linear-gradient(#ffcb95 10%, #e99f45 40%, #b1681b 70%);
-  justify-content: space-between;
-  width: 530px;
-  align-items: center;
-}
-
-.answer-box-item p {
-  font-size: 26px;
-  padding-inline: 10px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: white;
-  margin: 0px;
-  visibility: hidden;
-  text-shadow: 1px 1px 6px black;
-}
-
-.points-box {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 6px;
-  border-radius: 6px;
-}
-
-.teams-box-1 {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 6px;
-  border-radius: 6px;
-  position: absolute;
-  left: 1%;
-  top: 60%;
-  border: 4px ridge;
-  border-color: #cccccc;
-  width: 16%;
-}
-.teams-box-1-points {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 6px;
-  border-radius: 6px;
-  position: absolute;
-  left: 4%;
-  top: 45%;
-  border: 4px ridge;
-  border-color: #cccccc;
-  width: 10%;
-}
-.teams-box-points-p {
-  font-size: 60px;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: white;
-  margin: 0px;
-  text-align: center;
-}
-
-.teams-box-2 {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 6px;
-  border-radius: 6px;
-  position: absolute;
-  right: 1%;
-  top: 60%;
-  border: 4px ridge;
-  border-color: #cccccc;
-  width: 16%;
-}
-.teams-box-2-points {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 6px;
-  border-radius: 6px;
-  position: absolute;
-  right: 4%;
-  top: 45%;
-  border: 4px ridge;
-  border-color: #cccccc;
-  width: 10%;
-}
-
-.teams-box-title p {
-  font-size: 26px;
-  padding-inline: 10px;
-  font-weight: bold;
-  color: white;
-  margin: 0px;
-  text-align: center;
-}
-.teams-box-content {
-  margin: 0px;
-  padding: 3px;
-  overflow: auto;
-  max-height: 300px;
-  border-radius: 3px;
-  background: linear-gradient(
-    90deg,
-    rgb(9, 114, 0) 0%,
-    rgb(42, 194, 3) 33%,
-    rgb(42, 194, 3) 66%,
-    rgb(9, 114, 0) 100%
-  );
-  border: #cccccc 2px ridge;
-}
-.teams-box-content-right {
-  margin: 0px;
-  padding: 3px;
-  overflow: auto;
-  max-height: 300px;
-  border-radius: 3px;
-  background: linear-gradient(
-    90deg,
-    rgb(176, 0, 0) 0%,
-    rgb(255, 72, 72) 33%,
-    rgb(255, 72, 72) 66%,
-    rgb(176, 0, 0) 100%
-  );
-  border: #cccccc 2px ridge;
-}
-
-.teams-box-content p {
-  font-weight: bold;
-  font-size: 18px;
-  color: white;
-  margin: 2px;
-  text-shadow: 1px 1px 6px black;
-}
-
-.teams-box-content-right p {
-  font-weight: bold;
-  font-size: 18px;
-  color: white;
-  margin: 2px;
-  text-shadow: 1px 1px 6px black;
-}
-
-.select-team-box {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 6px;
-  border-radius: 6px;
-  border-color: #cccccc;
-  margin-inline: auto;
-  width: 40%;
-  visibility: visible;
-  text-align: center;
-  margin-top: 30px;
-}
-
-.select-team-box p {
-  font-size: 26px;
-  font-weight: bold;
-  color: white;
-  margin: 2px;
-  text-align: center;
-}
-
-.select-team-box button {
-  margin-inline: 4px;
-  font-size: 14px;
-  font-weight: bold;
-  transition: none;
-}
-
-.strikes-box-team1 {
-  position: absolute;
-  left: 1%;
-  top: 1%;
-}
-
-.strikes-box-team2 {
-  position: absolute;
-  right: 1%;
-  top: 1%;
-}
-
 .sound-board .tech-button {
   margin-bottom: 2px;
   width: 32.5%;
@@ -592,43 +352,6 @@ li {
 
 /* Images */
 /* ============================================================================= */
-.strike-img {
-  width: 100px;
-  height: 100px;
-}
-
-.big-strike {
-  position: absolute;
-  top: 50%;
-  left: 50.5%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  visibility: hidden;
-}
-
-.big-strike-image {
-  width: 700px;
-  height: 700px;
-  transition: 2s;
-  animation: ease-in;
-}
-
-.disabled-ptns {
-  position: absolute;
-  top: 16px;
-  color: white;
-  font-size: 30px;
-  visibility: hidden;
-}
-
-.double-ptns {
-  position: absolute;
-  top: 16px;
-  transform: translate(190px, 0px);
-  color: white;
-  font-size: 20px;
-  visibility: hidden;
-}
 
 .achievement-img {
   width: 20px;
@@ -842,6 +565,293 @@ li {
 
 /* Quiz page */
 /* ============================================================================= */
+.question-body {
+  margin-inline: 5%;
+}
+
+.round-info-row {
+  margin-top: 7px;
+  display: grid;
+  grid-template-areas: "🅱 🅿 🔠";
+  grid-template-columns: 25% 50% 25%;
+  justify-items: center;
+}
+
+.double-ptns {
+  width: 40%;
+  grid-area: 🅱;
+}
+
+.round-points-box {
+  grid-area: 🅿;
+  width: 40%;
+}
+
+.special-question-box {
+  width: 40%;
+  grid-area: 🔠;
+}
+
+.round-points-box p,
+.special-question-box p,
+.double-ptns {
+  color: white;
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.strikes-box-team1 {
+  position: absolute;
+  left: 1%;
+  top: 1%;
+}
+
+.strikes-box-team2 {
+  position: absolute;
+  right: 1%;
+  top: 1%;
+}
+
+.strike-img {
+  width: 100px;
+  height: 100px;
+}
+
+.big-strike {
+  position: absolute;
+  top: 50%;
+  left: 50.5%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  visibility: hidden;
+}
+
+.big-strike-image {
+  width: 700px;
+  height: 700px;
+  transition: 2s;
+  animation: ease-in;
+}
+
+.disabled-ptns {
+  position: absolute;
+  top: 16px;
+  color: white;
+  font-size: 30px;
+}
+.question-title-box {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  width: auto;
+}
+.question-title-box-content {
+  display: flex;
+  margin: 0px;
+  padding: 3px;
+  height: 125px;
+  border: #e2e2e2 7px ridge;
+  background-image: linear-gradient(#ffcb95 10%, #e99f45 40%, #b1681b 70%);
+  justify-content: center;
+  align-items: center;
+}
+
+.reverse {
+  background-image: url(./assets/images/ice2.png);
+
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 1080px 216px;
+  width: 1100px;
+  height: 200px;
+  transform: translate(-28px, -38px);
+}
+
+.answer-box {
+  background-color: rgba(0, 21, 90, 0.5);
+  padding: 6px;
+  border-radius: 10px;
+  border: #ffb52c 8px double;
+  display: flex;
+  flex-direction: row;
+}
+
+.answer-box-content {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.answer-box-item {
+  display: flex;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding: 3px;
+  height: 80px;
+  border: #e2e2e2 7px ridge;
+  background-image: linear-gradient(#ffcb95 10%, #e99f45 40%, #b1681b 70%);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.answer-box-item p {
+  font-size: 26px;
+  padding-inline: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+  margin: 0px;
+  visibility: hidden;
+  text-shadow: 1px 1px 6px black;
+}
+
+.points-box {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.team-1 {
+  position: absolute;
+  left: 5px;
+  top: 40%;
+}
+
+.team-2 {
+  position: absolute;
+  right: 5px;
+  top: 40%;
+}
+
+.team-1-box,
+.team-2-box {
+  max-width: 250px;
+}
+
+.team-points {
+  margin-inline: auto;
+  margin-bottom: 8px;
+  width: 90%;
+  max-width: 200px;
+}
+
+.team-points p,
+.team-box-title {
+  font-weight: bold;
+  color: white;
+  margin: 0px;
+  text-align: center;
+}
+
+.team-points p {
+  font-size: 60px;
+}
+
+.team-box-title {
+  font-size: 26px;
+  padding-inline: 10px;
+}
+.teams-box-content {
+  margin: 0px;
+  padding: 3px;
+  overflow: auto;
+  max-height: 300px;
+  border-radius: 3px;
+  background: linear-gradient(
+    90deg,
+    rgb(9, 114, 0) 0%,
+    rgb(42, 194, 3) 33%,
+    rgb(42, 194, 3) 66%,
+    rgb(9, 114, 0) 100%
+  );
+  border: #cccccc 2px ridge;
+}
+.teams-box-content-right {
+  margin: 0px;
+  padding: 3px;
+  overflow: auto;
+  max-height: 300px;
+  border-radius: 3px;
+  background: linear-gradient(
+    90deg,
+    rgb(176, 0, 0) 0%,
+    rgb(255, 72, 72) 33%,
+    rgb(255, 72, 72) 66%,
+    rgb(176, 0, 0) 100%
+  );
+  border: #cccccc 2px ridge;
+}
+
+.teams-box-content p,
+.teams-box-content-right p {
+  font-weight: bold;
+  font-size: 18px;
+  color: white;
+  margin: 2px;
+  text-shadow: 1px 1px 6px black;
+}
+
+.select-team-box {
+  margin-inline: auto;
+  width: 40%;
+  visibility: visible;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.select-team-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.select-team-button {
+  background-image: linear-gradient(#ff9daa 0%, #ffe8ed 51%, #ff9daa 100%);
+  min-width: 80px;
+  max-width: 210px;
+  margin-inline: 4px;
+  font-weight: bold;
+}
+.select-team-button:hover {
+  background-image: linear-gradient(#fd788a 0%, #ffd6df 51%, #fd788a 100%);
+}
+
+.select-team-box p {
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
+  margin: 2px;
+  text-align: center;
+}
+
+.select-team-box,
+.team-points,
+.team-1-box,
+.team-2-box,
+.round-points-box,
+.special-question-box,
+.double-ptns {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 6px;
+  border-radius: 6px;
+  border: 4px ridge;
+  border-color: #cccccc;
+}
+
+.active .team-points,
+.active .team-1-box,
+.active .team-2-box {
+  border-color: #ffbb00;
+  background-color: rgb(157 128 0 / 50%);
+}
+
+/* ============================================================================= */
+
+/* Winner page */
+/* ============================================================================= */
 .gif-1 {
   position: absolute;
   left: 10%;
@@ -917,7 +927,6 @@ li {
 .timer-box {
   border-radius: 6px;
   margin-inline: auto;
-  visibility: hidden;
   text-align: center;
   margin-top: 10px;
   height: 130px;

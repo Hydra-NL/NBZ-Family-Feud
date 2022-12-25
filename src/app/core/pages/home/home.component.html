@@ -1,164 +1,166 @@
-<!-- Home page title -->
-<div class="title-box">
-  <p class="title">
-    {{ title }}
-  </p>
-</div>
+<div id="home-page">
+  <!-- Home page title -->
+  <div class="title-box">
+    <p class="title">
+      {{ title }}
+    </p>
+  </div>
 
-<!-- Home page content player&team overview -->
-<div class="content-box">
-  <div class="col-md-6">
-    <div class="content-box-item">
-      <h4 class="align-center-bold">Teams & Players</h4>
-      <div class="content-box-content" style="max-height: 338px">
-        <div *ngFor="let team of teams">
-          <p class="team-title">Team - {{ team.teamName }}</p>
-          <div *ngFor="let teamplayer of teamplayers">
-            <a
-              class="home-player-team-row"
-              *ngIf="
-                team.teamMembers.includes(teamplayer._id!) &&
-                teamplayer.playerTeam == team._id
-              "
-              (click)="leaveTeam(teamplayer._id!, team._id!)"
-            >
-              {{ teamplayer.playerName }}
-              <span *ngIf="teamplayer.achievements.length > 0">
-                [<span *ngFor="let achievement of teamplayer.achievements">
-                  {{ achievement }} </span
-                >]
-              </span>
-            </a>
+  <!-- Home page content player&team overview -->
+  <div class="content-box">
+    <div class="col-md-6">
+      <div class="content-box-item">
+        <h4 class="align-center-bold">Teams & Players</h4>
+        <div class="content-box-content">
+          <div *ngFor="let team of teams">
+            <p class="team-title">Team - {{ team.teamName }}</p>
+            <div *ngFor="let teamplayer of teamplayers">
+              <a
+                class="home-player-team-row"
+                *ngIf="
+                  team.teamMembers.includes(teamplayer._id!) &&
+                  teamplayer.playerTeam == team._id
+                "
+                (click)="leaveTeam(teamplayer._id!, team._id!)"
+              >
+                {{ teamplayer.playerName }}
+                <span *ngIf="teamplayer.achievements.length > 0">
+                  [<span *ngFor="let achievement of teamplayer.achievements">
+                    {{ achievement }} </span
+                  >]
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="col-md-6">
-    <div class="content-box-item">
-      <h4 class="align-center-bold">Join Team</h4>
-      <form
-        #jointeamform="ngForm"
-        (ngSubmit)="
-          jointeamform.form.valid && joinTeam(team._id!, teamplayer._id!)
-        "
-      >
-        <div class="form-group team-player-select-form">
-          <select
-            class="form-control team-player-select"
-            name="teammember"
-            [(ngModel)]="team._id"
-            #teammember="ngModel"
-            required
-          >
-            <option value="" disabled selected hidden>Select a player</option>
-            <option
-              *ngFor="let teamplayer of teamplayers"
-              [ngValue]="teamplayer._id"
+    <div class="col-md-6">
+      <div class="content-box-item">
+        <h4 class="align-center-bold">Join Team</h4>
+        <form
+          #jointeamform="ngForm"
+          (ngSubmit)="
+            jointeamform.form.valid && joinTeam(team._id!, teamplayer._id!)
+          "
+        >
+          <div class="form-group team-player-select-form">
+            <select
+              class="form-control team-player-select"
+              name="teammember"
+              [(ngModel)]="team._id"
+              #teammember="ngModel"
+              required
             >
-              {{ teamplayer.playerName }}
-              <span *ngIf="!teamplayer.playerTeam">[No team]</span>
-            </option>
-          </select>
-          <i class="fa-solid fa-arrow-right"></i>
-          <select
-            class="form-control team-player-select"
-            name="playerteam"
-            [(ngModel)]="teamplayer._id"
-            #playerteam="ngModel"
-            required
+              <option value="" disabled selected hidden>Select a player</option>
+              <option
+                *ngFor="let teamplayer of teamplayers"
+                [ngValue]="teamplayer._id"
+              >
+                {{ teamplayer.playerName }}
+                <span *ngIf="!teamplayer.playerTeam">[No team]</span>
+              </option>
+            </select>
+            <i class="fa-solid fa-arrow-right"></i>
+            <select
+              class="form-control team-player-select"
+              name="playerteam"
+              [(ngModel)]="teamplayer._id"
+              #playerteam="ngModel"
+              required
+            >
+              <option value="" disabled selected hidden>Select a team</option>
+              <option *ngFor="let team of teams" [ngValue]="team._id">
+                {{ team.teamName }}
+              </option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="action-button"
+            [disabled]="!jointeamform.valid"
           >
-            <option value="" disabled selected hidden>Select a team</option>
-            <option *ngFor="let team of teams" [ngValue]="team._id">
-              {{ team.teamName }}
-            </option>
-          </select>
-        </div>
-        <button
-          type="submit"
-          class="action-button"
-          [disabled]="!jointeamform.valid"
-        >
-          Join team
-        </button>
-      </form>
+            Join team
+          </button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Home page content starting game -->
-<div class="content-box">
-  <div class="col-md-2">
-    <img class="home-steve-img" src="../../../../assets/gifs/steve.gif" />
-  </div>
-  <div class="col-md-8">
-    <div class="content-box-item">
-      <form
-        #startform="ngForm"
-        (ngSubmit)="startform.form.valid && goToQuiz(team1, team2)"
-      >
-        <h2 class="align-center-bold">Game</h2>
-        <div class="form-group col-md-5">
-          <label for="team1select">Team 1</label>
-          <select
-            class="form-control"
-            name="team1select"
-            [(ngModel)]="team1"
-            #team1select="ngModel"
-            required
-          >
-            <option *ngFor="let team of teams" [ngValue]="team">
-              {{ team.teamName }}
-            </option>
-          </select>
-        </div>
-
-        <div class="col-md-2">
-          <h3 class="align-center-bold">VS.</h3>
-        </div>
-
-        <div class="form-group col-md-5">
-          <label for="team2select">Team 2</label>
-          <select
-            class="form-control"
-            name="team2select"
-            [(ngModel)]="team2"
-            #team2select="ngModel"
-            required
-          >
-            <option *ngFor="let team of teams" [ngValue]="team">
-              {{ team.teamName }}
-            </option>
-          </select>
-        </div>
-        <button
-          type="submit"
-          class="action-button"
-          [disabled]="!startform.valid"
+  <!-- Home page content starting game -->
+  <div class="content-box">
+    <div class="col-md-2">
+      <img class="home-steve-img" src="../../../../assets/gifs/steve.gif" />
+    </div>
+    <div class="col-md-8">
+      <div class="content-box-item">
+        <form
+          #startform="ngForm"
+          (ngSubmit)="startform.form.valid && goToQuiz(team1, team2)"
         >
-          <i class="fa fa-play"></i>
-          Start
-        </button>
-      </form>
+          <h2 class="align-center-bold">Game</h2>
+          <div class="form-group col-md-5">
+            <label for="team1select">Team 1</label>
+            <select
+              class="form-control"
+              name="team1select"
+              [(ngModel)]="team1"
+              #team1select="ngModel"
+              required
+            >
+              <option *ngFor="let team of teams" [ngValue]="team">
+                {{ team.teamName }}
+              </option>
+            </select>
+          </div>
+
+          <div class="col-md-2">
+            <h3 class="align-center-bold">VS.</h3>
+          </div>
+
+          <div class="form-group col-md-5">
+            <label for="team2select">Team 2</label>
+            <select
+              class="form-control"
+              name="team2select"
+              [(ngModel)]="team2"
+              #team2select="ngModel"
+              required
+            >
+              <option *ngFor="let team of teams" [ngValue]="team">
+                {{ team.teamName }}
+              </option>
+            </select>
+          </div>
+          <button
+            type="submit"
+            class="action-button"
+            [disabled]="!startform.valid"
+          >
+            <i class="fa fa-play"></i>
+            Start
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <img class="home-steve-img" src="../../../../assets/gifs/steve.gif" />
     </div>
   </div>
-  <div class="col-md-2">
-    <img class="home-steve-img" src="../../../../assets/gifs/steve.gif" />
-  </div>
-</div>
 
-<!-- Credits box -->
-<div class="home-credit-box">
-  <p>
-    Made by <a href="https://github.com/Hydra-NL"><b>Hydra</b></a> with
-    <i class="fa fa-heart" style="color: red"></i><br />
-    <a href="https://www.instagram.com/pascal.vdkeere/">
-      <i class="fa-brands fa-instagram"></i>
-      Instagram |
-    </a>
-    <a href="https://www.youtube.com/channel/UCuBeCVIM7uUYRt9pzkGgbhA">
-      <i class="fa-brands fa-youtube"></i>
-      YouTube
-    </a>
-  </p>
+  <!-- Credits box -->
+  <div class="home-credit-box">
+    <p>
+      Made by <a href="https://github.com/Hydra-NL"><b>Hydra</b></a> with
+      <i class="fa fa-heart" style="color: red"></i><br />
+      <a href="https://www.instagram.com/pascal.vdkeere/">
+        <i class="fa-brands fa-instagram"></i>
+        Instagram |
+      </a>
+      <a href="https://www.youtube.com/channel/UCuBeCVIM7uUYRt9pzkGgbhA">
+        <i class="fa-brands fa-youtube"></i>
+        YouTube
+      </a>
+    </p>
+  </div>
 </div>

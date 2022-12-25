@@ -14,6 +14,7 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
   questions!: Question[];
   question!: Question;
   totalPoints!: number;
+  specialities: string[] = [];
   subscription!: Subscription;
 
   constructor(private questionsService: QuestionService) {}
@@ -29,8 +30,8 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  getQuestions() {
-    this.subscription = this.questionsService.list().subscribe({
+  async getQuestions() {
+    this.subscription = (await this.questionsService.list()).subscribe({
       next: (questions) => {
         this.questions = questions as Question[];
         console.log(questions);

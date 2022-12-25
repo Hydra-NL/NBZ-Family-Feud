@@ -11,7 +11,7 @@ import {
 } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { QuizComponent } from './core/pages/quiz/quiz.component';
+import { Quiz2Component } from './core/pages/quiz/quiz2.component';
 import { InfoComponent } from './core/pages/info/info.component';
 import { ControlsComponent } from './core/pages/controls/controls.component';
 import { AdminComponent } from './core/pages/adminpanel/admin.component';
@@ -26,7 +26,7 @@ import { AddTeamComponent } from './core/pages/adminpanel/addteam/addteam.compon
   declarations: [
     AppComponent,
     HomeComponent,
-    QuizComponent,
+    Quiz2Component,
     InfoComponent,
     ControlsComponent,
     AdminComponent,

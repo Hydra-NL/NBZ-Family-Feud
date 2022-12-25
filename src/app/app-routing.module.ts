@@ -5,7 +5,7 @@ import { AdminComponent } from './core/pages/adminpanel/admin.component';
 import { ControlsComponent } from './core/pages/controls/controls.component';
 import { HomeComponent } from './core/pages/home/home.component';
 import { InfoComponent } from './core/pages/info/info.component';
-import { QuizComponent } from './core/pages/quiz/quiz.component';
+import { Quiz2Component } from './core/pages/quiz/quiz2.component';
 import { DemoComponent } from './core/pages/demo/demo.component';
 import { HalloffameComponent } from './core/pages/halloffame/halloffame.component';
 import { AddQuestionComponent } from './core/pages/adminpanel/addquestion/addquestion.component';
@@ -29,7 +29,7 @@ const routes: Routes = [
       {
         path: 'quiz',
         children: [
-          { path: '', component: QuizComponent },
+          { path: '', component: Quiz2Component },
         ],
       },
       {

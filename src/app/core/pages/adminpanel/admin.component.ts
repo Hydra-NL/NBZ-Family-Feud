@@ -24,8 +24,8 @@ export class AdminComponent implements OnInit {
     this.getTeams();
     this.getPlayers();
   }
-  getTeams() {
-    this.teamService.list().subscribe({
+  async getTeams() {
+    this.subscription = (await this.teamService.list()).subscribe({
       next: (teams) => {
         this.teams = teams!;
         console.log('Teams: ' + this.teams.length);
@@ -33,9 +33,9 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  getPlayers() {
+  async getPlayers() {
     this.players = [];
-    this.subscription = this.teamPlayerService.list().subscribe({
+    this.subscription = (await this.teamPlayerService.list()).subscribe({
       next: (players) => {
         this.players = players!;
         console.log('Teamplayers: ' + this.players.length);
@@ -46,11 +46,11 @@ export class AdminComponent implements OnInit {
     });
   }
 
-  delTeam(id: string) {
+  async delTeam(id: string) {
     console.log(id);
     let text = 'Are you sure you want to delete this team?';
     if (confirm(text) == true) {
-      this.subscription = this.teamPlayerService.list().subscribe({
+      this.subscription = (await this.teamPlayerService.list()).subscribe({
         next: (players) => {
           this.players = players!;
           console.log('Teamplayers: ' + this.players.length);
@@ -82,11 +82,11 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  delPlayer(id: string) {
+  async delPlayer(id: string) {
     console.log(id);
     let text = 'Are you sure you want to delete this player?';
     if (confirm(text) == true) {
-      this.subscription = this.teamService.list().subscribe({
+      this.subscription = (await this.teamService.list()).subscribe({
         next: (teams) => {
           this.teams = teams!;
           console.log('Teams: ' + this.teams.length);

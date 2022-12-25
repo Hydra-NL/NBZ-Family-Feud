@@ -115,6 +115,27 @@
               name="questionanswer8"
               placeholder="Enter answer 8"
             />
+            <label for="isSpecial">Special Question</label>
+            <input
+              type="checkbox"
+              [(ngModel)]="question.isSpecial"
+              #questionisSpecial="ngModel"
+              name="questionisSpecial"
+              (change)="(true)"
+              #checkbox
+            />
+            <div *ngIf="checkbox.checked">
+              <label for="speciality">Speciality</label>
+              <select
+                class="form-control"
+                [(ngModel)]="question.speciality"
+                #questionSpeciality
+                name="questionSpeciality"
+                required="checkbox.checked"
+              >
+                <option value="Reverse">Reverse</option>
+              </select>
+            </div>
           </div>
           <div class="form-group" style="width: 25%">
             <label>Points</label><br />
@@ -233,15 +254,20 @@
       <div
         id="question-list"
         class="content-box-content"
-        style="max-height: 600px"
       >
         <tr
           class="question-list-title"
           *ngFor="let question of questions; let i = index"
         >
-          <p class="question-link">{{ i }}) {{ question.questionTitle }}</p>
+          <p class="question-link">
+            {{ i }}) {{ question.questionTitle }}
+            <span *ngIf="question.isSpecial">- [{{ question.speciality }}]</span>
+          </p>
 
-          <button class="admin-item-row-delete-btn" (click)="delQuestion(question._id!)">
+          <button
+            class="admin-item-row-delete-btn"
+            (click)="delQuestion(question._id!)"
+          >
             <i class="fa fa-trash"></i>
           </button>
         </tr>

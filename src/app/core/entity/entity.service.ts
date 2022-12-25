@@ -19,11 +19,15 @@ export class EntityService<T extends Entity> {
     @Inject(String) protected endpoint: string
   ) {}
 
-  public list(options?: any): Observable<T[] | null> {
+  public async list(options?: any): Promise<Observable<T[] | null>> {
     const endpoint = `${this.url}${this.endpoint}s`;
     console.log(`list ${this.endpoint}`);
     return this.http.get<T[]>(endpoint, { ...options, ...httpOptions }).pipe(
-      tap(console.log),
+      tap((response: any) => {
+        if (this.endpoint !== 'question') {
+          console.log(response);
+        }
+      }),
       map((response: any) => response.result),
       catchError(this.handleError)
     );

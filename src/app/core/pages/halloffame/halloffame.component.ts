@@ -14,9 +14,9 @@ export class HalloffameComponent implements OnInit {
 
   constructor(private teamPlayerService: TeamPlayerService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.players = [];
-    this.subscription = this.teamPlayerService.list().subscribe({
+    this.subscription = (await this.teamPlayerService.list()).subscribe({
       next: (teamplayers) => {
         if (teamplayers) {
           for (let i = 0; i < teamplayers.length; i++) {

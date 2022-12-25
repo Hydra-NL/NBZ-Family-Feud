@@ -1,12 +1,13 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ControlsService } from '../controls/controls.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TeamService } from 'src/app/entities/team/team.service';
 import { QuestionService } from 'src/app/entities/questions/question.service';
 import { TeamPlayerService } from 'src/app/entities/teamplayers/teamplayer.service';
 import { Team } from 'src/app/entities/team/team.model';
 import { Question } from 'src/app/entities/questions/question.model';
 import { TeamPlayer } from 'src/app/entities/teamplayers/teamplayer.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-quiz',
@@ -17,9 +18,12 @@ export class QuizComponent implements OnInit {
   team!: Team;
   team1!: Team;
   team2!: Team;
+  playersTeam1: TeamPlayer[] | null = null;
+  playersTeam2: TeamPlayer[] | null = null;
   question!: Question;
   questions: Question[] | null = null;
-  count: number = 1;
+  subscription!: Subscription;
+  count: number = 0;
   teamPlayers: TeamPlayer[] | null = null;
   roundPoints: number = 0;
   team1Turn: boolean = false;
@@ -35,6 +39,7 @@ export class QuizComponent implements OnInit {
   constructor(
     private controlsService: ControlsService,
     private router: Router,
+    private route: ActivatedRoute,
     private teamService: TeamService,
     private questionService: QuestionService,
     private teamPlayerService: TeamPlayerService
@@ -42,22 +47,57 @@ export class QuizComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.showTemplate);
-    this.teamService.list().subscribe({
+    this.getTeams();
+    this.getQuestions();
+    this.getTeamPlayers();
+  }
+
+  getTeams() {
+    this.teams = [];
+    this.subscription = this.teamService.list().subscribe({
       next: (teams) => {
-        this.teams = teams as Team[];
-        this.team1 = this.teams[0];
-        this.team2 = this.teams[1];
+        this.teams = teams!;
+        for (let i = 0; i < this.teams.length; i++) {
+          if (this.teams[i].isPlaying === true) {
+            if (this.team1 === undefined) {
+              this.team1 = this.teams[i];
+            } else if (this.team2 === undefined) {
+              this.team2 = this.teams[i];
+            }
+          }
+        }
       },
     });
+  }
+
+  getQuestions() {
     this.questionService.list().subscribe({
       next: (questions) => {
         this.questions = questions as Question[];
+        this.question = this.questions[this.count];
+
+        this.currentTemplate = this.quizTemplate;
       },
     });
+  }
+
+  getTeamPlayers() {
     this.teamPlayerService.list().subscribe({
       next: (teamPlayers) => {
         this.teamPlayers = teamPlayers as TeamPlayer[];
-        this.currentTemplate = this.quizTemplate;
+        for (let i = 0; i < this.teamPlayers.length; i++) {
+          if (this.teamPlayers[i].playerTeam === this.team1._id) {
+            if (this.playersTeam1 === null) {
+              this.playersTeam1 = [];
+            }
+            this.playersTeam1.push(this.teamPlayers[i]);
+          } else if (this.teamPlayers[i].playerTeam === this.team2._id) {
+            if (this.playersTeam2 === null) {
+              this.playersTeam2 = [];
+            }
+            this.playersTeam2.push(this.teamPlayers[i]);
+          }
+        }
       },
     });
   }
@@ -118,7 +158,7 @@ export class QuizComponent implements OnInit {
     }
   }
 
-  nextQuestion() {
+  async nextQuestion() {
     if (this.count === 19) {
       var double = document.getElementById('double-points');
       double!.style.visibility = 'visible';
@@ -128,7 +168,8 @@ export class QuizComponent implements OnInit {
       this.team1.strikes = 0;
       this.teamService.update(this.team1).subscribe({
         next: (team) => {
-          this.team1 = team as Team;
+          this.team1 = team;
+          this.getTeams();
         },
       });
     } else if (this.team2Turn === true) {
@@ -136,38 +177,48 @@ export class QuizComponent implements OnInit {
       this.team2.strikes = 0;
       this.teamService.update(this.team2).subscribe({
         next: (team) => {
-          this.team2 = team as Team;
+          this.team2 = team;
+          this.getTeams();
         },
       });
     }
     if (this.count < this.questions!.length) {
-      this.count++;
-      this.pointsEnabled = true;
-      this.roundPoints = 0;
-      this.team1Turn = false;
-      this.team2Turn = false;
-      this.team1.strikes = 0;
-      this.team2.strikes = 0;
-      var team1Selected = document.getElementById('team-box-1');
-      var team2Selected = document.getElementById('team-box-2');
-      var team1Points = document.getElementById('team-points-1');
-      var team2Points = document.getElementById('team-points-2');
-      var button = document.getElementById('show-title-button');
-      var selectTeam = document.getElementById('select-teams');
-      var lock = document.getElementById('lock-points');
-      var timer = document.getElementById('timer');
-      lock!.style.visibility = 'hidden';
-      button!.style.visibility = 'visible';
-      team1Selected!.style.borderColor = '#cccccc';
-      team2Selected!.style.borderColor = '#cccccc';
-      team1Points!.style.borderColor = '#cccccc';
-      team2Points!.style.borderColor = '#cccccc';
-      selectTeam!.style.visibility = 'visible';
-      timer!.style.visibility = 'hidden';
+      this.resetRound();
+      this.getQuestions();
+      this.getTeams();
+
+      // var team1Selected = document.getElementById('team-box-1');
+      // var team2Selected = document.getElementById('team-box-2');
+      // var team1Points = document.getElementById('team-points-1');
+      // var team2Points = document.getElementById('team-points-2');
+      // var selectTeam = document.getElementById('select-teams');
+      // var lock = document.getElementById('lock-points');
+      // var timer = document.getElementById('timer');
+
+      // lock!.style.visibility = 'hidden';
+      // team1Selected!.style.borderColor = '#cccccc';
+      // team2Selected!.style.borderColor = '#cccccc';
+      // team1Points!.style.borderColor = '#cccccc';
+      // team2Points!.style.borderColor = '#cccccc';
+      // selectTeam!.style.visibility = 'visible';
+      // timer!.style.visibility = 'hidden';
+
+      console.log('next question');
     } else {
-      this.toggleWinner();
+      this.toggleWinner(this.team1, this.team2);
       this.controlsService.playOutro();
     }
+  }
+
+  resetRound() {
+    this.count++;
+    this.pointsEnabled = true;
+    this.roundPoints = 0;
+    this.team1Turn = false;
+    this.team2Turn = false;
+    this.team1.strikes = 0;
+    this.team2.strikes = 0;
+    this.toggleTitle();
   }
 
   disablePoints() {
@@ -180,8 +231,13 @@ export class QuizComponent implements OnInit {
     var button = document.getElementById('show-title-button');
     var title = document.getElementById('question-title');
 
-    title!.style.visibility = 'visible';
-    button!.style.visibility = 'hidden';
+    if (title?.style.visibility === 'visible') {
+      title!.style.visibility = 'hidden';
+      button!.style.visibility = 'visible';
+    } else {
+      title!.style.visibility = 'visible';
+      button!.style.visibility = 'hidden';
+    }
   }
 
   toggleAnswer(number: Number) {
@@ -199,24 +255,14 @@ export class QuizComponent implements OnInit {
       } else if (this.count < 30) {
         this.roundPoints += parseInt(points!.innerHTML) * 2;
       }
-
       if (this.team1.strikes === 3 && this.team2Turn) {
         this.controlsService.playGoodAnswer();
-        setTimeout(() => {
-          this.controlsService.playApplause();
-        }, 700);
         this.disablePoints();
       } else if (this.team2.strikes === 3 && this.team1Turn) {
         this.controlsService.playGoodAnswer();
-        setTimeout(() => {
-          this.controlsService.playApplause();
-        }, 700);
         this.disablePoints();
       } else {
         this.controlsService.playGoodAnswer();
-        setTimeout(() => {
-          this.controlsService.playApplause();
-        }, 700);
       }
     }
   }
@@ -258,13 +304,30 @@ export class QuizComponent implements OnInit {
             }
           }, 1000);
         }
-      }
+      } 
     }
   }
 
-  toggleWinner() {
+  toggleWinner(team1: Team, team2: Team) {
     this.showTemplate = !this.showTemplate;
     this.currentTemplate = this.winnerTemplate;
+    team1 = {
+      ...team1,
+      isPlaying: false,
+      points: 0,
+      strikes: 0,
+    };
+    team2 = {
+      ...team2,
+      isPlaying: false,
+      points: 0,
+      strikes: 0,
+    };
+    this.teamService.update(team1).subscribe({
+      next: () => {
+        this.teamService.update(team2).subscribe({});
+      },
+    });
   }
 
   // Sounds
@@ -302,260 +365,3 @@ export class QuizComponent implements OnInit {
     this.controlsService.playOoh();
   }
 }
-
-// teams!: Team[];
-// roundPoints: number = 0;
-// teamTurn: boolean = true;
-// round: number = 1;
-// multiplier: number = 1;
-// questionNumber: number = 1;
-// questionId: string = '1';
-// questions!: Question[];
-// question: Question | undefined;
-// points1Given: boolean = false;
-// points2Given: boolean = false;
-// points3Given: boolean = false;
-// points4Given: boolean = false;
-// points5Given: boolean = false;
-// points6Given: boolean = false;
-// points7Given: boolean = false;
-// points8Given: boolean = false;
-// resultTeam1: boolean = false;
-// resultTeam2: boolean = false;
-// answersEnabled: boolean = true;
-// win: boolean = false;
-// tie: boolean = false;
-
-// constructor(
-//   private teamService: TeamService,
-//   private questionsService: QuestionService,
-//   private router: Router
-// ) {}
-
-// nextQuestion() {
-//   this.clearStrikes();
-//   this.resetAnswers();
-//   if (this.teamTurn) {
-//     this.pointsTeam1 += this.roundPoints;
-//   } else {
-//     this.pointsTeam2 += this.roundPoints;
-//   }
-//   this.roundPoints = 0;
-//   if (this.round == 7 && this.questionNumber == 3) {
-//     if (this.pointsTeam1 > this.pointsTeam2) {
-//       this.winner('team1');
-//     }
-//     if (this.pointsTeam2 > this.pointsTeam1) {
-//       this.winner('team2');
-//     }
-//     if (this.pointsTeam1 == this.pointsTeam2) {
-//       this.winner('tie');
-//     }
-//   }
-//   if (this.questionNumber < 3) {
-//     this.questionNumber++;
-//     this.questionId++;
-//     this.question = this.questionsService.getQuestionById(this.questionId);
-//   } else if ((this.questionNumber = 3)) {
-//     this.round++;
-//     this.questionNumber = 1;
-//     this.questionId++;
-//     this.question = this.questionsService.getQuestionById(this.questionId);
-//   }
-// }
-
-// addStrikeTeam() {
-//   if (this.teamTurn && this.team2Strikes == 0) {
-//     if (this.team1Strikes < 3) {
-//       this.team1Strikes++;
-//       this.playStrike();
-//     } else if ((this.team1Strikes = 3)) {
-//       this.switchTurns();
-//     }
-//   }
-
-//   if (this.teamTurn && this.team2Strikes == 3) {
-//     this.team1Strikes++;
-//     this.playStrike();
-//     this.switchTurns();
-//   }
-
-//   if (!this.teamTurn && this.team1Strikes == 0) {
-//     if (this.team2Strikes < 3) {
-//       this.team2Strikes++;
-//       this.playStrike();
-//     } else if ((this.team2Strikes = 3)) {
-//       this.switchTurns();
-//     }
-//   }
-
-//   if (!this.teamTurn && this.team1Strikes == 3) {
-//     this.team2Strikes++;
-//     this.playStrike();
-//     this.switchTurns();
-//   }
-
-//   if (this.team1Strikes == 3 && this.team2Strikes == 1) {
-//     this.disableAnswers();
-//   }
-
-//   if (this.team2Strikes == 3 && this.team1Strikes == 1) {
-//     this.disableAnswers();
-//   }
-// }
-
-// clearStrikes() {
-//   this.team1Strikes = 0;
-//   this.team2Strikes = 0;
-//   console.log('clearStrikes() is called');
-// }
-
-// resetAnswers() {
-//   this.points1Given = false;
-//   this.points2Given = false;
-//   this.points3Given = false;
-//   this.points4Given = false;
-//   this.points5Given = false;
-//   this.points6Given = false;
-//   this.points7Given = false;
-//   this.points8Given = false;
-//   this.answersEnabled = true;
-//   console.log('resetAnswers() is called');
-// }
-
-// disableAnswers() {
-//   this.points1Given = true;
-//   this.points2Given = true;
-//   this.points3Given = true;
-//   this.points4Given = true;
-//   this.points5Given = true;
-//   this.points6Given = true;
-//   this.points7Given = true;
-//   this.points8Given = true;
-//   this.answersEnabled = false;
-//   console.log('disableAnswers() is called');
-// }
-
-// awardPointsRound(amount: number) {
-//   if (this.round == 1 || this.round == 2) {
-//     this.multiplier = 1;
-//   }
-//   if (this.round == 3 || this.round == 4) {
-//     this.multiplier = 2;
-//   }
-//   if (this.round == 5 || this.round == 6) {
-//     this.multiplier = 3;
-//   }
-//   if (this.round == 7) {
-//     this.multiplier = 4;
-//   }
-//   if (!this.points1Given && amount == this.question.points1) {
-//     amount *= this.multiplier;
-//     this.roundPoints += amount;
-//     this.points1Given = true;
-//     this.playGoodAnsa();
-//   }
-//   if (!this.points2Given && amount == this.question.points2) {
-//     amount *= this.multiplier;
-//     this.roundPoints += amount;
-//     this.points2Given = true;
-//     this.playGoodAnsa();
-//   }
-//   if (!this.points3Given && amount == this.question.points3) {
-//     amount *= this.multiplier;
-//     this.roundPoints += amount;
-//     this.points3Given = true;
-//     this.playGoodAnsa();
-//   }
-//   if (!this.points4Given && amount == this.question.points4) {
-//     amount *= this.multiplier;
-//     this.roundPoints += amount;
-//     this.points4Given = true;
-//     this.playGoodAnsa();
-//   }
-//   if (!this.points5Given && amount == this.question.points5) {
-//     amount *= this.multiplier;
-//     this.roundPoints += amount;
-//     this.points5Given = true;
-//     this.playGoodAnsa();
-//   }
-//   if (!this.points6Given && amount == this.question.points6) {
-//     amount *= this.multiplier;
-//     this.roundPoints += amount;
-//     this.points6Given = true;
-//     this.playGoodAnsa();
-//   }
-//   if (!this.points7Given && amount == this.question.points7) {
-//     amount *= this.multiplier;
-//     this.roundPoints += amount;
-//     this.points7Given = true;
-//     this.playGoodAnsa();
-//   }
-//   if (!this.points8Given && amount == this.question.points8) {
-//     amount *= this.multiplier;
-//     this.roundPoints += amount;
-//     this.points8Given = true;
-//     this.playGoodAnsa();
-//   }
-// }
-
-// switchTurns() {
-//   this.teamTurn = !this.teamTurn;
-//   console.log('switchTurns() is called: ' + this.teamTurn);
-// }
-
-// playStrike() {
-//   let audio = new Audio();
-//   audio.src = '../../../../assets/sounds/StrikeSFX.mp3';
-//   audio.load();
-//   audio.play();
-//   console.log('playStrike() is called');
-// }
-
-// playGoodAnsa() {
-//   let audio = new Audio();
-//   audio.src = '../../../../assets/sounds/good-answer.mp3';
-//   audio.load();
-//   audio.play();
-// }
-
-// playFunny() {
-//   let audio = new Audio();
-//   audio.src = '../../../../assets/sounds/BahBow.mp3';
-//   audio.load();
-//   audio.play();
-// }
-
-// playOutroTheme() {
-//   let audio = new Audio();
-//   audio.src = '../../../../assets/sounds/outro_theme.mp3';
-//   audio.load();
-//   audio.play();
-// }
-
-// winner(winner: string) {
-//   if (winner == 'team1') {
-//     this.resultTeam1 = true;
-//     this.win = true;
-//     this.playOutroTheme();
-//     console.log('Team 1 won');
-//   }
-//   if (winner == 'team2') {
-//     this.resultTeam2 = true;
-//     this.win = true;
-//     this.playOutroTheme();
-//     console.log('Team 2 won');
-//   }
-//   if (winner == 'tie') {
-//     this.tie = true;
-//     this.playOutroTheme();
-//     console.log('Resulted in a tie');
-//   }
-// }
-
-// playTheme() {
-//   let audio = new Audio();
-//   audio.src = '../../../../assets/sounds/funny.mp3';
-//   audio.load();
-//   audio.play();
-// }

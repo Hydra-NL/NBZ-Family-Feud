@@ -1,5 +1,4 @@
 <!-- Quiz page -->
-<ng-component *ngTemplateOutlet="currentTemplate"></ng-component>
 <ng-template #quiz>
   <!-- Round points -->
   <div class="round-points-box">
@@ -118,131 +117,125 @@
       >
         Reveal Question #{{ count }}
       </button>
-      <div *ngFor="let question of questions">
-        <!-- <p
-          id="question-title"
-          class="question-title"
-          *ngIf="question.id === count"
-        >
-          {{ question.questionTitle }}
-        </p> -->
-      </div>
+      <p
+        id="question-title"
+        class="question-title"
+        *ngIf="question._id == this.question._id"
+      >
+        {{ question.questionTitle }}
+      </p>
     </div>
   </div>
 
   <!-- Quiz body -->
   <div id="answer-section" class="answer-box">
-    <div *ngFor="let question of questions">
-      <!-- <div *ngIf="question.id === count">
-        <div class="answer-box-content col-md-6">
-          <div class="answer-box-item">
-            <button
-              id="btn-answer-1"
-              class="show-answer-button"
-              (click)="toggleAnswer(1)"
-              accesskey="1"
-              *ngIf="question.points1 > 0"
-            >
-              1
-            </button>
-            <p id="answer-1">{{ question.answer1 }}</p>
-            <p id="points-1" class="points-box">{{ question.points1 }}</p>
-          </div>
-          <div class="answer-box-item">
-            <button
-              id="btn-answer-2"
-              class="show-answer-button"
-              (click)="toggleAnswer(2)"
-              accesskey="2"
-              *ngIf="question.points2 > 0"
-            >
-              2
-            </button>
-            <p id="answer-2">{{ question.answer2 }}</p>
-            <p id="points-2" class="points-box">{{ question.points2 }}</p>
-          </div>
-          <div class="answer-box-item">
-            <button
-              id="btn-answer-3"
-              class="show-answer-button"
-              (click)="toggleAnswer(3)"
-              accesskey="3"
-              *ngIf="question.points3 > 0"
-            >
-              3
-            </button>
-            <p id="answer-3">{{ question.answer3 }}</p>
-            <p id="points-3" class="points-box">{{ question.points3 }}</p>
-          </div>
-          <div class="answer-box-item">
-            <button
-              id="btn-answer-4"
-              class="show-answer-button"
-              (click)="toggleAnswer(4)"
-              accesskey="4"
-              *ngIf="question.points4 > 0"
-            >
-              4
-            </button>
-            <p id="answer-4">{{ question.answer4 }}</p>
-            <p id="points-4" class="points-box">{{ question.points4 }}</p>
-          </div>
-        </div>
-        <div class="answer-box-content col-md-6">
-          <div class="answer-box-item">
-            <button
-              id="btn-answer-5"
-              class="show-answer-button"
-              (click)="toggleAnswer(5)"
-              accesskey="5"
-              *ngIf="question.points5 > 0"
-            >
-              5
-            </button>
-            <p id="answer-5">{{ question.answer5 }}</p>
-            <p id="points-5" class="points-box">{{ question.points5 }}</p>
-          </div>
-          <div class="answer-box-item">
-            <button
-              id="btn-answer-6"
-              class="show-answer-button"
-              (click)="toggleAnswer(6)"
-              accesskey="6"
-              *ngIf="question.points6 > 0"
-            >
-              6
-            </button>
-            <p id="answer-6">{{ question.answer6 }}</p>
-            <p id="points-6" class="points-box">{{ question.points6 }}</p>
-          </div>
-          <div class="answer-box-item">
-            <button
-              id="btn-answer-7"
-              class="show-answer-button"
-              (click)="toggleAnswer(7)"
-              accesskey="7"
-              *ngIf="question.points7 > 0"
-            >
-              7
-            </button>
-            <p id="answer-7">{{ question.answer7 }}</p>
-            <p id="points-7" class="points-box">{{ question.points7 }}</p>
-          </div>
-          <div class="answer-box-item">
-            <button
-              id="btn-answer-8"
-              class="show-answer-button"
-              (click)="toggleAnswer(8)"
-              accesskey="8"
-              *ngIf="question.points8 > 0"
-            >
-              8
-            </button>
-            <p id="answer-8">{{ question.answer8 }}</p>
-            <p id="points-8" class="points-box">{{ question.points8 }}</p>
-          </div>
-        </div>
-      </div> -->
+    <div class="answer-box-content col-md-6">
+      <div class="answer-box-item">
+        <button
+          id="btn-answer-1"
+          class="show-answer-button"
+          (click)="toggleAnswer(1)"
+          accesskey="1"
+          *ngIf="question.points1 > 0"
+        >
+          1
+        </button>
+        <p id="answer-1">{{ question.answer1 }}</p>
+        <p id="points-1" class="points-box">{{ question.points1 }}</p>
+      </div>
+      <div class="answer-box-item">
+        <button
+          id="btn-answer-2"
+          class="show-answer-button"
+          (click)="toggleAnswer(2)"
+          accesskey="2"
+          *ngIf="question.points2 > 0"
+        >
+          2
+        </button>
+        <p id="answer-2">{{ question.answer2 }}</p>
+        <p id="points-2" class="points-box">{{ question.points2 }}</p>
+      </div>
+      <div class="answer-box-item">
+        <button
+          id="btn-answer-3"
+          class="show-answer-button"
+          (click)="toggleAnswer(3)"
+          accesskey="3"
+          *ngIf="question.points3 > 0"
+        >
+          3
+        </button>
+        <p id="answer-3">{{ question.answer3 }}</p>
+        <p id="points-3" class="points-box">{{ question.points3 }}</p>
+      </div>
+      <div class="answer-box-item">
+        <button
+          id="btn-answer-4"
+          class="show-answer-button"
+          (click)="toggleAnswer(4)"
+          accesskey="4"
+          *ngIf="question.points4 > 0"
+        >
+          4
+        </button>
+        <p id="answer-4">{{ question.answer4 }}</p>
+        <p id="points-4" class="points-box">{{ question.points4 }}</p>
+      </div>
+    </div>
+    <div class="answer-box-content col-md-6">
+      <div class="answer-box-item">
+        <button
+          id="btn-answer-5"
+          class="show-answer-button"
+          (click)="toggleAnswer(5)"
+          accesskey="5"
+          *ngIf="question.points5 > 0"
+        >
+          5
+        </button>
+        <p id="answer-5">{{ question.answer5 }}</p>
+        <p id="points-5" class="points-box">{{ question.points5 }}</p>
+      </div>
+      <div class="answer-box-item">
+        <button
+          id="btn-answer-6"
+          class="show-answer-button"
+          (click)="toggleAnswer(6)"
+          accesskey="6"
+          *ngIf="question.points6 > 0"
+        >
+          6
+        </button>
+        <p id="answer-6">{{ question.answer6 }}</p>
+        <p id="points-6" class="points-box">{{ question.points6 }}</p>
+      </div>
+      <div class="answer-box-item">
+        <button
+          id="btn-answer-7"
+          class="show-answer-button"
+          (click)="toggleAnswer(7)"
+          accesskey="7"
+          *ngIf="question.points7 > 0"
+        >
+          7
+        </button>
+        <p id="answer-7">{{ question.answer7 }}</p>
+        <p id="points-7" class="points-box">{{ question.points7 }}</p>
+      </div>
+      <div class="answer-box-item">
+        <button
+          id="btn-answer-8"
+          class="show-answer-button"
+          (click)="toggleAnswer(8)"
+          accesskey="8"
+          *ngIf="question.points8 > 0"
+        >
+          8
+        </button>
+        <p id="answer-8">{{ question.answer8 }}</p>
+        <p id="points-8" class="points-box">{{ question.points8 }}</p>
+      </div>
     </div>
   </div>
 
@@ -255,9 +248,9 @@
       <p>Team {{ team1.teamName }}</p>
     </div>
     <div class="teams-box-content">
-      <div *ngFor="let teamplayer of teamPlayers">
-        <p *ngIf="team1.teamMembers.includes(teamplayer._id!)">
-          {{ teamplayer.playerName }}
+      <div *ngFor="let playerTeam1 of playersTeam1">
+        <p>
+          {{ playerTeam1.playerName }}
         </p>
       </div>
     </div>
@@ -272,9 +265,9 @@
       <p>Team {{ team2.teamName }}</p>
     </div>
     <div class="teams-box-content">
-      <div *ngFor="let teamplayer of teamPlayers">
-        <p *ngIf="team2.teamMembers.includes(teamplayer._id!)">
-          {{ teamplayer.playerName }}
+      <div *ngFor="let playerTeam2 of playersTeam2">
+        <p>
+          {{ playerTeam2.playerName }}
         </p>
       </div>
     </div>
@@ -358,11 +351,8 @@
       <h1 class="winning-title">Team {{ team1.teamName }} wins!</h1>
       <div class="winning-box-item">
         <p class="winning-points">Points: {{ team1.points }}</p>
-        <div *ngFor="let teamplayer of teamPlayers">
-          <p
-            class="winning-playername"
-            *ngIf="team1.teamMembers.includes(teamplayer._id!)"
-          >
+        <div *ngFor="let teamplayer of playersTeam1">
+          <p class="winning-playername">
             {{ teamplayer.playerName }}
           </p>
         </div>
@@ -376,11 +366,8 @@
       <h1 class="winning-title">Team {{ team2.teamName }} wins!</h1>
       <div class="winning-box-item">
         <p class="winning-points">Points: {{ team2.points }}</p>
-        <div *ngFor="let teamplayer of teamPlayers">
-          <p
-            class="winning-playername"
-            *ngIf="team2.teamMembers.includes(teamplayer._id!)"
-          >
+        <div *ngFor="let teamplayer of playersTeam2">
+          <p class="winning-playername">
             {{ teamplayer.playerName }}
           </p>
         </div>
@@ -493,665 +480,3 @@
     />
   </div>
 </ng-template>
-
-<!-- Strikes team 1 -->
-<!-- <div
-  *ngIf="win == false && tie == false"
-  class="row"
-  style="position: absolute; left: 100px; top: 20px"
->
-  <div *ngIf="team1Strikes >= 1">
-    <img
-      src="../../../../assets/images/strike.png"
-      style="height: 100px; width: 100px"
-    />
-  </div>
-  <div *ngIf="team1Strikes == 0">
-    <img
-      src="../../../../assets/images/strike_inactive.png"
-      style="height: 100px; width: 100px"
-    />
-  </div>
-
-  <div *ngIf="team1Strikes >= 2">
-    <img
-      src="../../../../assets/images/strike.png"
-      style="height: 100px; width: 100px"
-    />
-  </div>
-  <div *ngIf="team1Strikes <= 1">
-    <img
-      src="../../../../assets/images/strike_inactive.png"
-      style="height: 100px; width: 100px"
-    />
-  </div>
-  <div *ngIf="team1Strikes >= 3">
-    <img
-      src="../../../../assets/images/strike.png"
-      style="height: 100px; width: 100px"
-    />
-  </div>
-  <div *ngIf="team1Strikes <= 2">
-    <img
-      src="../../../../assets/images/strike_inactive.png"
-      style="height: 100px; width: 100px"
-    />
-  </div>
-</div>
-<!-- Strikes team 2 -->
-<!-- <div
-  *ngIf="win == false && tie == false"
-  class="row"
-  style="position: absolute; right: 100px; top: 20px"
->
-  <div *ngIf="team2Strikes >= 1">
-    <img
-      src="../../../../assets/images/strike.png"
-      style="height: 100px; width: 100px"
-    />
-  </div>
-  <div *ngIf="team2Strikes == 0">
-    <img
-      src="../../../../assets/images/strike_inactive.png"
-      style="height: 100px; width: 100px"
-    />
-  </div>
-
-  <div *ngIf="team2Strikes >= 2">
-    <img
-      src="../../../../assets/images/strike.png"
-      style="height: 100px; width: 100px"
-    />
-  </div>
-  <div *ngIf="team2Strikes <= 1">
-    <img
-      src="../../../../assets/images/strike_inactive.png"
-      style="height: 100px; width: 100px"
-    />
-  </div>
-  <div *ngIf="team2Strikes >= 3">
-    <img
-      src="../../../../assets/images/strike.png"
-      style="height: 100px; width: 100px"
-    />
-  </div>
-  <div *ngIf="team2Strikes <= 2">
-    <img
-      src="../../../../assets/images/strike_inactive.png"
-      style="height: 100px; width: 100px"
-    />
-  </div>
-</div>
-
-<div *ngIf="win == true">
-  <div style="z-index: 3; position: absolute; left: 5px">
-    <img src="../../../../assets/gifs/confetti.gif" />
-    <img src="../../../../assets/gifs/confetti.gif" />
-    <img src="../../../../assets/gifs/confetti.gif" />
-    <img src="../../../../assets/gifs/confetti.gif" />
-    <img src="../../../../assets/gifs/confetti.gif" />
-    <img src="../../../../assets/gifs/confetti.gif" />
-    <img src="../../../../assets/gifs/confetti.gif" />
-  </div>
-  <div style="z-index: 3; position: absolute; left: 5px; top: 470px">
-    <img src="../../../../assets/gifs/confetti.gif" />
-    <img src="../../../../assets/gifs/confetti.gif" />
-    <img src="../../../../assets/gifs/confetti.gif" />
-    <img src="../../../../assets/gifs/confetti.gif" />
-    <img src="../../../../assets/gifs/confetti.gif" />
-    <img src="../../../../assets/gifs/confetti.gif" />
-    <img src="../../../../assets/gifs/confetti.gif" />
-  </div>
-</div> -->
-
-<!-- Title -->
-<!-- <div
-  style="
-    background-color: rgba(79, 234, 255, 0.5);
-    border-radius: 50px;
-    padding: 30px;
-    margin-top: 30px;
-    left: 20%;
-    right: 20%;
-    top: 15%;
-    position: absolute;
-  "
->
-  <div style="color: rgb(20, 20, 20); text-align: center">
-    <h1
-      style="
-        font-size: 5rem;
-
-        background: -webkit-linear-gradient(
-          rgb(252, 122, 35) 30%,
-          rgb(255, 221, 29),
-          rgb(255, 228, 78)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(3px 3px 3px #333);
-      "
-    >
-      NBZ Family Feud
-    </h1>
-
-    <h2 *ngIf="win == false && tie == false">
-      Round {{ round }} - Question {{ questionNumber }}
-    </h2>
-  </div>
-</div> -->
-
-<!-- Body quiz -->
-<!-- <div
-  style="
-    background-color: rgba(79, 234, 255, 0.5);
-    border-radius: 50px;
-    padding: 30px;
-    margin-top: 30px;
-    left: 20%;
-    right: 20%;
-    top: 35%;
-    position: absolute;
-  "
-> -->
-<!-- Winning screen Team 1 -->
-<!-- <div *ngIf="resultTeam1 == true" style="text-align: center">
-    <h1
-      style="
-        font-size: 7rem;
-
-        background: -webkit-linear-gradient(
-          rgb(252, 122, 35) 30%,
-          rgb(255, 221, 29),
-          rgb(255, 228, 78)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(3px 3px 3px #333);
-      "
-    >
-      TEAM 1 WON!!!
-    </h1>
-    <div *ngFor="let member of team1">
-      <h2 class="winner-name">{{ member.team1L }}</h2>
-      <h2 class="winner-name">{{ member.teamM2 }}</h2>
-      <h2 class="winner-name">{{ member.teamM3 }}</h2>
-      <h2 class="winner-name">{{ member.teamM4 }}</h2>
-      <h2 class="winner-name">{{ member.teamM5 }}</h2>
-    </div>
-  </div> -->
-
-<!-- Winning screen Team 2 -->
-<!-- <div *ngIf="resultTeam2 == true" style="text-align: center">
-    <h1
-      style="
-        font-size: 7rem;
-
-        background: -webkit-linear-gradient(
-          rgb(252, 122, 35) 30%,
-          rgb(255, 221, 29),
-          rgb(255, 228, 78)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(3px 3px 3px #333);
-      "
-    >
-      TEAM 2 WON!!!
-    </h1>
-    <div *ngFor="let member of team2">
-      <h2 class="winner-name">{{ member.team2L }}</h2>
-      <h2 class="winner-name">{{ member.team2M2 }}</h2>
-      <h2 class="winner-name">{{ member.team2M3 }}</h2>
-      <h2 class="winner-name">{{ member.team2M4 }}</h2>
-      <h2 class="winner-name">{{ member.team2M5 }}</h2>
-    </div>
-  </div> -->
-
-<!-- Tie screen -->
-<!-- <div *ngIf="tie == true" style="text-align: center">
-    <h1
-      style="
-        font-size: 7rem;
-
-        background: -webkit-linear-gradient(
-          rgb(252, 122, 35) 30%,
-          rgb(255, 221, 29),
-          rgb(255, 228, 78)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(3px 3px 3px #333);
-      "
-    >
-      TIE!!!
-    </h1>
-  </div> -->
-
-<!-- Question's anwsers -->
-<!-- <div
-    *ngIf="win == false && tie == false"
-    class="row"
-    style="margin-bottom: 15px"
-  >
-    <div class="col-md-6">
-      <input
-        id="FlipCard1"
-        type="checkbox"
-        class="answer-card-input"
-        accesskey="1"
-        (click)="awardPointsRound(question.points1)"
-      />
-
-      <label for="FlipCard1" class="answer-card">
-        <span class="answer-card-body-front">
-          <div class="row justify-content-center">
-            <div class="circle">
-              <h1>1</h1>
-            </div>
-          </div>
-        </span>
-        <div class="answer-card-body-back">
-          <div class="row justify-content-center">
-            <p>
-              {{ question.answer1 }}
-              [{{ question.points1 }}]
-            </p>
-          </div>
-        </div>
-      </label>
-    </div>
-
-    <div class="col-md-6">
-      <input
-        id="FlipCard5"
-        type="checkbox"
-        class="answer-card-input"
-        accesskey="5"
-        (click)="awardPointsRound(question.points5)"
-      />
-      <label for="FlipCard5" class="answer-card">
-        <span class="answer-card-body-front">
-          <div class="row justify-content-center">
-            <div *ngIf="question.answer5 != ''" class="circle">
-              <h1>5</h1>
-            </div>
-          </div>
-        </span>
-        <div class="answer-card-body-back">
-          <div class="row justify-content-center">
-            <p>
-              {{ question.answer5 }}
-
-              [{{ question.points5 }}]
-            </p>
-          </div>
-        </div>
-      </label>
-    </div>
-  </div>
-  <div
-    *ngIf="win == false && tie == false"
-    class="row"
-    style="margin-bottom: 15px"
-  >
-    <div class="col-md-6">
-      <input
-        id="FlipCard2"
-        type="checkbox"
-        class="answer-card-input"
-        accesskey="2"
-        (click)="awardPointsRound(question.points2)"
-      />
-      <label for="FlipCard2" class="answer-card">
-        <span class="answer-card-body-front">
-          <div class="row justify-content-center">
-            <div class="circle">
-              <h1>2</h1>
-            </div>
-          </div>
-        </span>
-        <div class="answer-card-body-back">
-          <div class="row justify-content-center">
-            <p>
-              {{ question.answer2 }}
-
-              [{{ question.points2 }}]
-            </p>
-          </div>
-        </div>
-      </label>
-    </div>
-    <div class="col-md-6">
-      <input
-        id="FlipCard6"
-        type="checkbox"
-        class="answer-card-input"
-        accesskey="6"
-        (click)="awardPointsRound(question.points6)"
-      />
-      <label for="FlipCard6" class="answer-card">
-        <span class="answer-card-body-front">
-          <div class="row justify-content-center">
-            <div *ngIf="question.answer6 != ''" class="circle">
-              <h1>6</h1>
-            </div>
-          </div>
-        </span>
-        <div class="answer-card-body-back">
-          <div class="row justify-content-center">
-            <p>
-              {{ question.answer6 }}
-              [{{ question.points6 }}]
-            </p>
-          </div>
-        </div>
-      </label>
-    </div>
-  </div>
-  <div
-    *ngIf="win == false && tie == false"
-    class="row"
-    style="margin-bottom: 15px"
-  >
-    <div class="col-md-6">
-      <input
-        id="FlipCard3"
-        type="checkbox"
-        class="answer-card-input"
-        accesskey="3"
-        (click)="awardPointsRound(question.points3)"
-      />
-      <label for="FlipCard3" class="answer-card">
-        <span class="answer-card-body-front">
-          <div class="row justify-content-center">
-            <div class="circle">
-              <h1>3</h1>
-            </div>
-          </div>
-        </span>
-        <div class="answer-card-body-back">
-          <div class="row justify-content-center">
-            <p>
-              {{ question.answer3 }}
-              [{{ question.points3 }}]
-            </p>
-          </div>
-        </div>
-      </label>
-    </div>
-    <div class="col-md-6">
-      <input
-        id="FlipCard7"
-        type="checkbox"
-        class="answer-card-input"
-        accesskey="7"
-        (click)="awardPointsRound(question.points7)"
-      />
-      <label for="FlipCard7" class="answer-card">
-        <span class="answer-card-body-front">
-          <div class="row justify-content-center">
-            <div *ngIf="question.answer7 != ''" class="circle">
-              <h1>7</h1>
-            </div>
-          </div>
-        </span>
-        <div class="answer-card-body-back">
-          <div class="row justify-content-center">
-            <p>
-              {{ question.answer7 }}
-              [{{ question.points7 }}]
-            </p>
-          </div>
-        </div>
-      </label>
-    </div>
-  </div>
-  <div
-    *ngIf="win == false && tie == false"
-    class="row"
-    style="margin-bottom: 15px"
-  >
-    <div class="col-md-6">
-      <input
-        id="FlipCard4"
-        type="checkbox"
-        class="answer-card-input"
-        accesskey="4"
-        (click)="awardPointsRound(question.points4)"
-      />
-      <label for="FlipCard4" class="answer-card">
-        <span class="answer-card-body-front">
-          <div class="row justify-content-center">
-            <div *ngIf="question.answer4 != ''" class="circle">
-              <h1>4</h1>
-            </div>
-          </div>
-        </span>
-        <div class="answer-card-body-back">
-          <div class="row justify-content-center">
-            <p>
-              {{ question.answer4 }}
-              [{{ question.points4 }}]
-            </p>
-          </div>
-        </div>
-      </label>
-    </div>
-    <div class="col-md-6">
-      <input
-        id="FlipCard8"
-        type="checkbox"
-        class="answer-card-input"
-        accesskey="8"
-        (click)="awardPointsRound(question.points8)"
-      />
-      <label for="FlipCard8" class="answer-card">
-        <span class="answer-card-body-front">
-          <div class="row justify-content-center">
-            <div *ngIf="question.answer8 != ''" class="circle">
-              <h1>8</h1>
-            </div>
-          </div>
-        </span>
-        <div class="answer-card-body-back">
-          <div class="row justify-content-center">
-            <p>
-              {{ question.answer8 }}
-              [{{ question.points8 }}]
-            </p>
-          </div>
-        </div>
-      </label>
-    </div>
-  </div>
-</div> -->
-
-<!-- Round points -->
-<!-- <div *ngIf="!answersEnabled">
-    <div
-      *ngIf="win == false && tie == false"
-      style="position: absolute; top: 20px; left: 46%"
-    >
-      <div class="card" style="width: 150px; max-width: 250px">
-        <div
-          class="card-body"
-          style="background: linear-gradient(#a7e4cb, #3c8868)"
-        >
-          <p style="font-size: 5rem; text-align: center">{{ roundPoints }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="answersEnabled">
-    <div
-      *ngIf="win == false && tie == false"
-      style="position: absolute; top: 20px; left: 46%"
-    >
-      <div
-        class="card"
-        style="
-          width: 150px;
-          max-width: 250px;
-          background-color: #ffe864;
-          padding: 6px;
-          box-shadow: 0px 0px 10px 0px rgb(255, 166, 0);
-        "
-      >
-        <div
-          class="card-body"
-          style="background: linear-gradient(#a7e4cb, #3c8868)"
-        >
-          <p style="font-size: 5rem; text-align: center">{{ roundPoints }}</p>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-<!-- Team 1 card their turn -->
-<!-- <div *ngIf="teamTurn && win == false && tie == false">
-    <div
-      class="col-md-2"
-      style="position: absolute; left: 0px; top: 30%"
-      *ngFor="let member of team1"
-    >
-      <div
-        class="card"
-        style="
-          background-color: #ffe864;
-          padding: 6px;
-          box-shadow: 0px 0px 10px 0px rgb(255, 166, 0);
-        "
-      >
-        <div class="card-header" style="text-align: center">
-          Team 1 - Points: {{ pointsTeam1 }}
-        </div>
-        <div class="card-body">
-          <p><b>Team Leader: </b>{{ member.team1L }}</p>
-          <p><b>Team Member: </b> {{ member.teamM2 }}</p>
-          <p><b>Team Member: </b> {{ member.teamM3 }}</p>
-          <p><b>Team Member: </b> {{ member.teamM4 }}</p>
-          <p><b>Team Member: </b> {{ member.teamM5 }}</p>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-<!-- Points Team 1 -->
-<!-- <div
-    *ngIf="win == false && tie == false"
-    style="position: absolute; left: 20px; bottom: 20%"
-  >
-    <div class="card" style="width: 150px; max-width: 250px">
-      <div
-        class="card-body"
-        style="background: linear-gradient(#a7e4cb, #3c8868)"
-      >
-        <p style="font-size: 5rem; text-align: center">{{ pointsTeam1 }}</p>
-      </div>
-    </div>
-  </div> -->
-
-<!-- Team 1 card NOT their turn -->
-<!-- <div *ngIf="!teamTurn && win == false && tie == false">
-    <div
-      class="col-md-2"
-      style="position: absolute; left: 0px; top: 30%"
-      *ngFor="let member of team1"
-    >
-      <div class="card">
-        <div class="card-header" style="text-align: center">
-          Team 1 - Points: {{ pointsTeam1 }}
-        </div>
-        <div class="card-body">
-          <p><b>Team Leader: </b>{{ member.team1L }}</p>
-          <p><b>Team Member: </b> {{ member.teamM2 }}</p>
-          <p><b>Team Member: </b> {{ member.teamM3 }}</p>
-          <p><b>Team Member: </b> {{ member.teamM4 }}</p>
-          <p><b>Team Member: </b> {{ member.teamM5 }}</p>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-<!-- Team 2 card their turn -->
-<!-- <div *ngIf="!teamTurn && win == false && tie == false">
-    <div
-      class="col-md-2"
-      style="position: absolute; right: 0px; top: 30%"
-      *ngFor="let member of team2"
-    >
-      <div>
-        <div
-          class="card"
-          style="
-            background-color: #ffe864;
-            padding: 6px;
-            box-shadow: 0px 0px 10px 0px rgb(255, 166, 0);
-          "
-        >
-          <div class="card-header" style="text-align: center">
-            Team 2 - Points: {{ pointsTeam2 }}
-          </div>
-          <div class="card-body">
-            <p><b>Team Leader: </b>{{ member.team2L }}</p>
-            <p><b>Team Member: </b> {{ member.team2M2 }}</p>
-            <p><b>Team Member: </b> {{ member.team2M3 }}</p>
-            <p><b>Team Member: </b> {{ member.team2M4 }}</p>
-            <p><b>Team Member: </b>{{ member.team2M5 }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-<!-- Team 2 card NOT their turn -->
-<!-- <div *ngIf="teamTurn && win == false && tie == false">
-    <div
-      class="col-md-2"
-      style="position: absolute; right: 0px; top: 30%"
-      *ngFor="let member of team2"
-    >
-      <div class="card">
-        <div class="card-header" style="text-align: center">
-          Team 2 - Points: {{ pointsTeam2 }}
-        </div>
-        <div class="card-body">
-          <p><b>Team Leader: </b>{{ member.team2L }}</p>
-          <p><b>Team Member: </b> {{ member.team2M2 }}</p>
-          <p><b>Team Member: </b> {{ member.team2M3 }}</p>
-          <p><b>Team Member: </b> {{ member.team2M4 }}</p>
-          <p><b>Team Member: </b>{{ member.team2M5 }}</p>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-<!-- Point Team 2 -->
-<!-- <div
-    *ngIf="win == false && tie == false"
-    style="position: absolute; right: 20px; bottom: 20%"
-  >
-    <div class="card" style="width: 150px; max-width: 250px">
-      <div
-        class="card-body"
-        style="background: linear-gradient(#a7e4cb, #3c8868)"
-      >
-        <p style="font-size: 5rem; text-align: center">{{ pointsTeam2 }}</p>
-      </div>
-    </div>
-  </div> -->
-
-<!-- Control panel -->
-<!-- <div style="position: absolute; bottom: 0px">
-  <div>
-    <button accesskey="9" (click)="addStrikeTeam()" hidden>STRIKE</button>
-    <button accesskey="0" (click)="switchTurns()" hidden>switchTurn</button>
-    <button accesskey="n" (click)="nextQuestion()" hidden>nextQuestion</button>
-    <button accesskey="p" (click)="disableAnswers()" hidden>DISABLE</button>
-    <button accesskey="l" (click)="playTheme()" hidden>PLAY SOUND</button>
-    <button accesskey="k" (click)="playFunny()" hidden>PLAY SOUND</button>
-  </div>
-</div> -->
-<!-- </div> -->

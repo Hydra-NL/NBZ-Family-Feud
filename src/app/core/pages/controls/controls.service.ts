@@ -96,8 +96,7 @@ export class ControlsService {
     audio.play();
   }
   playTimerTick() {
-    let audio = new Audio();
-    audio.src = '../../../../assets/sounds/timer.mp3';
+    let audio = new Audio('../../../../assets/sounds/timer.mp3');
     audio.load();
     audio.play();
   }

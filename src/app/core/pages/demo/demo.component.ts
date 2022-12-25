@@ -11,28 +11,29 @@ import { QuestionSpeciality } from 'src/app/entities/questions/question.model';
   templateUrl: './demo.component.html',
 })
 export class DemoComponent implements OnInit {
-  teams: Team[] | null = null;
-  team!: Team;
+  roundPoints = 0;
   team1!: Team;
   team2!: Team;
+  playersTeam1!: TeamPlayer[];
+  playersTeam2!: TeamPlayer[];
+  teamPlayers!: TeamPlayer[];
+  questionNumber: number = 0;
   question!: Question;
-  questions: Question[] | null = null;
-  count: number = 1;
-  teamPlayers: TeamPlayer[] | null = null;
-  roundPoints: number = 0;
+  questions!: Question[];
+  timeRemaining: number = 0;
+  timerActive: boolean = false;
+  multiplier: number = 1;
+  pointsLocked: boolean = false;
   team1Turn: boolean = false;
   team2Turn: boolean = false;
-  pointsEnabled: boolean = true;
-  timeRemaining: number = 30;
-  timerActive: boolean = false;
-  showNav: boolean = false;
+  isInFaceOff: boolean = true;
+  isTitleHidden: boolean = false;
+  isStrike: boolean = false;
 
   constructor(
     private controlsService: ControlsService,
     private router: Router
-  ) {
-    
-  }
+  ) {}
 
   ngOnInit(): void {
     this.team1 = {
@@ -98,6 +99,29 @@ export class DemoComponent implements OnInit {
         speciality: QuestionSpeciality.None,
         episode: 1,
       },
+      {
+        _id: '3',
+        questionTitle: 'Name something that can be put in reverse',
+        answer1: 'Demo',
+        answer2: 'Demo 2',
+        answer3: 'Demo 3: The demo',
+        answer4: 'Demo 4',
+        answer5: 'Demo: Reborn',
+        answer6: 'Demo: Reborn 2',
+        answer7: 'Demo 5',
+        answer8: 'Demo: busted',
+        points1: 20,
+        points2: 18,
+        points3: 16,
+        points4: 14,
+        points5: 12,
+        points6: 10,
+        points7: 8,
+        points8: 2,
+        isSpecial: true,
+        speciality: QuestionSpeciality.Reverse,
+        episode: 1,
+      },
     ];
     this.teamPlayers = [
       {
@@ -130,195 +154,189 @@ export class DemoComponent implements OnInit {
         achievements: [''],
       },
     ];
+    this.playersTeam1 = this.teamPlayers.filter(
+      (player) => player.playerTeam == this.team1._id
+    );
+    this.playersTeam2 = this.teamPlayers.filter(
+      (player) => player.playerTeam == this.team2._id
+    );
+    this.question = this.questions[this.questionNumber];
+  }
+
+  // Game actions
+  selectTeam(team: Team) {
+    var team1 = document.getElementById('team-1');
+    var team2 = document.getElementById('team-2');
+    this.isInFaceOff = false;
+
+    if (team == this.team1) {
+      this.team1Turn = true;
+      this.team2Turn = false;
+      team1!.classList.add('active');
+      team2!.classList.remove('active');
+    } else if (team == this.team2) {
+      this.team1Turn = false;
+      this.team2Turn = true;
+      team2!.classList.add('active');
+      team1!.classList.remove('active');
+    }
+  }
+
+  deselectTeam() {
+    var team1 = document.getElementById('team-1');
+    var team2 = document.getElementById('team-2');
+    team1!.classList.remove('active');
+    team2!.classList.remove('active');
+    this.team1Turn = false;
+    this.team2Turn = false;
   }
 
   giveStrike() {
-    var team1Selected = document.getElementById('team-box-1');
-    var team2Selected = document.getElementById('team-box-2');
-    var team1Points = document.getElementById('team-points-1');
-    var team2Points = document.getElementById('team-points-2');
-    var bigStrike = document.getElementById('big-strike');
-    if (this.team1Turn === true && this.team1.strikes < 3) {
-      this.team1.strikes += 1;
-      bigStrike!.style.visibility = 'visible';
-      setTimeout(() => {
-        bigStrike!.style.visibility = 'hidden';
-      }, 500);
-
-      if (this.team2.strikes === 3 && this.team1.strikes === 1) {
-        this.team2Turn = true;
-        this.team1Turn = false;
-        team1Selected!.style.borderColor = '#cccccc';
-        team2Selected!.style.borderColor = '#00ff00';
-        team1Points!.style.borderColor = '#cccccc';
-        team2Points!.style.borderColor = '#00ff00';
-        this.disablePoints();
-      } else if (this.team1.strikes === 3) {
-        this.team2Turn = true;
-        this.team1Turn = false;
-        team1Selected!.style.borderColor = '#cccccc';
-        team2Selected!.style.borderColor = '#00ff00';
-        team1Points!.style.borderColor = '#cccccc';
-        team2Points!.style.borderColor = '#00ff00';
+    if (!this.pointsLocked) {
+      if (this.team1Turn && this.team1.strikes < 3) {
+        this.team1.strikes++;
+        this.isStrike = true;
+        setTimeout(() => {
+          this.isStrike = false;
+        }, 900);
+        console.log('Team 1 strikes: ' + this.team1.strikes);
+        if (this.team2.strikes == 3 && this.team1.strikes == 1) {
+          this.selectTeam(this.team2);
+          this.pointsLocked = true;
+        } else if (this.team1.strikes == 3) {
+          this.selectTeam(this.team2);
+        }
+      } else if (this.team2Turn && this.team2.strikes < 3) {
+        this.team2.strikes++;
+        this.isStrike = true;
+        setTimeout(() => {
+          this.isStrike = false;
+        }, 900);
+        console.log('Team 2 strikes: ' + this.team2.strikes);
+        if (this.team1.strikes == 3 && this.team2.strikes == 1) {
+          this.selectTeam(this.team1);
+          this.pointsLocked = true;
+        } else if (this.team2.strikes == 3) {
+          this.selectTeam(this.team1);
+        }
       }
       this.controlsService.playStrike();
-    } else if (this.team2Turn === true && this.team2.strikes < 3) {
-      this.team2.strikes += 1;
-      bigStrike!.style.visibility = 'visible';
-      setTimeout(() => {
-        bigStrike!.style.visibility = 'hidden';
-      }, 500);
-      if (this.team1.strikes === 3 && this.team2.strikes === 1) {
-        this.team1Turn = true;
-        this.team2Turn = false;
-        team2Selected!.style.borderColor = '#cccccc';
-        team1Selected!.style.borderColor = '#00ff00';
-        team2Points!.style.borderColor = '#cccccc';
-        team1Points!.style.borderColor = '#00ff00';
-        this.disablePoints();
-      } else if (this.team2.strikes === 3) {
-        this.team1Turn = true;
-        this.team2Turn = false;
-        team1Selected!.style.borderColor = '#00ff00';
-        team2Selected!.style.borderColor = '#cccccc';
-        team1Points!.style.borderColor = '#00ff00';
-        team2Points!.style.borderColor = '#cccccc';
-      }
-      this.controlsService.playStrike();
+    } else {
+      console.log('Points are locked');
     }
   }
 
   nextQuestion() {
-    if (this.count < 2) {
-      var double = document.getElementById('double-points');
-      double!.style.visibility = 'visible';
+    if (this.questionNumber + 2 < this.questions.length / 3) {
+      this.multiplier = 1;
+    } else if (this.questionNumber + 2 < (this.questions.length / 3) * 2) {
+      this.multiplier = 2;
+    } else {
+      this.multiplier = 3;
     }
-    if (this.team1Turn === true) {
+    this.awardPoints();
+    this.closeAll();
+    this.resetGame();
+    this.questionNumber++;
+
+    if (this.questionNumber == this.questions.length) {
+      this.router.navigate(['/info']);
+    } else {
+      this.question = this.questions[this.questionNumber];
+      if (this.question.isSpecial) {
+        if (this.question.speciality == QuestionSpeciality.Reverse) {
+          this.roundPoints = 100 * this.multiplier + 100;
+          if (this.team1.points > this.team2.points) {
+            this.selectTeam(this.team2);
+          } else if (this.team2.points > this.team1.points) {
+            this.selectTeam(this.team1);
+          } else {
+            this.isInFaceOff = true;
+          }
+        }
+        // ATTENTION: New specialities go here
+      }
+    }
+  }
+
+  addToRoundPoints(num: number) {
+    if (!this.pointsLocked) {
+      if (
+        (this.team1.strikes == 3 && this.team2Turn) ||
+        (this.team2.strikes == 3 && this.team1Turn)
+      ) {
+        this.pointsLocked = true;
+      }
+      this.roundPoints += num * this.multiplier;
+      this.controlsService.playGoodAnswer();
+    } else {
+      console.log('Points are locked');
+    }
+  }
+
+  deductFromRoundPoints(num: number) {
+    if (!this.pointsLocked) {
+      if (
+        (this.team1.strikes == 3 && this.team2Turn) ||
+        (this.team2.strikes == 3 && this.team1Turn)
+      ) {
+        this.pointsLocked = true;
+      }
+      this.roundPoints -= num;
+      this.controlsService.playBahBow();
+    } else {
+      console.log('Points are locked');
+    }
+  }
+
+  awardPoints() {
+    if (this.team1Turn) {
       this.team1.points += this.roundPoints;
-      this.team1.strikes = 0;
-    } else if (this.team2Turn === true) {
+    } else if (this.team2Turn) {
       this.team2.points += this.roundPoints;
-      this.team2.strikes = 0;
-    }
-    if (this.count < this.questions!.length) {
-      this.count++;
-      this.pointsEnabled = true;
-      this.roundPoints = 0;
-      this.team1Turn = false;
-      this.team2Turn = false;
-      this.team1.strikes = 0;
-      this.team2.strikes = 0;
-      var team1Selected = document.getElementById('team-box-1');
-      var team2Selected = document.getElementById('team-box-2');
-      var team1Points = document.getElementById('team-points-1');
-      var team2Points = document.getElementById('team-points-2');
-      var button = document.getElementById('show-title-button');
-      var selectTeam = document.getElementById('select-teams');
-      var lock = document.getElementById('lock-points');
-      var timer = document.getElementById('timer');
-      lock!.style.visibility = 'hidden';
-      button!.style.visibility = 'visible';
-      team1Selected!.style.borderColor = '#cccccc';
-      team2Selected!.style.borderColor = '#cccccc';
-      team1Selected!.style.backgroundColor = '';
-      team1Points!.style.borderColor = '#cccccc';
-      team2Points!.style.borderColor = '#cccccc';
-      selectTeam!.style.visibility = 'visible';
-      timer!.style.visibility = 'hidden';
-    } else {
-      this.goBack();
     }
   }
 
-  goBack() {
-    this.router.navigate(['/']);
-  }
-
-  disablePoints() {
-    var lock = document.getElementById('lock-points');
-    lock!.style.visibility = 'visible';
-    this.pointsEnabled = false;
-  }
-
+  // Toggle
   toggleTitle() {
-    var button = document.getElementById('show-title-button');
-    var title = document.getElementById('question-title');
+    var x = document.getElementById('question-title');
+    var y = document.getElementById('question-title-button');
 
-    title!.style.visibility = 'visible';
-    button!.style.visibility = 'hidden';
+    x!.style.visibility = 'visible';
+    y!.style.visibility = 'hidden';
+
+    this.isTitleHidden = false;
   }
 
-  toggleAnswer(number: Number) {
-    var answer = document.getElementById(`answer-` + number);
-    var points = document.getElementById(`points-` + number);
-    var button = document.getElementById(`btn-answer-` + number);
+  toggleAnswer(num: number) {
+    var x = document.getElementById('answer-' + num);
+    var y = document.getElementById('answer-' + num + '-button');
+    var z = document.getElementById('points-' + num);
 
-    answer!.style.visibility = 'visible';
-    points!.style.visibility = 'visible';
-    button!.style.visibility = 'hidden';
+    x!.style.visibility = 'visible';
+    y!.style.visibility = 'hidden';
+    z!.style.visibility = 'visible';
 
-    if (this.pointsEnabled === true) {
-      if (this.count < 2) {
-        this.roundPoints += parseInt(points!.innerHTML);
-      } else if (this.count < 3) {
-        this.roundPoints += parseInt(points!.innerHTML) * 2;
+    if (!this.question.isSpecial) {
+      this.addToRoundPoints(parseInt(z!.innerHTML));
+    } else if (this.question.isSpecial) {
+      if (this.question.speciality == 'Reverse') {
+        this.deductFromRoundPoints(parseInt(z!.innerHTML) * this.multiplier);
       }
-
-      if (this.team1.strikes === 3 && this.team2Turn) {
-        this.controlsService.playGoodAnswer();
-        setTimeout(() => {
-          this.controlsService.playApplause();
-        }, 700);
-        this.disablePoints();
-      } else if (this.team2.strikes === 3 && this.team1Turn) {
-        this.controlsService.playGoodAnswer();
-        setTimeout(() => {
-          this.controlsService.playApplause();
-        }, 700);
-        this.disablePoints();
-      } else {
-        this.controlsService.playGoodAnswer();
-        setTimeout(() => {
-          this.controlsService.playApplause();
-        }, 700);
-      }
+      // ATTENTION: New specialities go here
     }
   }
 
-  selectTeam(team: Team) {
-    var team1Selected = document.getElementById('team-box-1');
-    var team2Selected = document.getElementById('team-box-2');
-    var team1Points = document.getElementById('team-points-1');
-    var team2Points = document.getElementById('team-points-2');
-    var selectedTeam = document.getElementById('select-teams');
-    selectedTeam!.style.visibility = 'hidden';
-    if (team._id === this.team1._id) {
-      team1Selected!.style.borderColor = 'rgb(255 249 0)';
-      team1Selected!.style.backgroundColor = 'rgb(157 128 0 / 50%)';
-      team1Points!.style.borderColor = 'rgb(255 249 0)';
-      team1Points!.style.backgroundColor = 'rgb(157 128 0 / 50%)';
-      this.team1Turn = true;
-    } else {
-      team2Selected!.style.borderColor = 'rgb(255 249 0)';
-      team2Selected!.style.backgroundColor = 'rgb(157 128 0 / 50%)';
-      team2Points!.style.borderColor = 'rgb(255 249 0)';
-      team2Points!.style.backgroundColor = 'rgb(157 128 0 / 50%)';
-      this.team2Turn = true;
-    }
-  }
-
-  toggleTimer() {
+  startTimer() {
     if (this.team1Turn === true || this.team2Turn === true) {
       if (this.timerActive === false) {
         this.timerActive = true;
+        console.log('Timer started');
         this.timeRemaining = 30;
         this.controlsService.playTimerTick();
         if (this.timeRemaining > 0) {
-          var timer = document.getElementById('timer');
-          timer!.style.visibility = 'visible';
           const intervalId = setInterval(() => {
             this.timeRemaining -= 1;
-
             if (this.timeRemaining < 1) {
               clearInterval(intervalId);
               this.controlsService.playTimerDing();
@@ -329,6 +347,39 @@ export class DemoComponent implements OnInit {
       }
     }
   }
+
+  // Reset game
+  closeAll() {
+    var t = document.getElementById('question-title');
+    var b = document.getElementById('question-title-button');
+    t!.style.visibility = 'hidden';
+    b!.style.visibility = 'visible';
+    this.isTitleHidden = true;
+
+    for (let i = 1; i < 9; i++) {
+      var x = document.getElementById('answer-' + i);
+      var y = document.getElementById('answer-' + i + '-button');
+      var z = document.getElementById('points-' + i);
+      if (x === null || y === null || z === null) return;
+      x!.style.visibility = 'hidden';
+      y!.style.visibility = 'visible';
+      z!.style.visibility = 'hidden';
+    }
+  }
+
+  resetGame() {
+    this.deselectTeam();
+    this.team1.strikes = 0;
+    this.team2.strikes = 0;
+    this.roundPoints = 0;
+    this.pointsLocked = false;
+    this.isInFaceOff = true;
+    this.timerActive = false;
+  }
+
+  // Specialities
+
+  // Sounds
   playTheme() {
     this.controlsService.playTheme();
   }
@@ -337,6 +388,9 @@ export class DemoComponent implements OnInit {
   }
   playFunny() {
     this.controlsService.playFunny();
+  }
+  playStrike() {
+    this.controlsService.playStrike();
   }
   playBadum() {
     this.controlsService.playBadum();

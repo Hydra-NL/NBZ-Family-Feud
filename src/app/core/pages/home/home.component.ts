@@ -5,6 +5,7 @@ import { TeamPlayer } from 'src/app/entities/teamplayers/teamplayer.model';
 import { TeamService } from 'src/app/entities/team/team.service';
 import { TeamPlayerService } from 'src/app/entities/teamplayers/teamplayer.service';
 import { Subscription } from 'rxjs';
+import { ControlsService } from '../controls/controls.service';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private teamService: TeamService,
-    private teamPlayerService: TeamPlayerService
+    private teamPlayerService: TeamPlayerService,
+    private controlService: ControlsService
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +48,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       achievements: [''],
     };
 
+    
     this.getTeams();
     this.getPlayers();
   }
@@ -155,9 +158,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   playTheme() {
-    let audio = new Audio();
-    audio.src = '../../../../assets/sounds/intro_theme.mp3';
-    audio.load();
-    audio.play();
+    this.controlService.playTheme();
   }
 }

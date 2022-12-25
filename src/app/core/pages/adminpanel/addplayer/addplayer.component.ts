@@ -13,6 +13,7 @@ export class AddPlayerComponent implements OnInit {
   player!: TeamPlayer;
   subscription!: Subscription;
   teams!: Team[];
+  achievements!: any[];
   constructor(
     private teamPlayerService: TeamPlayerService,
     private router: Router
@@ -20,6 +21,24 @@ export class AddPlayerComponent implements OnInit {
 
   ngOnInit(): void {
     this.player = new TeamPlayer('');
+    // ATTENTION: Episode wins go here
+    this.achievements = [
+      { id: 1, selected: false, value: '🏆' },
+      { id: 2, selected: false, value: '🌊' },
+    ];
+  }
+
+  onChange($event: any) {
+    const value = $event.target.value;
+    const isChecked = $event.target.checked;
+
+    if (isChecked) {
+      this.player.achievements.push(value);
+      console.log(this.player.achievements);
+    } else {
+      const index = this.player.achievements.indexOf(value);
+      this.player.achievements.splice(index, 1);
+    }
   }
 
   addPlayer(): void {

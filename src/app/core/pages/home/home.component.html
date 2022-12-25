@@ -13,7 +13,9 @@
         <h4 class="align-center-bold">Teams & Players</h4>
         <div class="content-box-content">
           <div *ngFor="let team of teams">
-            <p class="team-title">Team - {{ team.teamName }}</p>
+            <p class="team-title">
+              ({{ team.teamMembers.length }}) Team - {{ team.teamName }}
+            </p>
             <div *ngFor="let teamplayer of teamplayers">
               <a
                 class="home-player-team-row"
@@ -25,9 +27,9 @@
               >
                 {{ teamplayer.playerName }}
                 <span *ngIf="teamplayer.achievements.length > 0">
-                  [<span *ngFor="let achievement of teamplayer.achievements">
-                    {{ achievement }} </span
-                  >]
+                  <span *ngFor="let achievement of teamplayer.achievements">
+                    {{ achievement }}
+                  </span>
                 </span>
               </a>
             </div>

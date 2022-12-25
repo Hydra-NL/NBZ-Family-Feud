@@ -11,6 +11,7 @@ import { HalloffameComponent } from './core/pages/halloffame/halloffame.componen
 import { AddQuestionComponent } from './core/pages/adminpanel/addquestion/addquestion.component';
 import { AddPlayerComponent } from './core/pages/adminpanel/addplayer/addplayer.component';
 import { AddTeamComponent } from './core/pages/adminpanel/addteam/addteam.component';
+import { FinalComponent } from './core/pages/final/final.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
         path: 'quiz',
         children: [
           { path: '', component: Quiz2Component },
+          { path: 'final', component: FinalComponent}
         ],
       },
       {

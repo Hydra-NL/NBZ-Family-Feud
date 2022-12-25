@@ -24,6 +24,15 @@ export class HalloffameComponent implements OnInit {
               this.players.push(teamplayers[i]);
             }
           }
+          this.players.sort((a, b) => {
+            if (a.achievements.length < b.achievements.length) {
+              return 1;
+            }
+            if (a.achievements.length > b.achievements.length) {
+              return -1;
+            }
+            return 0;
+          });
         }
       },
     });

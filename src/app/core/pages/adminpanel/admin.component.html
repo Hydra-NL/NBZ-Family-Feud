@@ -28,6 +28,9 @@
         <div class="col-md-4">
           <label>Teams</label>
           <div class="content-box-content">
+            <p *ngIf="teams.length == 0" class="text-muted">
+              No teams have been added yet
+            </p>
             <tr class="admin-item-row" *ngFor="let team of teams">
               Team -
               {{
@@ -45,6 +48,9 @@
         <div class="col-md-4">
           <label>Players</label>
           <div class="content-box-content">
+            <p *ngIf="players.length == 0" class="text-muted">
+              No players have been added yet
+            </p>
             <tr class="admin-item-row" *ngFor="let player of players">
               {{
                 player.playerName

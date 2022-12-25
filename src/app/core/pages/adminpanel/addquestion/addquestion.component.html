@@ -115,7 +115,7 @@
               name="questionanswer8"
               placeholder="Enter answer 8"
             />
-            <label for="isSpecial">Special Question</label>
+            <label for="questionisSpecial">Special Question: </label>
             <input
               type="checkbox"
               [(ngModel)]="question.isSpecial"
@@ -124,8 +124,9 @@
               (change)="(true)"
               #checkbox
             />
+            <!-- ATTENTION: Specialities will go here -->
             <div *ngIf="checkbox.checked">
-              <label for="speciality">Speciality</label>
+              <label for="questionSpeciality">Speciality</label>
               <select
                 class="form-control"
                 [(ngModel)]="question.speciality"
@@ -251,17 +252,16 @@
       <a id="toggle" class="reveal-question-list" (click)="toggleList()"
         >[Show]</a
       >
-      <div
-        id="question-list"
-        class="content-box-content"
-      >
+      <div id="question-list" class="content-box-content">
         <tr
           class="question-list-title"
           *ngFor="let question of questions; let i = index"
         >
           <p class="question-link">
             {{ i }}) {{ question.questionTitle }}
-            <span *ngIf="question.isSpecial">- [{{ question.speciality }}]</span>
+            <span *ngIf="question.isSpecial"
+              >- [{{ question.speciality }}]</span
+            >
           </p>
 
           <button

@@ -93,8 +93,10 @@ li {
 }
 
 .text-muted {
-  color: #7a7a7a;
+  color: #b6b6b6;
   font-style: italic;
+  text-align: center;
+  text-shadow: 1px 1px 3px black;
 }
 /* ============================================================================= */
 
@@ -262,11 +264,6 @@ li {
 }
 /* ============================================================================= */
 
-/* Select Team buttons */
-/* ============================================================================= */
-
-/* ============================================================================= */
-
 /* Boxes */
 /* ============================================================================= */
 .content-box {
@@ -312,29 +309,6 @@ li {
   border-radius: 10px;
   margin-top: 6px;
   margin-bottom: 6px;
-}
-.winning-title-box {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 16px;
-  border-radius: 10px;
-  margin-inline: auto;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  width: fit-content;
-}
-.winning-team-box {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 16px;
-  border-radius: 10px;
-  margin-inline: auto;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  width: 80%;
-}
-.winning-box-item {
-  border-radius: 10px;
-  padding: 8px;
-  background-color: rgba(0, 217, 255, 0.65);
 }
 
 .sound-board .tech-button {
@@ -546,11 +520,9 @@ li {
 /* ============================================================================= */
 .info-strike {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top: 250px;
-  left: 195px;
+  flex-direction: row;
+}
+.info-strike-img {
   height: 70px;
   width: 70px;
 }
@@ -580,6 +552,7 @@ li {
 .double-ptns {
   width: 40%;
   grid-area: 🅱;
+  margin-inline-start: 90%;
 }
 
 .round-points-box {
@@ -590,6 +563,7 @@ li {
 .special-question-box {
   width: 40%;
   grid-area: 🔠;
+  margin-inline-end: 90%;
 }
 
 .round-points-box p,
@@ -624,7 +598,6 @@ li {
   left: 50.5%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  visibility: hidden;
 }
 
 .big-strike-image {
@@ -755,7 +728,6 @@ li {
   padding-inline: 10px;
 }
 .teams-box-content {
-  margin: 0px;
   padding: 3px;
   overflow: auto;
   max-height: 300px;
@@ -770,7 +742,6 @@ li {
   border: #cccccc 2px ridge;
 }
 .teams-box-content-right {
-  margin: 0px;
   padding: 3px;
   overflow: auto;
   max-height: 300px;
@@ -805,7 +776,7 @@ li {
 .select-team-buttons {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .select-team-button {
@@ -852,6 +823,30 @@ li {
 
 /* Winner page */
 /* ============================================================================= */
+.winning-title-box {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 16px;
+  border-radius: 10px;
+  margin-inline: auto;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  width: fit-content;
+}
+.winning-team-box {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 16px;
+  border-radius: 10px;
+  margin-inline: auto;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  width: 80%;
+}
+.winning-box-item {
+  border-radius: 10px;
+  padding: 8px;
+  background-color: rgba(0, 217, 255, 0.65);
+}
+
 .gif-1 {
   position: absolute;
   left: 10%;
@@ -907,9 +902,12 @@ li {
 }
 
 .confetti-gif {
-  width: 240px;
-  height: auto;
-  z-index: 1;
+  width: 100%;
+  height: 99%;
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  background-image: url("./assets/gifs/confetti.gif");
 }
 
 .big-confetti-gif {
@@ -920,6 +918,23 @@ li {
   height: auto;
   z-index: 1;
 }
+/* ============================================================================= */
+
+/* Hall of Fame */
+/* ============================================================================= */
+.hff-page th,
+.hff-page td {
+  font-weight: bold;
+}
+
+.hff-page th {
+  font-size: 20px;
+}
+
+.hff-page td {
+  font-size: 16px;
+}
+
 /* ============================================================================= */
 
 /* Timer */
@@ -951,7 +966,7 @@ li {
   color: #fff;
   font-size: 1em;
   font-family: Arial;
-  text-shadow: 0 0 1px #000;
+  text-shadow: 0 0 8px #05c4fd;
 }
 
 @-webkit-keyframes snowflakes-fall {

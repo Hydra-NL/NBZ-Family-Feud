@@ -108,7 +108,7 @@
 </div>
 
 <!-- Big Strike -->
-<div id="big-strike" class="big-strike">
+<div id="big-strike" class="big-strike" *ngIf="isStrike">
   <img
     class="big-strike-image"
     src="../../../../assets/images/strike.png"
@@ -270,7 +270,7 @@
   </div>
   <div id="team-box-2" class="team-2-box">
     <p class="team-box-title">Team {{ team2.teamName }}</p>
-    <div class="teams-box-content">
+    <div class="teams-box-content-right">
       <div *ngFor="let playerTeam2 of playersTeam2">
         <p>
           {{ playerTeam2.playerName }}
@@ -301,15 +301,7 @@
 >
   <p>Who cracked the ice?</p>
   <div class="select-team-buttons">
-    <button (click)="selectTeam(team1)" class="select-team-button">
-      <i class="fa fa-arrow-left"></i>
-      Team {{ team1.teamName }}
-    </button>
-    <button (click)="nextQuestion()" class="select-team-button">Nobody</button>
-    <button (click)="selectTeam(team2)" class="select-team-button">
-      Team {{ team2.teamName }}
-      <i class="fa fa-arrow-right"></i>
-    </button>
+    <button (click)="deselectTeam()" class="select-team-button">Nobody</button>
   </div>
 </div>
 

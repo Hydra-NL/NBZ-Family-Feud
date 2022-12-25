@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {
   Question,
@@ -34,13 +35,15 @@ export class Quiz2Component implements OnInit {
   team2Turn: boolean = false;
   isInFaceOff: boolean = true;
   isTitleHidden: boolean = false;
+  isStrike: boolean = false;
   subscription!: Subscription;
 
   constructor(
     private controlsService: ControlsService,
     private teamService: TeamService,
     private teamPlayerService: TeamPlayerService,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -159,10 +162,23 @@ export class Quiz2Component implements OnInit {
     }
   }
 
+  deselectTeam() {
+    var team1 = document.getElementById('team-1');
+    var team2 = document.getElementById('team-2');
+    team1!.classList.remove('active');
+    team2!.classList.remove('active');
+    this.team1Turn = false;
+    this.team2Turn = false;
+  }
+
   giveStrike() {
     if (!this.pointsLocked) {
       if (this.team1Turn && this.team1.strikes < 3) {
         this.team1.strikes++;
+        this.isStrike = true;
+        setTimeout(() => {
+          this.isStrike = false;
+        }, 900);
         console.log('Team 1 strikes: ' + this.team1.strikes);
         if (this.team2.strikes == 3 && this.team1.strikes == 1) {
           this.selectTeam(this.team2);
@@ -172,6 +188,10 @@ export class Quiz2Component implements OnInit {
         }
       } else if (this.team2Turn && this.team2.strikes < 3) {
         this.team2.strikes++;
+        this.isStrike = true;
+        setTimeout(() => {
+          this.isStrike = false;
+        }, 900);
         console.log('Team 2 strikes: ' + this.team2.strikes);
         if (this.team1.strikes == 3 && this.team2.strikes == 1) {
           this.selectTeam(this.team1);
@@ -200,14 +220,26 @@ export class Quiz2Component implements OnInit {
     this.questionNumber++;
 
     if (this.questionNumber == this.questions.length) {
-      this.questionNumber = 0;
+      console.log('team1: ' + this.team1.points);
+      console.log('team2: ' + this.team2.points);
+
+      // update teams + give achievements to players
+      this.router.navigate(['/quiz/final']);
+      this.controlsService.playOutro();
     } else {
       this.question = this.questions[this.questionNumber];
       if (this.question.isSpecial) {
         if (this.question.speciality == QuestionSpeciality.Reverse) {
-          this.isInFaceOff = false;
           this.roundPoints = 100 * this.multiplier + 100;
+          if (this.team1.points > this.team2.points) {
+            this.selectTeam(this.team2);
+          } else if (this.team2.points > this.team1.points) {
+            this.selectTeam(this.team1);
+          } else {
+            this.isInFaceOff = true;
+          }
         }
+        // ATTENTION: New specialities go here
       }
     }
   }
@@ -274,7 +306,7 @@ export class Quiz2Component implements OnInit {
       this.addToRoundPoints(parseInt(z!.innerHTML));
     } else if (this.question.isSpecial) {
       if (this.question.speciality == 'Reverse') {
-        this.deductFromRoundPoints(parseInt(z!.innerHTML));
+        this.deductFromRoundPoints(parseInt(z!.innerHTML) * this.multiplier);
       }
       // ATTENTION: New specialities go here
     }
@@ -321,14 +353,9 @@ export class Quiz2Component implements OnInit {
   }
 
   resetGame() {
-    var team1 = document.getElementById('team-1');
-    var team2 = document.getElementById('team-2');
-    team1!.classList.remove('active');
-    team2!.classList.remove('active');
+    this.deselectTeam();
     this.team1.strikes = 0;
     this.team2.strikes = 0;
-    this.team1Turn = false;
-    this.team2Turn = false;
     this.roundPoints = 0;
     this.pointsLocked = false;
     this.isInFaceOff = true;
@@ -336,10 +363,6 @@ export class Quiz2Component implements OnInit {
   }
 
   // Specialities
-  reverse() {
-
-  }
-
 
   // Sounds
   playTheme() {

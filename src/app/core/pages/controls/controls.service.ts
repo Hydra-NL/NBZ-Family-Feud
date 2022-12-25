@@ -1,21 +1,37 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ControlsService {
+  isChristmas = false;
+
+  constructor() {
+    if (new Date().getMonth() === 11) {
+      this.isChristmas = true;
+    } else {
+      this.isChristmas = false;
+    }
+  }
+
   playTheme() {
     let audio = new Audio();
-    audio.src = '../../../../assets/sounds/intro_theme.mp3';
+    if (this.isChristmas) {
+      audio.src = '../../../../assets/sounds/intro_theme_christmas.mp3';
+    } else {
+      audio.src = '../../../../assets/sounds/intro_theme.mp3';
+    }
     audio.load();
     audio.play();
   }
 
   playOutro() {
     let audio = new Audio();
-    audio.src = '../../../../assets/sounds/outro_theme.mp3';
+    if (this.isChristmas) {
+      audio.src = '../../../../assets/sounds/outro_theme_christmas.mp3';
+    } else {
+      audio.src = '../../../../assets/sounds/outro_theme.mp3';
+    }
     audio.load();
     audio.play();
   }

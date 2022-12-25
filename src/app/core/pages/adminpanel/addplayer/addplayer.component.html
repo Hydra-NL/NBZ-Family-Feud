@@ -1,6 +1,6 @@
 <div class="content-box">
-  <div class="col-md-3"></div>
-  <div class="col-md-6">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
     <div class="content-box-item">
       <h4 class="align-center-bold">Add a Teamplayer</h4>
       <form
@@ -38,6 +38,18 @@
                 Player name can be at most 30 characters
               </p>
             </div>
+          </div>
+          <br />
+          <label for="playerAchievement">Achievements</label>
+          <div *ngFor="let a of achievements; let i = index">
+            <span
+              >Episode {{ i + 1 }}: {{ a.value }}
+              <input
+                type="checkbox"
+                [value]="a.value"
+                [checked]="a.selected"
+                (change)="onChange($event)"
+            /></span>
           </div>
         </div>
       </form>

@@ -1,25 +1,31 @@
-<!-- Home page nav-buttons -->
-<div class="nav-button-box">
-  <button class="nav-button" routerLink="/home" style="margin-bottom: 0px">
-    <i class="fa fa-home"></i> Home
-  </button>
-</div>
-
-<!-- Gifs -->
-<div>
-  <img src="../../../../assets/gifs/steve.gif" alt="setev" class="steve-gif" />
-  <img
-    src="../../../../assets/gifs/confetti.gif"
-    alt="confetti"
-    class="confetti-gif"
-  />
-</div>
+<div class="confetti-gif"></div>
 
 <!-- Winner box -->
-<div class="content-box">
-  <div class="content-box-item col-md-12">
-    <h1 class="align-center-bold">Congratulations!</h1>
-    <h2 class="align-center-bold">You won!</h2>
-    <p *ngFor="let player of teamplayers">{{ player.playerName }}</p>
+<div class="winning-title-box">
+  <h1 class="winning-title">Congratulations!</h1>
+</div>
+
+<!-- Draw -->
+<div *ngIf="isDraw">
+  <div class="winning-team-box">
+    <h1 class="winning-title">Draw!</h1>
+    <div class="winning-box-item">
+      <p class="winning-points">Points: {{ team.points }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- Team 1 wins -->
+<div *ngIf="!isDraw">
+  <div class="winning-team-box">
+    <h1 class="winning-title">Team {{ team.teamName }} wins!</h1>
+    <div class="winning-box-item">
+      <p class="winning-points">Points: {{ team.points }}</p>
+      <div *ngFor="let teamplayer of teamPlayers">
+        <p class="winning-playername" *ngIf="teamplayer.playerTeam == team._id">
+          {{ teamplayer.playerName }}
+        </p>
+      </div>
+    </div>
   </div>
 </div>

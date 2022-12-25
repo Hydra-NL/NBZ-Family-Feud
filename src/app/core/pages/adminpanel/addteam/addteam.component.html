@@ -10,7 +10,7 @@
         <div class="form-group">
           <label for="teamname">Team Name</label>
           <div class="home-team-creation">
-            <p>Team </p>
+            <p>Team</p>
             <input
               type="text"
               class="form-control"
@@ -40,15 +40,17 @@
           </div>
         </div>
       </form>
-      <button
-        type="submit"
-        class="action-button"
-        (click)="addTeam()"
-        [disabled]="!teamaddform.valid"
-      >
-        <i class="fa fa-save"></i>
-        Create
-      </button>
+      <div class="action-button-center">
+        <button
+          type="submit"
+          class="action-button"
+          (click)="addTeam()"
+          [disabled]="!teamaddform.valid"
+        >
+          <i class="fa fa-save"></i>
+          Create
+        </button>
+      </div>
     </div>
   </div>
   <div class="col-md-2"></div>

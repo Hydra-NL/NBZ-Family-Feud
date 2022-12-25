@@ -1,0 +1,28 @@
+<!-- <div class="confetti-gif"></div> -->
+
+<div class="winning-page">
+  <div class="winning-title-box">
+    <h1 class="winning-title">Congratulations!</h1>
+  </div>
+
+  <div *ngIf="!isDraw">
+    <div class="winning-team-box">
+      <h1 class="winning-title">Draw!</h1>
+      <p class="winning-title">This is actually kind of insane</p>
+    </div>
+  </div>
+
+  <div *ngIf="isDraw">
+    <div class="winning-team-box">
+      <h1 class="winning-title">{{ winningTeam?.teamName }}Team PogChamps wins!</h1>
+      <div class="winning-box-item">
+        <p class="winning-points">Points: 2345{{ winningTeam?.points }}</p>
+        <p *ngFor="let player of teamPlayers">{{ player.playerName }}</p>
+        <p class="winning-playername">player</p>
+        <p class="winning-playername">player</p>
+        <p class="winning-playername">player</p>
+        <p class="winning-playername">player</p>
+      </div>
+    </div>
+  </div>
+</div>

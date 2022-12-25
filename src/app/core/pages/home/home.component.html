@@ -77,13 +77,47 @@
               </option>
             </select>
           </div>
-          <button
-            type="submit"
-            class="action-button"
-            [disabled]="!jointeamform.valid"
-          >
-            Join team
-          </button>
+          <div class="action-button-center">
+            <button
+              type="submit"
+              class="action-button"
+              [disabled]="!jointeamform.valid"
+            >
+              Join team
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="content-box-item">
+        <h4 class="align-center-bold">Select Episode</h4>
+        <form
+          #selectepisodeform="ngForm"
+          (ngSubmit)="
+            selectepisodeform.form.valid && selectEpisode(episode._id!)
+          "
+        >
+          <div class="episode-select-form">
+            <select
+              class="form-control episode-select"
+              name="episodeSelect"
+              [(ngModel)]="episode._id"
+              #episodeSelect="ngModel"
+              required
+            >
+              <option value="" disabled selected hidden>Select a team</option>
+              <option *ngFor="let eps of episodes" [ngValue]="episode._id">
+                {{ eps.episodeNumber }}
+              </option>
+            </select>
+
+            <button
+              type="submit"
+              class="action-button"
+              [disabled]="!selectepisodeform.valid"
+            >
+              Select episode
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -134,14 +168,16 @@
               </option>
             </select>
           </div>
-          <button
-            type="submit"
-            class="action-button"
-            [disabled]="!startform.valid"
-          >
-            <i class="fa fa-play"></i>
-            Start
-          </button>
+          <div class="action-button-center">
+            <button
+              type="submit"
+              class="action-button"
+              [disabled]="!startform.valid"
+            >
+              <i class="fa fa-play"></i>
+              Start
+            </button>
+          </div>
         </form>
       </div>
     </div>

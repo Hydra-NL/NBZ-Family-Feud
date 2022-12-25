@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import {
@@ -16,7 +16,7 @@ import { ControlsService } from '../controls/controls.service';
   selector: 'app-quiz2',
   templateUrl: './quiz2.component.html',
 })
-export class Quiz2Component implements OnInit {
+export class Quiz2Component implements OnInit, OnDestroy {
   roundPoints = 0;
   team1!: Team;
   team2!: Team;
@@ -63,8 +63,6 @@ export class Quiz2Component implements OnInit {
       strikes: 0,
       isPlaying: true,
     };
-    this.playersTeam1 = [];
-    this.playersTeam2 = [];
     this.question = {
       _id: '123abc',
       questionTitle: 'I am a question title',
@@ -89,14 +87,25 @@ export class Quiz2Component implements OnInit {
       episode: 3,
     };
     this.timeRemaining = 0;
-    this.teams = [];
-    this.teamPlayers = [];
+
     this.getTeams();
     this.getQuestions();
   }
 
+  async ngOnDestroy() {
+    (await this.teamService.list()).subscribe((teams) => {
+      for (let i = 0; i < teams!.length; i++) {
+        if (teams![i].isPlaying) {
+          teams![i].isPlaying = false;
+          this.teamService.update(teams![i]).subscribe();
+        }
+      }
+    });
+  }
+
   // Get
   async getTeams() {
+    this.teams = [];
     this.subscription = (await this.teamService.list()).subscribe({
       next: (teams) => {
         for (let i = 0; i < teams!.length; i++) {
@@ -104,16 +113,24 @@ export class Quiz2Component implements OnInit {
             this.teams.push(teams![i]);
           }
         }
-        this.team1 = this.teams[0];
-        this.team2 = this.teams[1];
-        console.log('Team 1: ' + this.team1.teamName);
-        console.log('Team 2: ' + this.team2.teamName);
-        this.getTeamPlayers();
+        if (this.teams.length != 2) {
+          alert('You are not allowed to be here!');
+          this.router.navigate(['/']);
+        } else {
+          this.team1 = this.teams[0];
+          this.team2 = this.teams[1];
+          console.log('Team 1: ' + this.team1.teamName);
+          console.log('Team 2: ' + this.team2.teamName);
+          this.getTeamPlayers();
+        }
       },
     });
   }
 
   async getTeamPlayers() {
+    this.teamPlayers = [];
+    this.playersTeam1 = [];
+    this.playersTeam2 = [];
     this.subscription = (await this.teamPlayerService.list()).subscribe(
       (players) => {
         for (let i = 0; i < players!.length; i++) {
@@ -206,7 +223,7 @@ export class Quiz2Component implements OnInit {
     }
   }
 
-  nextQuestion() {
+  async nextQuestion() {
     if (this.questionNumber + 2 < this.questions.length / 3) {
       this.multiplier = 1;
     } else if (this.questionNumber + 2 < (this.questions.length / 3) * 2) {
@@ -219,6 +236,9 @@ export class Quiz2Component implements OnInit {
     this.resetGame();
     this.questionNumber++;
 
+    (await this.teamService.update(this.team1)).subscribe();
+    (await this.teamService.update(this.team2)).subscribe();
+    
     if (this.questionNumber == this.questions.length) {
       console.log('team1: ' + this.team1.points);
       console.log('team2: ' + this.team2.points);

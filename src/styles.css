@@ -41,32 +41,6 @@ body {
   margin: 0px;
 }
 
-.winning-title {
-  font-size: 78px;
-  background: -webkit-linear-gradient(
-    rgb(255, 136, 0),
-    rgb(252, 234, 206),
-    rgb(255, 136, 0)
-  );
-  background-clip: inherit;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.winning-points {
-  font-weight: 900;
-  text-align: center;
-  text-decoration: underline;
-  margin: 0px;
-  color: white;
-  font-size: 40px;
-}
-.winning-playername {
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  font-size: 40px;
-}
-
 .error-message {
   color: rgb(255, 255, 255);
   background-color: rgba(230, 36, 36, 0.842);
@@ -226,6 +200,10 @@ li {
 
 /* Action buttons */
 /* ============================================================================= */
+.action-button-center {
+  display: flex;
+  justify-content: center;
+}
 .action-button {
   background-image: linear-gradient(
     to right,
@@ -235,8 +213,6 @@ li {
   );
   min-width: 33%;
   max-width: 45%;
-  margin-left: 33%;
-  margin-right: auto;
 }
 .action-button:hover {
   background-position: right center;
@@ -433,16 +409,24 @@ li {
   transform: translateX(-50%);
 }
 
-.team-player-select-form {
+.team-player-select-form,
+.episode-select-form {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
+.episode-select-form {
+}
+
 .team-player-select {
   margin-inline: 10px;
   width: 40%;
+}
+
+.episode-select {
+  width: 30%;
 }
 /* ============================================================================= */
 
@@ -518,9 +502,12 @@ li {
 
 /* Info page */
 /* ============================================================================= */
-.info-strike {
+.info-strike,
+.admin-question-checkbox {
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  gap: 4px;
 }
 .info-strike-img {
   height: 70px;
@@ -823,6 +810,13 @@ li {
 
 /* Winner page */
 /* ============================================================================= */
+.winning-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.winning-team-box,
 .winning-title-box {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 16px;
@@ -832,65 +826,38 @@ li {
   margin-bottom: 6px;
   width: fit-content;
 }
+
 .winning-team-box {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 16px;
-  border-radius: 10px;
-  margin-inline: auto;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  width: 80%;
+  min-width: 75%;
 }
+
 .winning-box-item {
   border-radius: 10px;
   padding: 8px;
   background-color: rgba(0, 217, 255, 0.65);
 }
 
-.gif-1 {
-  position: absolute;
-  left: 10%;
-  top: 4%;
+.winning-title {
+  font-size: 78px;
+  background: -webkit-linear-gradient(
+    rgb(255, 136, 0),
+    rgb(252, 234, 206),
+    rgb(255, 136, 0)
+  );
+  background-clip: inherit;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-
-.gif-2 {
-  position: absolute;
-  left: 17%;
-  top: 35%;
+.winning-points {
+  text-decoration: underline;
 }
-
-.gif-3 {
-  position: absolute;
-  left: 3%;
-  top: 55%;
-}
-
-.gif-4 {
-  position: absolute;
-  right: 8%;
-  top: 2%;
-}
-
-.gif-5 {
-  position: absolute;
-  right: 1%;
-  top: 45%;
-}
-
-.gif-6 {
-  position: absolute;
-  left: 37%;
-  top: 50%;
-}
-.gif-7 {
-  position: absolute;
-  right: 20%;
-  top: 30%;
-}
-.gif-8 {
-  position: absolute;
-  right: 38%;
-  top: 16%;
+.winning-playername,
+.winning-points {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 40px;
+  margin: 0px;
 }
 
 .steve-gif {
@@ -910,14 +877,6 @@ li {
   background-image: url("./assets/gifs/confetti.gif");
 }
 
-.big-confetti-gif {
-  transform: scale(3.5);
-  position: absolute;
-  top: 0px;
-  left: 47%;
-  height: auto;
-  z-index: 1;
-}
 /* ============================================================================= */
 
 /* Hall of Fame */

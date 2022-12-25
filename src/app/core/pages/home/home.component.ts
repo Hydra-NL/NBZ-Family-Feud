@@ -6,6 +6,8 @@ import { TeamService } from 'src/app/entities/team/team.service';
 import { TeamPlayerService } from 'src/app/entities/teamplayers/teamplayer.service';
 import { Subscription } from 'rxjs';
 import { ControlsService } from '../controls/controls.service';
+import { Episode } from 'src/app/entities/episodes/episode.model';
+import { EpisodeService } from 'src/app/entities/episodes/episode.service';
 
 @Component({
   selector: 'app-home',
@@ -19,13 +21,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   team2!: Team;
   teamplayers!: TeamPlayer[];
   teamplayer!: TeamPlayer;
+  episode!: Episode;
+  episodes!: Episode[];
   subscription!: Subscription;
 
   constructor(
     private router: Router,
     private teamService: TeamService,
     private teamPlayerService: TeamPlayerService,
-    private controlService: ControlsService
+    private controlService: ControlsService,
+    private episodeService: EpisodeService
   ) {}
 
   ngOnInit(): void {
@@ -47,10 +52,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       isAnswering: false,
       achievements: [''],
     };
+    this.episode = {
+      _id: '',
+      episodeTitle: '',
+      episodeNumber: 0,
+      episodeAchievement: '',
+      isActive: false,
+    };
 
-    
     this.getTeams();
     this.getPlayers();
+    this.getEpisodes();
   }
 
   ngOnDestroy(): void {
@@ -77,6 +89,19 @@ export class HomeComponent implements OnInit, OnDestroy {
       next: (teamplayers) => {
         this.teamplayers = teamplayers!;
         console.log('Teamplayers: ' + this.teamplayers.length);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  async getEpisodes() {
+    this.episodes = [];
+    this.subscription = (await this.episodeService.list()).subscribe({
+      next: (episodes) => {
+        this.episodes = episodes!;
+        console.log('Episodes: ' + this.episodes.length);
       },
       error: (err) => {
         console.log(err);
@@ -155,6 +180,26 @@ export class HomeComponent implements OnInit, OnDestroy {
         },
       });
     }
+  }
+
+  selectEpisode(episodeId: string) {
+    console.log('EpisodeId: ' + episodeId);
+    for (let i = 0; i < this.episodes.length; i++) {
+      this.episodes[i].isActive = false;
+      this.episodeService.update(this.episodes[i]).subscribe();
+    }
+    this.episodeService.read(episodeId).subscribe({
+      next: (episode) => {
+        this.episode = episode;
+        this.episode.isActive = true;
+        console.log('Episode: ' + this.episode);
+        this.episodeService.update(this.episode).subscribe({
+          next: () => {
+            this.getEpisodes();
+          },
+        });
+      },
+    });
   }
 
   playTheme() {

@@ -53,15 +53,17 @@
           </div>
         </div>
       </form>
-      <button
-        type="submit"
-        class="action-button"
-        (click)="addPlayer()"
-        [disabled]="!playeraddform.valid"
-      >
-        <i class="fa fa-save"></i>
-        Join
-      </button>
+      <div class="action-button-center">
+        <button
+          type="submit"
+          class="action-button"
+          (click)="addPlayer()"
+          [disabled]="!playeraddform.valid"
+        >
+          <i class="fa fa-save"></i>
+          Join
+        </button>
+      </div>
     </div>
   </div>
 </div>

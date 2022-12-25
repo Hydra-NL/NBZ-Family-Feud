@@ -115,15 +115,17 @@
               name="questionanswer8"
               placeholder="Enter answer 8"
             />
-            <label for="questionisSpecial">Special Question: </label>
-            <input
-              type="checkbox"
-              [(ngModel)]="question.isSpecial"
-              #questionisSpecial="ngModel"
-              name="questionisSpecial"
-              (change)="(true)"
-              #checkbox
-            />
+            <div class="admin-question-checkbox">
+              <label for="questionisSpecial">Special Question: </label>
+              <input
+                type="checkbox"
+                [(ngModel)]="question.isSpecial"
+                #questionisSpecial="ngModel"
+                name="questionisSpecial"
+                (change)="(true)"
+                #checkbox
+              />
+            </div>
             <!-- ATTENTION: Specialities will go here -->
             <div *ngIf="checkbox.checked">
               <label for="questionSpeciality">Speciality</label>
@@ -235,15 +237,17 @@
           </div>
         </div>
       </form>
-      <button
-        type="submit"
-        class="action-button"
-        (click)="addQuestion()"
-        [disabled]="!questionaddform.valid"
-      >
-        <i class="fa fa-save"></i>
-        Create
-      </button>
+      <div class="action-button-center">
+        <button
+          type="submit"
+          class="action-button"
+          (click)="addQuestion()"
+          [disabled]="!questionaddform.valid"
+        >
+          <i class="fa fa-save"></i>
+          Create
+        </button>
+      </div>
     </div>
   </div>
   <div class="col-md-7">

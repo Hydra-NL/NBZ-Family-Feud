@@ -21,7 +21,7 @@ import { NavComponent } from './nav/nav.component';
 import { AddQuestionComponent } from './core/pages/adminpanel/addquestion/addquestion.component';
 import { AddPlayerComponent } from './core/pages/adminpanel/addplayer/addplayer.component';
 import { AddTeamComponent } from './core/pages/adminpanel/addteam/addteam.component';
-import { FinalComponent } from './core/pages/final/final.component';
+import { FinalComponent } from './core/pages/quiz/final/final.component';
 
 @NgModule({
   declarations: [

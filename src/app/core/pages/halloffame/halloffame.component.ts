@@ -25,14 +25,9 @@ export class HalloffameComponent implements OnInit {
             }
           }
           this.players.sort((a, b) => {
-            if (a.achievements.length < b.achievements.length) {
-              return 1;
-            }
-            if (a.achievements.length > b.achievements.length) {
-              return -1;
-            }
-            return 0;
+            return b.achievements.length - a.achievements.length;
           });
+
           setTimeout(() => {
             this.setPlayerColors();
           }, 10);
@@ -47,12 +42,8 @@ export class HalloffameComponent implements OnInit {
     var player2 = document.getElementById('hff-player-1');
     var player3 = document.getElementById('hff-player-2');
 
-    console.log(player1);
-
-    player1?.classList.add('hff-first');
-    player2?.classList.add('hff-second');
-    player3?.classList.add('hff-third');
-
-    console.log(player1);
+    player1?.classList.add('hff-gold');
+    player2?.classList.add('hff-silver');
+    player3?.classList.add('hff-bronze');
   }
 }

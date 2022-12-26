@@ -282,7 +282,7 @@
 
 <!-- Team select -->
 <div class="select-team-box" *ngIf="isInFaceOff">
-  <p>Who plays?</p>
+  <p>Who goes first?</p>
   <div class="select-team-buttons">
     <button (click)="selectTeam(team1)" class="select-team-button">
       <i class="fa fa-arrow-left"></i>
@@ -299,9 +299,9 @@
   class="select-team-box"
   *ngIf="!isInFaceOff && !isTitleHidden && question.speciality == 'Reverse'"
 >
-  <p>Who cracked the ice?</p>
+  <p>Did a team crack the ice?</p>
   <div class="select-team-buttons">
-    <button (click)="deselectTeam()" class="select-team-button">Nobody</button>
+    <button (click)="deselectTeam()" class="select-team-button">No.</button>
   </div>
 </div>
 

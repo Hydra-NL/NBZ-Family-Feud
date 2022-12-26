@@ -22,7 +22,6 @@ export class DemoComponent implements OnInit {
   questions!: Question[];
   timeRemaining: number = 0;
   timerActive: boolean = false;
-  multiplier: number = 1;
   pointsLocked: boolean = false;
   team1Turn: boolean = false;
   team2Turn: boolean = false;
@@ -189,6 +188,7 @@ export class DemoComponent implements OnInit {
     team2!.classList.remove('active');
     this.team1Turn = false;
     this.team2Turn = false;
+    this.isInFaceOff = true;
   }
 
   giveStrike() {
@@ -227,13 +227,6 @@ export class DemoComponent implements OnInit {
   }
 
   nextQuestion() {
-    if (this.questionNumber + 2 < this.questions.length / 3) {
-      this.multiplier = 1;
-    } else if (this.questionNumber + 2 < (this.questions.length / 3) * 2) {
-      this.multiplier = 2;
-    } else {
-      this.multiplier = 3;
-    }
     this.awardPoints();
     this.closeAll();
     this.resetGame();
@@ -245,7 +238,7 @@ export class DemoComponent implements OnInit {
       this.question = this.questions[this.questionNumber];
       if (this.question.isSpecial) {
         if (this.question.speciality == QuestionSpeciality.Reverse) {
-          this.roundPoints = 100 * this.multiplier + 100;
+          this.roundPoints = 100 + 100;
           if (this.team1.points > this.team2.points) {
             this.selectTeam(this.team2);
           } else if (this.team2.points > this.team1.points) {
@@ -267,7 +260,7 @@ export class DemoComponent implements OnInit {
       ) {
         this.pointsLocked = true;
       }
-      this.roundPoints += num * this.multiplier;
+      this.roundPoints += num;
       this.controlsService.playGoodAnswer();
     } else {
       console.log('Points are locked');
@@ -321,7 +314,7 @@ export class DemoComponent implements OnInit {
       this.addToRoundPoints(parseInt(z!.innerHTML));
     } else if (this.question.isSpecial) {
       if (this.question.speciality == 'Reverse') {
-        this.deductFromRoundPoints(parseInt(z!.innerHTML) * this.multiplier);
+        this.deductFromRoundPoints(parseInt(z!.innerHTML));
       }
       // ATTENTION: New specialities go here
     }

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Episode } from 'src/app/entities/episodes/episode.model';
 import { EpisodeService } from 'src/app/entities/episodes/episode.service';
@@ -23,14 +24,37 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
 
   constructor(
     private questionsService: QuestionService,
-    private episodeService: EpisodeService
+    private episodeService: EpisodeService,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {
-    this.clearQuestion();
-
-    this.getQuestions();
+  ngOnInit() {
+    this.question = {
+      _id: '',
+      questionTitle: '',
+      answer1: '',
+      answer2: '',
+      answer3: '',
+      answer4: '',
+      answer5: '',
+      answer6: '',
+      answer7: '',
+      answer8: '',
+      points1: 0,
+      points2: 0,
+      points3: 0,
+      points4: 0,
+      points5: 0,
+      points6: 0,
+      points7: 0,
+      points8: 0,
+      isSpecial: false,
+      speciality: QuestionSpeciality.None,
+      episode: 0,
+    };
     this.getEpisodes();
+    this.getQuestions();
+
     var list = document.getElementById('question-list');
     list!.classList.toggle('hidden');
   }
@@ -54,11 +78,17 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
     this.episodes = [];
     this.subscription = (await this.episodeService.list()).subscribe({
       next: (episodes) => {
-        this.episodes = episodes!;
-        console.log('Episodes: ' + this.episodes.length);
-        this.activeEpisode = this.episodes.find(
-          (episode) => episode.isActive == true
-        )!;
+        if (episodes) {
+          this.episodes = episodes!;
+          console.log('Episodes: ' + this.episodes.length);
+          this.activeEpisode = this.episodes.find(
+            (episode) => episode.isActive == true
+          )!;
+          this.clearQuestion();
+        } else {
+          alert('No episodes found');
+          this.router.navigate(['/admin']);
+        }
       },
       error: (err) => {
         console.log(err);
@@ -88,8 +118,9 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
       points8: 0,
       isSpecial: false,
       speciality: QuestionSpeciality.None,
-      episode: 0,
+      episode: this.activeEpisode.episodeNumber,
     };
+    console.log(this.question.episode);
   }
 
   toggleList() {
@@ -127,15 +158,20 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
       alert('Total points cannot be less than 100');
       return;
     } else {
-      this.questionsService.create(this.question).subscribe({
-        next: () => {
-          this.getQuestions();
-          this.clearQuestion();
-        },
-        error: (err) => {
-          console.log(err);
-        },
-      });
+      if (this.question.episode > this.episodes.length) {
+        alert('Episode number cannot be greater than the number of episodes');
+        return;
+      } else {
+        this.questionsService.create(this.question).subscribe({
+          next: () => {
+            this.getQuestions();
+            this.clearQuestion();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      }
     }
   }
 

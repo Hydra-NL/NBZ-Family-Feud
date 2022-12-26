@@ -208,6 +208,7 @@ export class Quiz2Component implements OnInit, OnDestroy {
     team2!.classList.remove('active');
     this.team1Turn = false;
     this.team2Turn = false;
+    this.isInFaceOff = true;
   }
 
   giveStrike() {

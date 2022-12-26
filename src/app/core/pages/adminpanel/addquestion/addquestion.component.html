@@ -32,7 +32,6 @@
                 name="questionanswer1"
                 placeholder="Enter answer 1"
                 required
-                minlength="2"
               />
               <input
                 type="number"
@@ -57,7 +56,6 @@
                 name="questionanswer2"
                 placeholder="Enter answer 2"
                 required
-                minlength="2"
               />
               <input
                 type="number"
@@ -80,8 +78,6 @@
                 #questionanswer3="ngModel"
                 name="questionanswer3"
                 placeholder="Enter answer 3"
-                required
-                minlength="2"
               />
               <input
                 type="number"
@@ -90,7 +86,6 @@
                 #questionpoints3="ngModel"
                 name="questionpoints3"
                 placeholder="Enter points for answer 3"
-                required
                 min="1"
                 max="100"
               />
@@ -234,7 +229,6 @@
               name="questionepisode"
               placeholder="Enter episode"
               required
-              [value]="activeEpisode?.episodeNumber"
               min="1"
             />
           </div>
@@ -265,10 +259,12 @@
           *ngFor="let question of questions; let i = index"
         >
           <p>
-            {{ i }}) {{ question.questionTitle }}
-            <span *ngIf="question.isSpecial"
-              >- [{{ question.speciality }}]</span
+            {{ i + 1 }}) [ep {{ question.episode }}]<span
+              *ngIf="question.isSpecial"
             >
+              [{{ question.speciality }}]</span
+            >
+            {{ question.questionTitle }}
           </p>
 
           <button

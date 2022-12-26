@@ -23,13 +23,14 @@ body {
   text-align: center;
   font-weight: bold;
   text-shadow: 0px 0px 8px black;
-  margin-inline: 10px;
+  margin-inline: 16px;
 }
 
 .question-title {
   font-size: 38px;
   visibility: hidden;
   text-shadow: 2px 2px 6px black;
+  z-index: 1;
 }
 
 .home-credit-box a {
@@ -263,7 +264,7 @@ body {
 }
 #admin-page .content-box-content,
 #question-list.content-box-content {
-  max-height: 600px;
+  max-height: 660px;
 }
 .content-box-content ul {
   padding-inline-start: 25px;
@@ -397,6 +398,12 @@ body {
 .episode-select-form {
   flex-direction: column;
   gap: 10px;
+}
+
+.team-select-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .select-box-small,
@@ -878,14 +885,14 @@ body {
   font-size: 16px;
 }
 
-.hff-first,
-.hff-second,
-.hff-third {
+.hff-gold,
+.hff-silver,
+.hff-bronze {
   border-radius: 5px;
   color: black;
 }
 
-.hff-first {
+.hff-gold {
   background-image: linear-gradient(
     0deg,
     rgba(255, 188, 2, 1) 0%,
@@ -894,7 +901,7 @@ body {
   );
 }
 
-.hff-second {
+.hff-silver {
   background-image: linear-gradient(
     0deg,
     rgba(103, 103, 103, 1) 0%,
@@ -903,7 +910,7 @@ body {
   );
 }
 
-.hff-third {
+.hff-bronze {
   background-image: linear-gradient(
     0deg,
     rgba(185, 80, 0, 1) 0%,

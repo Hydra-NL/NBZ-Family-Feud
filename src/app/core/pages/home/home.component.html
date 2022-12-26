@@ -145,31 +145,37 @@
         >
           <h2 class="subtitle">Game</h2>
           <div class="form-group team-select-form">
-            <select
-              class="form-control select-box-medium"
-              name="team1select"
-              [(ngModel)]="team1"
-              #team1select="ngModel"
-              required
-            >
-              <option *ngFor="let team of teams" [ngValue]="team">
-                {{ team.teamName }}
-              </option>
-            </select>
+            <div class="team-select-section">
+              <label class="subtitle">Team 1</label>
+              <select
+                class="form-control"
+                name="team1select"
+                [(ngModel)]="team1"
+                #team1select="ngModel"
+                required
+              >
+                <option *ngFor="let team of teams" [ngValue]="team">
+                  {{ team.teamName }}
+                </option>
+              </select>
+            </div>
 
             <h3 class="subtitle">VS.</h3>
 
-            <select
-              class="form-control select-box-medium"
-              name="team2select"
-              [(ngModel)]="team2"
-              #team2select="ngModel"
-              required
-            >
-              <option *ngFor="let team of teams" [ngValue]="team">
-                {{ team.teamName }}
-              </option>
-            </select>
+            <div class="team-select-section">
+              <label class="subtitle">Team 2</label>
+              <select
+                class="form-control"
+                name="team2select"
+                [(ngModel)]="team2"
+                #team2select="ngModel"
+                required
+              >
+                <option *ngFor="let team of teams" [ngValue]="team">
+                  {{ team.teamName }}
+                </option>
+              </select>
+            </div>
           </div>
           <div class="action-button-center">
             <button

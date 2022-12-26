@@ -39,18 +39,18 @@
               </p>
             </div>
           </div>
-          <br />
+          <!-- <br />
           <label for="playerAchievement">Achievements</label>
           <div *ngFor="let a of achievements; let i = index">
             <span
-              >Episode {{ i + 1 }}: {{ a.value }}
+              >Episode {{ a.id }}: {{ a.value }}
               <input
                 type="checkbox"
                 [value]="a.value"
                 [checked]="a.selected"
                 (change)="onChange($event)"
             /></span>
-          </div>
+          </div> -->
         </div>
       </form>
       <div class="action-button-center">

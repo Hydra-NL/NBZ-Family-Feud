@@ -22,6 +22,7 @@ import { AddQuestionComponent } from './core/pages/adminpanel/addquestion/addque
 import { AddPlayerComponent } from './core/pages/adminpanel/addplayer/addplayer.component';
 import { AddTeamComponent } from './core/pages/adminpanel/addteam/addteam.component';
 import { FinalComponent } from './core/pages/quiz/final/final.component';
+import { AddEpisodeComponent } from './core/pages/adminpanel/addepisode/addepisode.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { FinalComponent } from './core/pages/quiz/final/final.component';
     AddQuestionComponent,
     AddPlayerComponent,
     AddTeamComponent,
+    AddEpisodeComponent,
     FinalComponent,
   ],
   imports: [

@@ -17,23 +17,20 @@
               [(ngModel)]="team.teamName"
               #teamname="ngModel"
               name="teamname"
-              placeholder="Enter team name"
+              placeholder="Enter team title"
               [ngClass]="{
                 'is-invalid': teamaddform.submitted && teamname.invalid
               }"
               required
               minlength="3"
             />
-          </div>
-
+            </div>
           <div *ngIf="teamname.errors && teamname.touched">
             <div *ngIf="teamname.errors?.['required']">
-              <p class="error-message" style="margin-left: 15%">
-                Team name is required
-              </p>
+              <p class="error-message">Team name is required</p>
             </div>
             <div *ngIf="teamname.errors?.['minlength']">
-              <p class="error-message" style="margin-left: 15%">
+              <p class="error-message">
                 Team name must be at least 3 characters long
               </p>
             </div>

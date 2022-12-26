@@ -13,15 +13,15 @@
         <table class="table">
           <thead>
             <tr>
-              <th>#</th>
-              <th>Player</th>
-              <th>Achievements</th>
+              <th class="one">#</th>
+              <th class="two">Player</th>
+              <th class="three">Achievements</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let player of players; let i = index">
               <td>{{ i + 1 }}</td>
-              <td>{{ player.playerName }}</td>
+              <td id="hff-player-{{i}}">{{ player.playerName }}</td>
               <td>{{ player.achievements }}</td>
             </tr>
           </tbody>

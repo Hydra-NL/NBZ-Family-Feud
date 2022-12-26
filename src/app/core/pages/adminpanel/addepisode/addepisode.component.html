@@ -1,0 +1,111 @@
+<div class="content-box">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <div class="content-box-item">
+      <h4 class="align-center-bold">Create an Episode</h4>
+      <form
+        #episodeaddform="ngForm"
+        (ngSubmit)="episodeaddform.form.valid && addEpisode()"
+      >
+        <div class="form-group">
+          <label for="episodename">Episode Title</label>
+          <div class="home-episode-creation">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="episode.episodeTitle"
+              #episodename="ngModel"
+              name="episodename"
+              placeholder="Enter episode name"
+              [ngClass]="{
+                'is-invalid': episodeaddform.submitted && episodename.invalid
+              }"
+              required
+              minlength="3"
+            />
+          </div>
+          <div *ngIf="episodename.errors && episodename.touched">
+            <div *ngIf="episodename.errors?.['required']">
+              <p class="error-message">Episode name is required</p>
+            </div>
+            <div *ngIf="episodename.errors?.['minlength']">
+              <p class="error-message">
+                Episode name must be at least 3 characters long
+              </p>
+            </div>
+          </div>
+
+          <label for="episodenumber">Episode Number</label>
+          <div class="home-episode-creation">
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="episode.episodeNumber"
+              #episodenumber="ngModel"
+              name="episodenumber"
+              placeholder="Enter episode number"
+              [ngClass]="{
+                'is-invalid': episodeaddform.submitted && episodenumber.invalid
+              }"
+              required
+              minlength="1"
+            />
+          </div>
+
+          <div *ngIf="episodenumber.errors && episodenumber.touched">
+            <div *ngIf="episodenumber.errors?.['required']">
+              <p class="error-message">Episode number is required</p>
+            </div>
+            <div *ngIf="episodenumber.errors?.['minlength']">
+              <p class="error-message">
+                Episode number must be at least 1 characters long
+              </p>
+            </div>
+          </div>
+
+          <label for="episodeachievement">Episode Achievement</label>
+          <div class="home-episode-creation">
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="episode.episodeAchievement"
+              #episodeachievement="ngModel"
+              name="episodeachievement"
+              placeholder="Enter episode achievement"
+              [ngClass]="{
+                'is-invalid':
+                  episodeaddform.submitted && episodeachievement.invalid
+              }"
+              required
+              minlength="1"
+            />
+          </div>
+          <div *ngIf="episodeachievement.errors && episodeachievement.touched">
+            <div *ngIf="episodeachievement.errors?.['required']">
+              <p class="error-message">Episode achievement is required</p>
+            </div>
+            <div *ngIf="episodeachievement.errors?.['minlength']">
+              <p class="error-message">
+                Episode achievement must be at least 1 characters long
+              </p>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="action-button-center">
+        <button
+          type="submit"
+          class="action-button"
+          (click)="addEpisode()"
+          [disabled]="!episodeaddform.valid"
+        >
+          <i class="fa fa-save"></i>
+          Create
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<a class="btn btn-danger" routerLink="..">Back</a>

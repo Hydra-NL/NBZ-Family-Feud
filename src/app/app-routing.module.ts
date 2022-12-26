@@ -12,6 +12,7 @@ import { AddQuestionComponent } from './core/pages/adminpanel/addquestion/addque
 import { AddPlayerComponent } from './core/pages/adminpanel/addplayer/addplayer.component';
 import { AddTeamComponent } from './core/pages/adminpanel/addteam/addteam.component';
 import { FinalComponent } from './core/pages/quiz/final/final.component';
+import { AddEpisodeComponent } from './core/pages/adminpanel/addepisode/addepisode.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,7 @@ const routes: Routes = [
           { path: 'addquestion', component: AddQuestionComponent },
           { path: 'addplayer', component: AddPlayerComponent },
           { path: 'addteam', component: AddTeamComponent },
+          { path: 'addepisode', component: AddEpisodeComponent },
         ],
       },
       { path: 'halloffame', component: HalloffameComponent },

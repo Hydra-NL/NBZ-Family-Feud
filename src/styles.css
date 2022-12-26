@@ -890,8 +890,54 @@ li {
   font-size: 20px;
 }
 
+.hff-page th.one {
+  width: 5%;
+}
+
+.hff-page th.two {
+  width: 30%;
+}
+
+.hff-page th.three {
+  width: 65%;
+}
+
 .hff-page td {
   font-size: 16px;
+}
+
+.hff-first,
+.hff-second,
+.hff-third {
+  border-radius: 5px;
+  color: black;
+}
+
+.hff-first {
+  background-image: linear-gradient(
+    0deg,
+    rgba(255, 188, 2, 1) 0%,
+    rgba(255, 219, 118, 1) 50%,
+    rgba(255, 251, 239, 1) 100%
+  );
+}
+
+.hff-second {
+  background-image: linear-gradient(
+    0deg,
+    rgba(103, 103, 103, 1) 0%,
+    rgba(187, 187, 187, 1) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.hff-third {
+  background-image: linear-gradient(
+    0deg,
+    rgba(185, 80, 0, 1) 0%,
+    rgba(196, 142, 100, 1) 50%,
+    rgba(255, 231, 213, 1) 100%
+  );
 }
 
 /* ============================================================================= */

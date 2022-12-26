@@ -33,8 +33,26 @@ export class HalloffameComponent implements OnInit {
             }
             return 0;
           });
+          setTimeout(() => {
+            this.setPlayerColors();
+          }, 10);
         }
       },
     });
+  }
+
+  setPlayerColors() {
+    console.log('setPlayerColors');
+    var player1 = document.getElementById('hff-player-0');
+    var player2 = document.getElementById('hff-player-1');
+    var player3 = document.getElementById('hff-player-2');
+
+    console.log(player1);
+
+    player1?.classList.add('hff-first');
+    player2?.classList.add('hff-second');
+    player3?.classList.add('hff-third');
+
+    console.log(player1);
   }
 }

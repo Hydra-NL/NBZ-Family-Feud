@@ -3,17 +3,10 @@ body {
   background-size: cover;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: white;
 }
 /* Texts */
 /* ============================================================================= */
-.align-center-bold {
-  text-align: center;
-  font-weight: bold;
-  text-shadow: #000000 0px 0px 8px;
-}
-.align-block {
-  text-align: justify;
-}
 .title {
   font-size: 38px;
   background: -webkit-linear-gradient(
@@ -25,24 +18,34 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.subtitle {
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 0px 0px 8px black;
+  margin-inline: 10px;
+}
+
 .question-title {
   font-size: 38px;
   visibility: hidden;
-  color: white;
   text-shadow: 2px 2px 6px black;
+}
+
+.home-credit-box a {
+  color: white;
+  text-decoration: none;
 }
 
 .question-title,
 .title,
-.winning-title,
-.team-title {
+.winning-title {
   font-weight: bold;
   text-align: center;
   margin: 0px;
 }
 
 .error-message {
-  color: rgb(255, 255, 255);
   background-color: rgba(230, 36, 36, 0.842);
   font-size: 14px;
   text-align: left;
@@ -50,18 +53,15 @@ body {
   padding-inline: 5px;
   border-radius: 5px;
 }
-li {
-  margin-bottom: 5px;
-}
-.home-credit-box p,
-.home-credit-box a {
-  color: white;
-  text-decoration: none;
-}
 
 .team-title {
+  font-weight: bold;
   font-size: 20px;
+}
+
+.team-title-box {
   background-color: rgb(255, 73, 73);
+  text-align: center;
   border-radius: 5px;
   margin-bottom: 5px;
 }
@@ -79,7 +79,6 @@ li {
 .show-title-button {
   border-radius: 150px;
   background-image: linear-gradient(#acbbff, rgb(25, 51, 167) 60%);
-  color: white;
   height: 50px;
   width: 225px;
   font-weight: bold;
@@ -97,12 +96,10 @@ li {
 .show-answer-button {
   border-radius: 50%;
   background-image: linear-gradient(#acbbff, #1933a7 60%);
-  color: white;
   padding: 5px;
   width: 78px;
   font-weight: 900;
   font-size: 30px;
-
   margin: 4px 1px;
   cursor: pointer;
   visibility: visible;
@@ -114,39 +111,30 @@ li {
 
 /* Tech buttons */
 /* ============================================================================= */
-.tech-button-box {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 0;
-  position: absolute;
-  right: 0;
-  bottom: 0;
-}
-.tech-button-box label {
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding-inline: 5px;
-  position: absolute;
-  bottom: 21px;
-}
+.tech-button-box,
 .tech-funny-button-box {
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0;
   position: absolute;
-  left: 0;
   bottom: 0;
 }
+.tech-button-box label,
 .tech-funny-button-box label {
-  color: white;
   background-color: rgba(0, 0, 0, 0.5);
   padding-inline: 5px;
   position: absolute;
   bottom: 21px;
+}
+.tech-button-box {
+  right: 0;
+}
+.tech-funny-button-box {
+  left: 0;
 }
 .tech-button {
   background-image: linear-gradient(#474747 0%, #7a7a7a 51%, #474747 100%);
   border-radius: 5px;
   border: none;
-  color: rgb(255, 255, 255);
   display: inline-block;
   font-size: 14px;
   margin-inline: 2px;
@@ -175,7 +163,6 @@ li {
     #f37d7d 51%,
     #fd3333 100%
   );
-  color: white;
   padding: 6px;
   border-radius: 6px;
   border: 1px solid rgb(255, 160, 160);
@@ -186,7 +173,6 @@ li {
 }
 .nav-button:hover {
   background-position: right center;
-  color: #fff;
   text-decoration: none;
 }
 .nav-button:disabled {
@@ -212,7 +198,6 @@ li {
     #35fd1b 100%
   );
   min-width: 33%;
-  max-width: 45%;
 }
 .action-button:hover {
   background-position: right center;
@@ -257,8 +242,12 @@ li {
   border-radius: 10px;
   padding: 8px;
   background-color: rgba(224, 154, 1, 0.65);
-  color: white;
 }
+
+.content-box-item li {
+  margin-bottom: 5px;
+}
+
 .content-box-content {
   margin: 0px;
   padding: 3px;
@@ -281,10 +270,6 @@ li {
 }
 .title-box {
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 16px;
-  border-radius: 10px;
-  margin-top: 6px;
-  margin-bottom: 6px;
 }
 
 .sound-board .tech-button {
@@ -297,6 +282,16 @@ li {
   position: absolute;
   bottom: 10px;
   left: 10px;
+}
+
+.title-box,
+.winning-team-box,
+.winning-title-box,
+.question-title-box {
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 /* ============================================================================= */
 
@@ -327,36 +322,17 @@ li {
 }
 /* ============================================================================= */
 
-/* Tooltips */
-/* ============================================================================= */
-.tooltip {
-  position: relative;
-  display: inline-block;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-
-  position: absolute;
-  z-index: 1;
-}
-
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
-/* ============================================================================= */
-
 /* Home page */
 /* ============================================================================= */
+#home-page {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
 .home-player-team-row {
-  text-decoration: none;
   color: white;
+  text-decoration: none;
   font-size: 18px;
   font-weight: bold;
   transition: 0.2s;
@@ -410,7 +386,8 @@ li {
 }
 
 .team-player-select-form,
-.episode-select-form {
+.episode-select-form,
+.team-select-form {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -418,26 +395,39 @@ li {
 }
 
 .episode-select-form {
+  flex-direction: column;
+  gap: 10px;
 }
 
-.team-player-select {
-  margin-inline: 10px;
+.select-box-small,
+.input-box-small {
+  width: 15%;
+}
+
+.select-box-medium,
+.input-box-medium {
   width: 40%;
 }
 
-.episode-select {
-  width: 30%;
+.select-box-large,
+.input-box-large {
+  width: 85%;
 }
+
 /* ============================================================================= */
 
 /* Admin page */
 /* ============================================================================= */
 .question-form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
-.question-link {
-  color: white;
+
+.question-form-section {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-bottom: 2px;
 }
 .reveal-question-list {
   color: white;
@@ -468,11 +458,6 @@ li {
 .admin-nav-buttons-group {
   display: flex;
   flex-direction: column;
-}
-
-.admin-nav-buttons-group .action-button {
-  margin: 0;
-  max-width: 100%;
 }
 
 .admin-item-row {
@@ -556,7 +541,6 @@ li {
 .round-points-box p,
 .special-question-box p,
 .double-ptns {
-  color: white;
   font-size: 60px;
   font-weight: bold;
   text-align: center;
@@ -597,15 +581,10 @@ li {
 .disabled-ptns {
   position: absolute;
   top: 16px;
-  color: white;
   font-size: 30px;
 }
 .question-title-box {
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 6px;
-  margin-bottom: 6px;
   width: auto;
 }
 .question-title-box-content {
@@ -662,7 +641,6 @@ li {
   padding-inline: 10px;
   font-weight: bold;
   text-transform: uppercase;
-  color: white;
   margin: 0px;
   visibility: hidden;
   text-shadow: 1px 1px 6px black;
@@ -701,7 +679,6 @@ li {
 .team-points p,
 .team-box-title {
   font-weight: bold;
-  color: white;
   margin: 0px;
   text-align: center;
 }
@@ -747,7 +724,6 @@ li {
 .teams-box-content-right p {
   font-weight: bold;
   font-size: 18px;
-  color: white;
   margin: 2px;
   text-shadow: 1px 1px 6px black;
 }
@@ -780,7 +756,6 @@ li {
 .select-team-box p {
   font-size: 26px;
   font-weight: bold;
-  color: white;
   margin: 2px;
   text-align: center;
 }
@@ -819,11 +794,9 @@ li {
 .winning-team-box,
 .winning-title-box {
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 16px;
-  border-radius: 10px;
+
   margin-inline: auto;
-  margin-top: 6px;
-  margin-bottom: 6px;
+
   width: fit-content;
 }
 
@@ -853,7 +826,6 @@ li {
 }
 .winning-playername,
 .winning-points {
-  color: white;
   text-align: center;
   font-weight: bold;
   font-size: 40px;
@@ -960,7 +932,6 @@ li {
 .timer-box p {
   font-size: 80px;
   font-weight: bold;
-  color: white;
   margin: 0px;
 }
 /* ============================================================================= */
@@ -968,7 +939,6 @@ li {
 /* Snowfall */
 /* ============================================================================= */
 .snowflake {
-  color: #fff;
   font-size: 1em;
   font-family: Arial;
   text-shadow: 0 0 8px #05c4fd;
@@ -1098,14 +1068,12 @@ li {
 }
 .content-box-item {
   background-color: rgba(0, 217, 255, 0.65);
-  color: white;
 }
 .content-box-content {
   background-color: rgba(164, 241, 255, 0.315);
 }
 .home-credit-box {
   background-color: rgba(0, 131, 148, 0.65);
-  color: white;
 }
 .action-button {
   background-image: linear-gradient(
@@ -1128,7 +1096,6 @@ li {
     #4dbaec 51%,
     #5387a7 100%
   );
-  color: white;
 }
 .nav-button:disabled {
   background-image: linear-gradient(

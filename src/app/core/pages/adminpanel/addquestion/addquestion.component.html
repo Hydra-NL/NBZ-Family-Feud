@@ -1,7 +1,7 @@
 <div class="content-box">
   <div class="col-md-5">
     <div class="content-box-item">
-      <h4 class="align-center-bold">Add a Question</h4>
+      <h4 class="subtitle">Add a Question</h4>
       <form
         #questionaddform="ngForm"
         (ngSubmit)="questionaddform.form.valid && addQuestion()"
@@ -15,108 +15,195 @@
             #questionname="ngModel"
             name="questionname"
             placeholder="Enter question name"
-            [ngClass]="{
-              'is-invalid': questionaddform.submitted && questionname.invalid
-            }"
             required
             minlength="10"
           />
-          <div *ngIf="questionname.errors && questionname.touched">
-            <div *ngIf="questionname.errors?.['required']">
-              <p class="error-message">Question title is required</p>
-            </div>
-            <div *ngIf="questionname.errors?.['minlength']">
-              <p class="error-message">
-                Question title must be at least 10 characters long
-              </p>
-            </div>
-          </div>
         </div>
         <div class="question-form">
-          <div class="form-group" style="width: 73%; margin-right: 2%">
+          <div class="form-group">
             <label>Question Answers</label><br />
-
             <label for="answer1">Answer 1</label>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="question.answer1"
-              #questionanswer1="ngModel"
-              name="questionanswer1"
-              placeholder="Enter answer 1"
-              required
-              minlength="2"
-            />
+            <div class="question-form-section">
+              <input
+                type="text"
+                class="form-control input-box-large"
+                [(ngModel)]="question.answer1"
+                #questionanswer1="ngModel"
+                name="questionanswer1"
+                placeholder="Enter answer 1"
+                required
+                minlength="2"
+              />
+              <input
+                type="number"
+                class="form-control input-box-small"
+                [(ngModel)]="question.points1"
+                #questionpoints1="ngModel"
+                name="questionpoints1"
+                placeholder="Enter points for answer 1"
+                required
+                min="1"
+                max="100"
+              />
+            </div>
 
             <label for="answer2">Answer 2</label>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="question.answer2"
-              #questionanswer2="ngModel"
-              name="questionanswer2"
-              placeholder="Enter answer 2"
-              required
-              minlength="2"
-            />
+            <div class="question-form-section">
+              <input
+                type="text"
+                class="form-control input-box-large"
+                [(ngModel)]="question.answer2"
+                #questionanswer2="ngModel"
+                name="questionanswer2"
+                placeholder="Enter answer 2"
+                required
+                minlength="2"
+              />
+              <input
+                type="number"
+                class="form-control input-box-small"
+                [(ngModel)]="question.points2"
+                #questionpoints2="ngModel"
+                name="questionpoints2"
+                placeholder="Enter points for answer 2"
+                required
+                min="1"
+                max="100"
+              />
+            </div>
             <label for="answer3">Answer 3</label>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="question.answer3"
-              #questionanswer3="ngModel"
-              name="questionanswer3"
-              placeholder="Enter answer 3"
-              required
-              minlength="2"
-            />
+            <div class="question-form-section">
+              <input
+                type="text"
+                class="form-control input-box-large"
+                [(ngModel)]="question.answer3"
+                #questionanswer3="ngModel"
+                name="questionanswer3"
+                placeholder="Enter answer 3"
+                required
+                minlength="2"
+              />
+              <input
+                type="number"
+                class="form-control input-box-small"
+                [(ngModel)]="question.points3"
+                #questionpoints3="ngModel"
+                name="questionpoints3"
+                placeholder="Enter points for answer 3"
+                required
+                min="1"
+                max="100"
+              />
+            </div>
             <label for="answer4">Answer 4</label>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="question.answer4"
-              #questionanswer4="ngModel"
-              name="questionanswer4"
-              placeholder="Enter answer 4"
-            />
+            <div class="question-form-section">
+              <input
+                type="text"
+                class="form-control input-box-large"
+                [(ngModel)]="question.answer4"
+                #questionanswer4="ngModel"
+                name="questionanswer4"
+                placeholder="Enter answer 4"
+              />
+              <input
+                type="number"
+                class="form-control input-box-small"
+                [(ngModel)]="question.points4"
+                #questionpoints4="ngModel"
+                name="questionpoints4"
+                placeholder="Enter points for answer 4"
+                min="0"
+                max="100"
+              />
+            </div>
+
             <label for="answer5">Answer 5</label>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="question.answer5"
-              #questionanswer5="ngModel"
-              name="questionanswer5"
-              placeholder="Enter answer 5"
-            />
+            <div class="question-form-section">
+              <input
+                type="text"
+                class="form-control input-box-large"
+                [(ngModel)]="question.answer5"
+                #questionanswer5="ngModel"
+                name="questionanswer5"
+                placeholder="Enter answer 5"
+              /><input
+                type="number"
+                class="form-control input-box-small"
+                [(ngModel)]="question.points5"
+                #questionpoints5="ngModel"
+                name="questionpoints5"
+                placeholder="Enter points for answer 5"
+                min="0"
+                max="100"
+              />
+            </div>
+
             <label for="answer6">Answer 6</label>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="question.answer6"
-              #questionanswer6="ngModel"
-              name="questionanswer6"
-              placeholder="Enter answer 6"
-            />
+            <div class="question-form-section">
+              <input
+                type="text"
+                class="form-control input-box-large"
+                [(ngModel)]="question.answer6"
+                #questionanswer6="ngModel"
+                name="questionanswer6"
+                placeholder="Enter answer 6"
+              />
+              <input
+                type="number"
+                class="form-control input-box-small"
+                [(ngModel)]="question.points6"
+                #questionpoints6="ngModel"
+                name="questionpoints6"
+                placeholder="Enter points for answer 6"
+                min="0"
+                max="100"
+              />
+            </div>
             <label for="answer7">Answer 7</label>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="question.answer7"
-              #questionanswer7="ngModel"
-              name="questionanswer7"
-              placeholder="Enter answer 7"
-            />
+            <div class="question-form-section">
+              <input
+                type="text"
+                class="form-control input-box-large"
+                [(ngModel)]="question.answer7"
+                #questionanswer7="ngModel"
+                name="questionanswer7"
+                placeholder="Enter answer 7"
+              />
+              <input
+                type="number"
+                class="form-control input-box-small"
+                [(ngModel)]="question.points7"
+                #questionpoints7="ngModel"
+                name="questionpoints7"
+                placeholder="Enter points for answer 7"
+                min="0"
+                max="100"
+              />
+            </div>
             <label for="answer8">Answer 8</label>
-            <input
-              type="text"
-              class="form-control"
-              [(ngModel)]="question.answer8"
-              #questionanswer8="ngModel"
-              name="questionanswer8"
-              placeholder="Enter answer 8"
-            />
+            <div class="question-form-section">
+              <input
+                type="text"
+                class="form-control input-box-large"
+                [(ngModel)]="question.answer8"
+                #questionanswer8="ngModel"
+                name="questionanswer8"
+                placeholder="Enter answer 8"
+              />
+              <input
+                type="number"
+                class="form-control input-box-small"
+                [(ngModel)]="question.points8"
+                #questionpoints8="ngModel"
+                name="questionpoints8"
+                placeholder="Enter points for answer 8"
+                min="0"
+                max="100"
+              />
+            </div>
             <div class="admin-question-checkbox">
               <label for="questionisSpecial">Special Question: </label>
+
               <input
                 type="checkbox"
                 [(ngModel)]="question.isSpecial"
@@ -128,9 +215,8 @@
             </div>
             <!-- ATTENTION: Specialities will go here -->
             <div *ngIf="checkbox.checked">
-              <label for="questionSpeciality">Speciality</label>
               <select
-                class="form-control"
+                class="form-control select-box-medium"
                 [(ngModel)]="question.speciality"
                 #questionSpeciality
                 name="questionSpeciality"
@@ -139,100 +225,17 @@
                 <option value="Reverse">Reverse</option>
               </select>
             </div>
-          </div>
-          <div class="form-group" style="width: 25%">
-            <label>Points</label><br />
-            <label for="points1">Points 1</label>
+            <label for="episode">Episode</label>
             <input
               type="number"
-              class="form-control"
-              [(ngModel)]="question.points1"
-              #questionpoints1="ngModel"
-              name="questionpoints1"
-              placeholder="Enter points for answer 1"
+              class="form-control select-box-small"
+              [(ngModel)]="question.episode"
+              #questionepisode="ngModel"
+              name="questionepisode"
+              placeholder="Enter episode"
               required
+              [value]="activeEpisode?.episodeNumber"
               min="1"
-              max="100"
-            />
-            <label for="points2">Points 2</label>
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="question.points2"
-              #questionpoints2="ngModel"
-              name="questionpoints2"
-              placeholder="Enter points for answer 2"
-              required
-              min="1"
-              max="100"
-            />
-            <label for="points3">Points 3</label>
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="question.points3"
-              #questionpoints3="ngModel"
-              name="questionpoints3"
-              placeholder="Enter points for answer 3"
-              required
-              min="1"
-              max="100"
-            />
-
-            <label for="points4">Points 4</label>
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="question.points4"
-              #questionpoints4="ngModel"
-              name="questionpoints4"
-              placeholder="Enter points for answer 4"
-              min="0"
-              max="100"
-            />
-            <label for="points5">Points 5</label>
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="question.points5"
-              #questionpoints5="ngModel"
-              name="questionpoints5"
-              placeholder="Enter points for answer 5"
-              min="0"
-              max="100"
-            />
-            <label for="points6">Points 6</label>
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="question.points6"
-              #questionpoints6="ngModel"
-              name="questionpoints6"
-              placeholder="Enter points for answer 6"
-              min="0"
-              max="100"
-            />
-            <label for="points7">Points 7</label>
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="question.points7"
-              #questionpoints7="ngModel"
-              name="questionpoints7"
-              placeholder="Enter points for answer 7"
-              min="0"
-              max="100"
-            />
-            <label for="points8">Points 8</label>
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="question.points8"
-              #questionpoints8="ngModel"
-              name="questionpoints8"
-              placeholder="Enter points for answer 8"
-              min="0"
-              max="100"
             />
           </div>
         </div>
@@ -252,7 +255,7 @@
   </div>
   <div class="col-md-7">
     <div class="content-box-item">
-      <h4 class="align-center-bold">Questions</h4>
+      <h4 class="subtitle">Questions</h4>
       <a id="toggle" class="reveal-question-list" (click)="toggleList()"
         >[Show]</a
       >
@@ -261,7 +264,7 @@
           class="question-list-title"
           *ngFor="let question of questions; let i = index"
         >
-          <p class="question-link">
+          <p>
             {{ i }}) {{ question.questionTitle }}
             <span *ngIf="question.isSpecial"
               >- [{{ question.speciality }}]</span

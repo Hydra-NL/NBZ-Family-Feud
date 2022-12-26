@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Episode } from 'src/app/entities/episodes/episode.model';
+import { EpisodeService } from 'src/app/entities/episodes/episode.service';
 import {
   Question,
   QuestionSpeciality,
@@ -13,16 +15,22 @@ import { QuestionService } from 'src/app/entities/questions/question.service';
 export class AddQuestionComponent implements OnInit, OnDestroy {
   questions!: Question[];
   question!: Question;
+  episodes!: Episode[];
+  activeEpisode!: Episode;
   totalPoints!: number;
   specialities: string[] = [];
   subscription!: Subscription;
 
-  constructor(private questionsService: QuestionService) {}
+  constructor(
+    private questionsService: QuestionService,
+    private episodeService: EpisodeService
+  ) {}
 
   ngOnInit(): void {
     this.clearQuestion();
 
     this.getQuestions();
+    this.getEpisodes();
     var list = document.getElementById('question-list');
     list!.classList.toggle('hidden');
   }
@@ -35,6 +43,22 @@ export class AddQuestionComponent implements OnInit, OnDestroy {
       next: (questions) => {
         this.questions = questions as Question[];
         console.log(questions);
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  async getEpisodes() {
+    this.episodes = [];
+    this.subscription = (await this.episodeService.list()).subscribe({
+      next: (episodes) => {
+        this.episodes = episodes!;
+        console.log('Episodes: ' + this.episodes.length);
+        this.activeEpisode = this.episodes.find(
+          (episode) => episode.isActive == true
+        )!;
       },
       error: (err) => {
         console.log(err);

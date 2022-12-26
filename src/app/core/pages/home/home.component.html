@@ -2,20 +2,24 @@
   <!-- Home page title -->
   <div class="title-box">
     <p class="title">
-      {{ title }}
+      {{ activeEpisode?.episodeTitle }}
     </p>
+    <p class="title" *ngIf="activeEpisode == undefined">[Title goes here]</p>
   </div>
 
   <!-- Home page content player&team overview -->
   <div class="content-box">
     <div class="col-md-6">
       <div class="content-box-item">
-        <h4 class="align-center-bold">Teams & Players</h4>
+        <h4 class="subtitle">Teams & Players</h4>
         <div class="content-box-content">
           <div *ngFor="let team of teams">
-            <p class="team-title">
-              ({{ team.teamMembers.length }}) Team - {{ team.teamName }}
-            </p>
+            <div class="team-title-box">
+              <span class="team-title">
+                ({{ team.teamMembers.length }}) Team - {{ team.teamName }}
+              </span>
+            </div>
+
             <div *ngFor="let teamplayer of teamplayers">
               <a
                 class="home-player-team-row"
@@ -39,7 +43,7 @@
     </div>
     <div class="col-md-6">
       <div class="content-box-item">
-        <h4 class="align-center-bold">Join Team</h4>
+        <h4 class="subtitle">Join Team</h4>
         <form
           #jointeamform="ngForm"
           (ngSubmit)="
@@ -48,7 +52,7 @@
         >
           <div class="form-group team-player-select-form">
             <select
-              class="form-control team-player-select"
+              class="form-control select-box-medium"
               name="teammember"
               [(ngModel)]="team._id"
               #teammember="ngModel"
@@ -63,9 +67,9 @@
                 <span *ngIf="!teamplayer.playerTeam">[No team]</span>
               </option>
             </select>
-            <i class="fa-solid fa-arrow-right"></i>
+            <i class="fa-solid fa-arrow-right subtitle"></i>
             <select
-              class="form-control team-player-select"
+              class="form-control select-box-medium"
               name="playerteam"
               [(ngModel)]="teamplayer._id"
               #playerteam="ngModel"
@@ -89,34 +93,39 @@
         </form>
       </div>
       <div class="content-box-item">
-        <h4 class="align-center-bold">Select Episode</h4>
+        <h4 class="subtitle">Select Episode</h4>
         <form
           #selectepisodeform="ngForm"
           (ngSubmit)="
             selectepisodeform.form.valid && selectEpisode(episode._id!)
           "
         >
-          <div class="episode-select-form">
+          <div class="form-group episode-select-form">
             <select
-              class="form-control episode-select"
-              name="episodeSelect"
+              class="form-control select-box-medium"
+              name="episodeselect"
               [(ngModel)]="episode._id"
-              #episodeSelect="ngModel"
+              #episodeselect="ngModel"
               required
             >
-              <option value="" disabled selected hidden>Select a team</option>
-              <option *ngFor="let eps of episodes" [ngValue]="episode._id">
-                {{ eps.episodeNumber }}
+              <option value="" disabled selected hidden>
+                Select an episode
+              </option>
+              <option *ngFor="let episode of episodes" [ngValue]="episode._id">
+                Episode: {{ episode.episodeNumber }}
+                {{ episode.episodeAchievement }}
               </option>
             </select>
 
-            <button
-              type="submit"
-              class="action-button"
-              [disabled]="!selectepisodeform.valid"
-            >
-              Select episode
-            </button>
+            <div class="action-button-center">
+              <button
+                type="submit"
+                class="action-button"
+                [disabled]="!selectepisodeform.valid"
+              >
+                Select episode
+              </button>
+            </div>
           </div>
         </form>
       </div>
@@ -134,11 +143,10 @@
           #startform="ngForm"
           (ngSubmit)="startform.form.valid && goToQuiz(team1, team2)"
         >
-          <h2 class="align-center-bold">Game</h2>
-          <div class="form-group col-md-5">
-            <label for="team1select">Team 1</label>
+          <h2 class="subtitle">Game</h2>
+          <div class="form-group team-select-form">
             <select
-              class="form-control"
+              class="form-control select-box-medium"
               name="team1select"
               [(ngModel)]="team1"
               #team1select="ngModel"
@@ -148,16 +156,11 @@
                 {{ team.teamName }}
               </option>
             </select>
-          </div>
 
-          <div class="col-md-2">
-            <h3 class="align-center-bold">VS.</h3>
-          </div>
+            <h3 class="subtitle">VS.</h3>
 
-          <div class="form-group col-md-5">
-            <label for="team2select">Team 2</label>
             <select
-              class="form-control"
+              class="form-control select-box-medium"
               name="team2select"
               [(ngModel)]="team2"
               #team2select="ngModel"

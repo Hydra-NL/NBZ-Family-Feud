@@ -16,11 +16,32 @@ export class AddEpisodeComponent implements OnInit {
     this.getEpisodes();
   }
 
-  addEpisode() {}
+  addEpisode() {
+    if (
+      !/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(
+        this.episode.episodeAchievement
+      )
+    ) {
+      this.episode.episodeNumber = this.episodes.length + 1;
+      this.episodeService.create(this.episode).subscribe({
+        next: () => {
+          this.episode = new Episode('');
+          this.getEpisodes();
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
+    } else {
+      alert('The achievement must be an emoji (WIN + .)');
+    }
+  }
 
   async getEpisodes() {
+    this.episodes = [];
     (await this.episodeService.list()).subscribe((episodes) => {
       this.episodes = episodes!;
+      console.log(this.episodes.length);
     });
   }
 }

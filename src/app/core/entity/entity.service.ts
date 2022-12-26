@@ -96,6 +96,14 @@ export class EntityService<T extends Entity> {
       .pipe(catchError(this.handleError));
   }
 
+  public activateEpisode(episodeId: string, options?: any): Observable<T> {
+    const endpoint = `${this.url}${this.endpoint}/activate/${episodeId}`;
+    console.log(`activate ${endpoint}`);
+    return this.http
+      .put(endpoint, episodeId, { ...options, ...httpOptions })
+      .pipe(catchError(this.handleError));
+  }
+
   public handleError(error: HttpErrorResponse): Observable<any> {
     console.log(error);
 

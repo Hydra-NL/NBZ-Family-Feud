@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   team2!: Team;
   teamplayers!: TeamPlayer[];
   teamplayer!: TeamPlayer;
+  activeEpisode: Episode | undefined;
   episode!: Episode;
   episodes!: Episode[];
   subscription!: Subscription;
@@ -59,7 +60,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       episodeAchievement: '',
       isActive: false,
     };
-
     this.getTeams();
     this.getPlayers();
     this.getEpisodes();
@@ -102,6 +102,10 @@ export class HomeComponent implements OnInit, OnDestroy {
       next: (episodes) => {
         this.episodes = episodes!;
         console.log('Episodes: ' + this.episodes.length);
+        this.episodes.sort((a, b) => a.episodeNumber - b.episodeNumber);
+        this.activeEpisode = this.episodes.find(
+          (episode) => episode.isActive == true
+        )!;
       },
       error: (err) => {
         console.log(err);
@@ -182,22 +186,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
   }
 
-  selectEpisode(episodeId: string) {
-    console.log('EpisodeId: ' + episodeId);
-    for (let i = 0; i < this.episodes.length; i++) {
-      this.episodes[i].isActive = false;
-      this.episodeService.update(this.episodes[i]).subscribe();
-    }
-    this.episodeService.read(episodeId).subscribe({
-      next: (episode) => {
-        this.episode = episode;
-        this.episode.isActive = true;
-        console.log('Episode: ' + this.episode);
-        this.episodeService.update(this.episode).subscribe({
-          next: () => {
-            this.getEpisodes();
-          },
-        });
+  selectEpisode(episodeToActivateId: string) {
+    this.activeEpisode = new Episode('');
+    this.episodeService.activateEpisode(episodeToActivateId).subscribe({
+      next: () => {
+        this.getEpisodes();
       },
     });
   }

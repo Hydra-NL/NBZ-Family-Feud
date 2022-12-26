@@ -2,7 +2,7 @@
   <div class="col-md-3"></div>
   <div class="col-md-6">
     <div class="content-box-item">
-      <h4 class="align-center-bold">Create a Team</h4>
+      <h4 class="subtitle">Create a Team</h4>
       <form
         #teamaddform="ngForm"
         (ngSubmit)="teamaddform.form.valid && addTeam()"
@@ -24,7 +24,7 @@
               required
               minlength="3"
             />
-            </div>
+          </div>
           <div *ngIf="teamname.errors && teamname.touched">
             <div *ngIf="teamname.errors?.['required']">
               <p class="error-message">Team name is required</p>

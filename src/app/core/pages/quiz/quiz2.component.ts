@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Episode } from 'src/app/entities/episodes/episode.model';
+import { EpisodeService } from 'src/app/entities/episodes/episode.service';
 import {
   Question,
   QuestionSpeciality,
@@ -36,6 +38,8 @@ export class Quiz2Component implements OnInit, OnDestroy {
   isInFaceOff: boolean = true;
   isTitleHidden: boolean = false;
   isStrike: boolean = false;
+  episodes!: Episode[];
+  activeEpisode!: Episode;
   subscription!: Subscription;
 
   constructor(
@@ -43,6 +47,7 @@ export class Quiz2Component implements OnInit, OnDestroy {
     private teamService: TeamService,
     private teamPlayerService: TeamPlayerService,
     private questionService: QuestionService,
+    private episodeService: EpisodeService,
     private router: Router
   ) {}
 
@@ -87,7 +92,7 @@ export class Quiz2Component implements OnInit, OnDestroy {
       episode: 3,
     };
     this.timeRemaining = 0;
-
+    this.getEpisodes();
     this.getTeams();
     this.getQuestions();
   }
@@ -147,17 +152,34 @@ export class Quiz2Component implements OnInit, OnDestroy {
   }
 
   async getQuestions() {
+    this.questions = [];
     this.subscription = (await this.questionService.list()).subscribe(
       (questions) => {
         for (let i = 0; i < questions!.length; i++) {
-          if (questions![i].episode == 3) {
-            this.questions = questions!;
+          if (questions![i].episode == this.activeEpisode.episodeNumber) {
+            this.questions.push(questions![i]);
           }
         }
         console.log('Questions: ' + this.questions.length);
         this.question = this.questions[this.questionNumber];
       }
     );
+  }
+
+  async getEpisodes() {
+    this.episodes = [];
+    this.subscription = (await this.episodeService.list()).subscribe({
+      next: (episodes) => {
+        this.episodes = episodes!;
+        console.log('Episodes: ' + this.episodes.length);
+        this.activeEpisode = this.episodes.find(
+          (episode) => episode.isActive == true
+        )!;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   // Game actions
@@ -238,7 +260,7 @@ export class Quiz2Component implements OnInit, OnDestroy {
 
     (await this.teamService.update(this.team1)).subscribe();
     (await this.teamService.update(this.team2)).subscribe();
-    
+
     if (this.questionNumber == this.questions.length) {
       console.log('team1: ' + this.team1.points);
       console.log('team2: ' + this.team2.points);

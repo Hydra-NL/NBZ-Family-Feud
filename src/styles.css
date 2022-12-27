@@ -514,10 +514,22 @@ body {
 }
 /* ============================================================================= */
 
+/* Smaller quiz page  */
+/* ============================================================================= */
+@media (max-width: 1280px) {
+  .reverse {
+    background-size: 1050px 216px;
+    width: 1050px;
+    height: 200px;
+  }
+}
+
+/* ============================================================================= */
+
 /* Quiz page */
 /* ============================================================================= */
 .question-body {
-  margin-inline: 5%;
+  margin-inline-end: 3%;
 }
 
 .round-info-row {
@@ -607,7 +619,6 @@ body {
 
 .reverse {
   background-image: url(./assets/images/ice2.png);
-
   position: absolute;
   background-repeat: no-repeat;
   background-size: 1080px 216px;

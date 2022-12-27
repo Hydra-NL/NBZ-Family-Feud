@@ -1,21 +1,3 @@
-<div class="round-info-row">
-  <!-- Question multiplier -->
-  <div class="double-ptns" *ngIf="multiplier > 1">
-    <p>{{ multiplier }}x</p>
-  </div>
-
-  <!-- Round points -->
-  <div class="round-points-box">
-    <p>{{ roundPoints }}</p>
-    <i *ngIf="pointsLocked" class="fa fa-lock disabled-ptns"></i>
-  </div>
-
-  <!-- Question speciality -->
-  <div class="special-question-box" *ngIf="question.isSpecial">
-    <p *ngIf="question.speciality == 'Reverse'">🥶</p>
-  </div>
-</div>
-
 <!-- Strikes -->
 <div class="strikes-box-team1">
   <img
@@ -117,6 +99,23 @@
 </div>
 
 <div class="question-body">
+  <div class="round-info-row">
+    <!-- Question multiplier -->
+    <div class="double-ptns" *ngIf="multiplier > 1">
+      <p>{{ multiplier }}x</p>
+    </div>
+
+    <!-- Round points -->
+    <div class="round-points-box">
+      <p>{{ roundPoints }}</p>
+      <i *ngIf="pointsLocked" class="fa fa-lock disabled-ptns"></i>
+    </div>
+
+    <!-- Question speciality -->
+    <div class="special-question-box" *ngIf="question.isSpecial">
+      <p *ngIf="question.speciality == 'Reverse'">🥶</p>
+    </div>
+  </div>
   <!-- Title quiz -->
   <div class="question-title-box">
     <div class="reverse" *ngIf="question.speciality == 'Reverse'"></div>
@@ -245,6 +244,38 @@
       </div>
     </div>
   </div>
+
+  <!-- Team select -->
+  <div class="select-team-box" *ngIf="isInFaceOff">
+    <p>Who goes first?</p>
+    <div class="select-team-buttons">
+      <button (click)="selectTeam(team1)" class="select-team-button">
+        <i class="fa fa-arrow-left"></i>
+        Team {{ team1.teamName }}
+      </button>
+      <button (click)="selectTeam(team2)" class="select-team-button">
+        Team {{ team2.teamName }}
+        <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="select-team-box"
+    *ngIf="!isInFaceOff && !isTitleHidden && question.speciality == 'Reverse'"
+  >
+    <p>Did a team crack the ice?</p>
+    <div class="select-team-buttons">
+      <button (click)="deselectTeam()" class="select-team-button">No.</button>
+    </div>
+  </div>
+
+  <!-- Timer -->
+  <div *ngIf="timerActive">
+    <div class="timer-box">
+      <p>{{ timeRemaining }}</p>
+    </div>
+  </div>
 </div>
 <!-- Team 1 -->
 <div id="team-1" class="team-1">
@@ -277,38 +308,6 @@
         </p>
       </div>
     </div>
-  </div>
-</div>
-
-<!-- Team select -->
-<div class="select-team-box" *ngIf="isInFaceOff">
-  <p>Who goes first?</p>
-  <div class="select-team-buttons">
-    <button (click)="selectTeam(team1)" class="select-team-button">
-      <i class="fa fa-arrow-left"></i>
-      Team {{ team1.teamName }}
-    </button>
-    <button (click)="selectTeam(team2)" class="select-team-button">
-      Team {{ team2.teamName }}
-      <i class="fa fa-arrow-right"></i>
-    </button>
-  </div>
-</div>
-
-<div
-  class="select-team-box"
-  *ngIf="!isInFaceOff && !isTitleHidden && question.speciality == 'Reverse'"
->
-  <p>Did a team crack the ice?</p>
-  <div class="select-team-buttons">
-    <button (click)="deselectTeam()" class="select-team-button">No.</button>
-  </div>
-</div>
-
-<!-- Timer -->
-<div *ngIf="timerActive">
-  <div class="timer-box">
-    <p>{{ timeRemaining }}</p>
   </div>
 </div>
 

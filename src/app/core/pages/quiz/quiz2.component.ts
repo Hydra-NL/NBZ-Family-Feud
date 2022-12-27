@@ -334,6 +334,9 @@ export class Quiz2Component implements OnInit, OnDestroy {
     y!.style.visibility = 'hidden';
 
     this.isTitleHidden = false;
+    if (this.question.speciality == QuestionSpeciality.Reverse) {
+      this.pointsLocked = true;
+    }
   }
 
   toggleAnswer(num: number) {

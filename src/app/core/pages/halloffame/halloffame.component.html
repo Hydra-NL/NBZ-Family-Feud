@@ -23,7 +23,12 @@
           <tbody>
             <tr *ngFor="let player of players; let i = index">
               <td>{{ i + 1 }}</td>
-              <td id="hff-player-{{i}}">{{ player.playerName }}</td>
+              <td id="hff-player-{{ i }}">
+                <span *ngIf="i == 0">🥇</span>
+                <span *ngIf="i == 1">🥈</span>
+                <span *ngIf="i == 2">🥉</span>
+                <span *ngIf="i > 2">🏅</span> {{ player.playerName }}
+              </td>
               <td>{{ player.achievements }}</td>
             </tr>
           </tbody>

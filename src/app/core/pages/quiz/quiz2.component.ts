@@ -247,9 +247,9 @@ export class Quiz2Component implements OnInit, OnDestroy {
   }
 
   async nextQuestion() {
-    if (this.questionNumber + 2 < this.questions.length / 3) {
+    if (this.questionNumber + 1 < this.questions.length / 3) {
       this.multiplier = 1;
-    } else if (this.questionNumber + 2 < (this.questions.length / 3) * 2) {
+    } else if (this.questionNumber + 1 < (this.questions.length / 3) * 2) {
       this.multiplier = 2;
     } else {
       this.multiplier = 3;

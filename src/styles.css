@@ -302,18 +302,11 @@ body {
   margin: 0;
 }
 .home-steve-img {
-  width: 100px;
+  width: 134px;
   height: auto;
   position: relative;
-  top: 18%;
+  top: 6%;
   left: 13%;
-}
-.home-steve-img-mirrored {
-  width: 100px;
-  height: auto;
-  position: relative;
-  top: 18%;
-  left: 23%;
 }
 .home-credit-box {
   background-color: rgba(148, 79, 0, 0.65);
@@ -459,13 +452,13 @@ body {
 /* Screen sizes  */
 /* ============================================================================= */
 /* Big screen */
-@media (max-width: 1980px) {
+@media (max-width: 1920px) {
   .reverse {
     background-image: url(./assets/images/ice2.png);
     position: absolute;
     background-repeat: no-repeat;
-    background-size: 1080px 216px;
-    width: 1100px;
+    background-size: 1156px 216px;
+    width: 1156px;
     height: 200px;
     transform: translate(-28px, -38px);
   }
@@ -586,12 +579,12 @@ body {
 }
 
 /* Small screen */
-@media (max-width: 1900px) {
+@media (max-width: 1800px) {
   .reverse {
     background-size: 960px 160px;
     width: 980px;
     height: 200px;
-    translate: 0px 10px;
+    transform: translate(0px, 10px);
   }
 
   .question-body {
@@ -653,12 +646,10 @@ body {
 
 /* ============================================================================= */
 
-
 /* ============================================================================= */
 
 /* Quiz page */
 /* ============================================================================= */
-
 
 .round-info-row {
   margin-top: 7px;
@@ -731,7 +722,6 @@ body {
   font-size: 30px;
 }
 
-
 .answer-box-content {
   margin: 0px;
   display: flex;
@@ -765,7 +755,7 @@ body {
   margin-inline: auto;
   margin-bottom: 8px;
   width: 90%;
-  max-width: 200px;
+  min-width: fit-content;
 }
 
 .team-points p,

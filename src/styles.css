@@ -26,13 +26,6 @@ body {
   margin-inline: 16px;
 }
 
-.question-title {
-  font-size: 38px;
-  visibility: hidden;
-  text-shadow: 2px 2px 6px black;
-  z-index: 1;
-}
-
 .home-credit-box a {
   color: white;
   text-decoration: none;
@@ -75,41 +68,6 @@ body {
 }
 /* ============================================================================= */
 
-/* Reveal button */
-/* ============================================================================= */
-.show-title-button {
-  border-radius: 150px;
-  background-image: linear-gradient(#acbbff, rgb(25, 51, 167) 60%);
-  height: 50px;
-  width: 225px;
-  font-weight: bold;
-  font-size: 20px;
-  cursor: pointer;
-  visibility: visible;
-  position: absolute;
-  display: flex;
-  border: 2px rgb(218, 230, 255) solid;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.show-answer-button {
-  border-radius: 50%;
-  background-image: linear-gradient(#acbbff, #1933a7 60%);
-  padding: 5px;
-  width: 78px;
-  font-weight: 900;
-  font-size: 30px;
-  margin: 4px 1px;
-  cursor: pointer;
-  visibility: visible;
-  position: absolute;
-  left: 42.5%;
-  border: 2px rgb(218, 230, 255) solid;
-}
-/* ============================================================================= */
-
 /* Tech buttons */
 /* ============================================================================= */
 .tech-button-box,
@@ -119,27 +77,11 @@ body {
   position: absolute;
   bottom: 0;
 }
-.tech-button-box label,
-.tech-funny-button-box label {
-  background-color: rgba(0, 0, 0, 0.5);
-  padding-inline: 5px;
-  position: absolute;
-  bottom: 21px;
-}
 .tech-button-box {
   right: 0;
 }
 .tech-funny-button-box {
   left: 0;
-}
-.tech-button {
-  background-image: linear-gradient(#474747 0%, #7a7a7a 51%, #474747 100%);
-  border-radius: 5px;
-  border: none;
-  display: inline-block;
-  font-size: 14px;
-  margin-inline: 2px;
-  height: 26px;
 }
 /* ============================================================================= */
 
@@ -514,23 +456,209 @@ body {
 }
 /* ============================================================================= */
 
-/* Smaller quiz page  */
+/* Screen sizes  */
 /* ============================================================================= */
-@media (max-width: 1280px) {
+/* Big screen */
+@media (max-width: 1980px) {
   .reverse {
-    background-size: 1050px 216px;
-    width: 1050px;
+    background-image: url(./assets/images/ice2.png);
+    position: absolute;
+    background-repeat: no-repeat;
+    background-size: 1080px 216px;
+    width: 1100px;
     height: 200px;
+    transform: translate(-28px, -38px);
+  }
+
+  .question-body {
+    margin-inline-end: 3%;
+  }
+
+  .round-points-box p,
+  .special-question-box p,
+  .double-ptns {
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .question-title-box {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: auto;
+  }
+
+  .question-title-box-content {
+    display: flex;
+    height: fit-content;
+    min-height: 125px;
+    border: #e2e2e2 7px ridge;
+    background-image: linear-gradient(#ffcb95 10%, #e99f45 40%, #b1681b 70%);
+    justify-content: center;
+    align-items: center;
+  }
+
+  .question-title {
+    font-size: 38px;
+    visibility: hidden;
+    text-shadow: 2px 2px 6px black;
+    z-index: 1;
+  }
+
+  .answer-box {
+    background-color: rgba(0, 21, 90, 0.5);
+    padding: 6px;
+    border-radius: 10px;
+    border: #ffb52c 8px double;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .answer-box-item {
+    display: flex;
+    margin-top: 6px;
+    margin-bottom: 6px;
+    padding: 3px;
+    height: 80px;
+    border: #e2e2e2 7px ridge;
+    background-image: linear-gradient(#ffcb95 10%, #e99f45 40%, #b1681b 70%);
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .answer-box-item p {
+    font-size: 26px;
+    padding-inline: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0px;
+    visibility: hidden;
+    text-shadow: 1px 1px 6px black;
+  }
+
+  .show-title-button {
+    border-radius: 150px;
+    background-image: linear-gradient(#acbbff, rgb(25, 51, 167) 60%);
+    height: 50px;
+    width: 225px;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
+    visibility: visible;
+    position: absolute;
+    display: flex;
+    border: 2px rgb(218, 230, 255) solid;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .show-answer-button {
+    border-radius: 50%;
+    background-image: linear-gradient(#acbbff, #1933a7 60%);
+    padding: 5px;
+    width: 78px;
+    font-weight: bold;
+    font-size: 30px;
+    margin: 4px 1px;
+    visibility: visible;
+    position: absolute;
+    left: 42.5%;
+    border: 2px rgb(218, 230, 255) solid;
+  }
+
+  .tech-button {
+    background-image: linear-gradient(#474747 0%, #7a7a7a 51%, #474747 100%);
+    border-radius: 5px;
+    border: none;
+    display: inline-block;
+    font-size: 14px;
+    margin-inline: 2px;
+    height: 26px;
+  }
+
+  .tech-button-box label,
+  .tech-funny-button-box label {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-inline: 5px;
+    position: absolute;
+    bottom: 21px;
+  }
+}
+
+/* Small screen */
+@media (max-width: 1900px) {
+  .reverse {
+    background-size: 960px 160px;
+    width: 980px;
+    height: 200px;
+    translate: 0px 10px;
+  }
+
+  .question-body {
+    max-width: 950px;
+    margin-inline-start: 7%;
+    margin-inline-end: 0;
+    margin-top: 2%;
+  }
+
+  .round-points-box p,
+  .special-question-box p,
+  .double-ptns {
+    font-size: 40px;
+  }
+
+  .question-title-box {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 97%;
+    margin-inline: auto;
+  }
+
+  .question-title-box-content {
+    min-height: 95px;
+  }
+
+  .question-title {
+    font-size: 28px;
+  }
+
+  .show-title-button {
+    height: 42px;
+    width: 220px;
+    font-size: 18px;
+  }
+
+  .show-answer-button {
+    font-size: 26px;
+  }
+
+  .answer-box-item {
+    height: 75px;
+  }
+
+  .answer-box-item p {
+    font-size: 22px;
+  }
+
+  .tech-button {
+    height: fit-content;
+    font-size: 11px;
+  }
+
+  .tech-button-box label,
+  .tech-funny-button-box label {
+    font-size: 12px;
+    bottom: 15px;
   }
 }
 
 /* ============================================================================= */
 
+
+/* ============================================================================= */
+
 /* Quiz page */
 /* ============================================================================= */
-.question-body {
-  margin-inline-end: 3%;
-}
+
 
 .round-info-row {
   margin-top: 7px;
@@ -602,66 +730,12 @@ body {
   top: 16px;
   font-size: 30px;
 }
-.question-title-box {
-  background-color: rgba(0, 0, 0, 0.5);
-  width: auto;
-}
-.question-title-box-content {
-  display: flex;
-  margin: 0px;
-  padding: 3px;
-  height: 125px;
-  border: #e2e2e2 7px ridge;
-  background-image: linear-gradient(#ffcb95 10%, #e99f45 40%, #b1681b 70%);
-  justify-content: center;
-  align-items: center;
-}
 
-.reverse {
-  background-image: url(./assets/images/ice2.png);
-  position: absolute;
-  background-repeat: no-repeat;
-  background-size: 1080px 216px;
-  width: 1100px;
-  height: 200px;
-  transform: translate(-28px, -38px);
-}
-
-.answer-box {
-  background-color: rgba(0, 21, 90, 0.5);
-  padding: 6px;
-  border-radius: 10px;
-  border: #ffb52c 8px double;
-  display: flex;
-  flex-direction: row;
-}
 
 .answer-box-content {
   margin: 0px;
   display: flex;
   flex-direction: column;
-}
-
-.answer-box-item {
-  display: flex;
-  margin-top: 6px;
-  margin-bottom: 6px;
-  padding: 3px;
-  height: 80px;
-  border: #e2e2e2 7px ridge;
-  background-image: linear-gradient(#ffcb95 10%, #e99f45 40%, #b1681b 70%);
-  justify-content: space-between;
-  align-items: center;
-}
-
-.answer-box-item p {
-  font-size: 26px;
-  padding-inline: 10px;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin: 0px;
-  visibility: hidden;
-  text-shadow: 1px 1px 6px black;
 }
 
 .points-box {

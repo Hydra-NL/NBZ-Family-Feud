@@ -7,7 +7,7 @@ export class ControlsService {
   isChristmas = false;
 
   constructor() {
-    if (new Date().getMonth() === 11) {
+    if (new Date().getMonth() === 0 || 11) {
       this.isChristmas = true;
     } else {
       this.isChristmas = false;

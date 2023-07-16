@@ -218,6 +218,7 @@
                 required="checkbox.checked"
               >
                 <option value="Reverse">Reverse</option>
+                <option value="AI">AI</option>
               </select>
             </div>
             <label for="episode">Episode</label>
@@ -258,7 +259,14 @@
           class="question-list-title"
           *ngFor="let question of questions; let i = index"
         >
-          <p>
+          <p
+            [ngStyle]="{
+              'background-color':
+                question.episode % 2 == 0
+                  ? 'rgba(0, 0, 0, 0.349)'
+                  : 'rgba(0, 0, 0, 0)'
+            }"
+          >
             {{ i + 1 }}) [ep {{ question.episode }}]<span
               *ngIf="question.isSpecial"
             >

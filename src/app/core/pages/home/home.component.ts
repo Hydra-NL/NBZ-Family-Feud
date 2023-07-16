@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   episode!: Episode;
   episodes!: Episode[];
   subscription!: Subscription;
+  isChristmas = false;
 
   constructor(
     private router: Router,
@@ -32,11 +33,20 @@ export class HomeComponent implements OnInit, OnDestroy {
     private teamPlayerService: TeamPlayerService,
     private controlService: ControlsService,
     private episodeService: EpisodeService
-  ) {}
+  ) {
+
+    if (new Date().getMonth() === 0 || new Date().getMonth() === 11) {
+      this.isChristmas = true;
+    } else {
+      this.isChristmas = false;
+    }
+  }
 
   ngOnInit(): void {
     this.title =
       'NBZ Family Feud episode 3: Winter edition, Christmas special LIVE in person, for the second time, snow edition';
+
+    
 
     this.team = {
       teamName: '',

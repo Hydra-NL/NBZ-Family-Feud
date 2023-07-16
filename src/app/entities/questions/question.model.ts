@@ -3,6 +3,7 @@ import { Entity } from 'src/app/core/entity/entity.model';
 export enum QuestionSpeciality {
   None = 'None',
   Reverse = 'Reverse',
+  AI = 'AI',
 }
 
 export class Question extends Entity {

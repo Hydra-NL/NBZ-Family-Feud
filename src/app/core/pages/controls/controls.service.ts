@@ -7,7 +7,7 @@ export class ControlsService {
   isChristmas = false;
 
   constructor() {
-    if (new Date().getMonth() === 0 || 11) {
+    if (new Date().getMonth() === 0 || new Date().getMonth() === 11) {
       this.isChristmas = true;
     } else {
       this.isChristmas = false;
@@ -119,6 +119,18 @@ export class ControlsService {
   playOoh() {
     let audio = new Audio();
     audio.src = '../../../../assets/sounds/ooh.mp3';
+    audio.load();
+    audio.play();
+  }
+  playPipes() {
+    let audio = new Audio();
+    audio.src = '../../../../assets/sounds/pipes.mp3';
+    audio.load();
+    audio.play();
+  }
+  playShadow() {
+    let audio = new Audio();
+    audio.src = '../../../../assets/sounds/shadow.mp3';
     audio.load();
     audio.play();
   }

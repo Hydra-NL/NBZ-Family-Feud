@@ -1,13 +1,15 @@
 <main role="main" class="container">
   <app-nav *ngIf="showNav"></app-nav>
-  <span class="snowflake">❅</span>
-  <span class="snowflake">❅</span>
-  <span class="snowflake">❅</span>
-  <span class="snowflake">❅</span>
-  <span class="snowflake">❅</span>
-  <span class="snowflake">❅</span>
-  <span class="snowflake">❅</span>
-  <span class="snowflake">❅</span>
-  <span class="snowflake">❅</span>
+  <div *ngIf="isChristmas">
+    <span class="snowflake">❅</span>
+    <span class="snowflake">❅</span>
+    <span class="snowflake">❅</span>
+    <span class="snowflake">❅</span>
+    <span class="snowflake">❅</span>
+    <span class="snowflake">❅</span>
+    <span class="snowflake">❅</span>
+    <span class="snowflake">❅</span>
+    <span class="snowflake">❅</span>
+  </div>
   <router-outlet></router-outlet>
 </main>

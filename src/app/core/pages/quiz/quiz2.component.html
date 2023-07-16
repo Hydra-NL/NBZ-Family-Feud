@@ -112,8 +112,12 @@
     </div>
 
     <!-- Question speciality -->
+    <!-- Add new specialities HERE -->
     <div class="special-question-box" *ngIf="question.isSpecial">
       <p *ngIf="question.speciality == 'Reverse'">🥶</p>
+    </div>
+    <div class="special-question-box" *ngIf="question.isSpecial">
+      <p *ngIf="question.speciality == 'AI'">🤖</p>
     </div>
   </div>
   <!-- Title quiz -->
@@ -322,6 +326,8 @@
   <button class="tech-button" (click)="playTrombone()">🎺</button>
   <button class="tech-button" (click)="playGoofy()">💀</button>
   <button class="tech-button" (click)="playOoh()">😮</button>
+  <button class="tech-button" (click)="playPipes()">🚧</button>
+  <button class="tech-button" (click)="playShadow()">🧙‍♂️</button>
 </div>
 
 <div class="tech-button-box">

@@ -1,9 +1,11 @@
 body {
-  background-image: url("../src/assets/images/ep3.jpg");
-  background-size: cover;
+  background-image: url("../src/assets/images/ep4.png");
+  /* background-size: cover; */
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
   color: white;
+  background-repeat-y: no-repeat;
+  background-color: black;
 }
 /* Texts */
 /* ============================================================================= */
@@ -384,8 +386,6 @@ body {
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
-  height: 20px;
-  margin-bottom: 4px;
 }
 
 .question-list-title p {
@@ -532,7 +532,7 @@ body {
     border-radius: 150px;
     background-image: linear-gradient(#acbbff, rgb(25, 51, 167) 60%);
     height: 50px;
-    width: 225px;
+    width: 230px;
     font-weight: bold;
     font-size: 20px;
     cursor: pointer;
@@ -1140,14 +1140,14 @@ body {
 /* ============================================================================= */
 
 /* Episode 2 */
-/* 
-.title {
+
+/* .title {
   background: -webkit-linear-gradient(
     rgb(255, 136, 0),
     rgb(252, 234, 206),
     rgb(255, 136, 0)
   );
-}
+} */
 .content-box-item {
   background-color: rgba(0, 217, 255, 0.65);
 }
@@ -1206,4 +1206,18 @@ body {
   color: black;
   border: 1px solid rgb(255, 139, 187);
 }
-*/
+/* ============================================================================= */
+
+/* Episode 4 */
+
+.title {
+  font-size: 38px;
+  background: -webkit-linear-gradient(
+    rgb(0, 225, 255),
+    rgb(170, 255, 159),
+    rgb(0, 225, 255)
+  );
+  background-clip: inherit;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

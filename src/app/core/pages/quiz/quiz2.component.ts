@@ -355,6 +355,9 @@ export class Quiz2Component implements OnInit, OnDestroy {
         this.deductFromRoundPoints(parseInt(z!.innerHTML) * this.multiplier);
       }
       // ATTENTION: New specialities go here
+      if (this.question.speciality == 'AI') {
+        this.addToRoundPoints(parseInt(z!.innerHTML));
+      }
     }
   }
 
@@ -443,5 +446,11 @@ export class Quiz2Component implements OnInit, OnDestroy {
   }
   playOoh() {
     this.controlsService.playOoh();
+  }
+  playPipes() {
+    this.controlsService.playPipes();
+  }
+  playShadow() {
+    this.controlsService.playShadow();
   }
 }
